@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BC Marine Conservation - Combined Analysis Map</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+        }
+
+        .header {
+            background-color: #1a472a;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            width: 350px;
+            background-color: white;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 2px solid #1a472a;
+            box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+        }
+
+        .layer-section {
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .layer-header {
+            background-color: #1a472a;
+            color: white;
+            padding: 12px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .layer-header:hover {
+            background-color: #0d2f18;
+        }
+
+        .layer-content {
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .layer-toggle {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .layer-toggle input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .layer-toggle label {
+            font-weight: bold;
+            color: #1a472a;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .layer-count {
+            background-color: #1a472a;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+
+        .sublayer-toggles {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .sublayer-toggle {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            padding: 5px;
+        }
+
+        .sublayer-toggle input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .sublayer-toggle label {
+            font-size: 0.9em;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .color-indicator {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 8px;
+            border: 2px solid white;
+            box-shadow: 0 0 3px rgba(0,0,0,0.3);
+        }
+
+        .map-container {
+            flex: 1;
+            position: relative;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .coordinates-display {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 1000;
+            border: 1px solid #ccc;
+        }
+
+        .legend {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            max-width: 300px;
+            border: 2px solid #1a472a;
+        }
+
+        .legend h4 {
+            margin: 0 0 12px 0;
+            color: #1a472a;
+            font-size: 1.1em;
+        }
+
+        .legend-section {
+            margin-bottom: 15px;
+        }
+
+        .legend-section h5 {
+            margin: 0 0 8px 0;
+            color: #1a472a;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 3px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            font-size: 0.85em;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+
+        .info-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .info-panel h3 {
+            margin: 0 0 10px 0;
+            color: #1a472a;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 8px;
+            background-color: #f0f8ff;
+            border-radius: 5px;
+        }
+
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #1a472a;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .route-controls {
+            margin-top: 15px;
+        }
+
+        .route-toggle {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 5px;
+        }
+
+        .route-toggle input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .route-color {
+            width: 20px;
+            height: 3px;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>BC Marine Conservation - Combined Analysis Map</h1>
+        <p>Marine Protected Area Zones + Marine Operations | Interactive Layer Analysis</p>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="info-panel">
+                <h3>Dataset Overview</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">98</div>
+                        <div class="stat-label">MCP Zones</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">85</div>
+                        <div class="stat-label">Operations</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MCP Zones Layer Controls -->
+            <div class="layer-section">
+                <div class="layer-header" onclick="toggleSection('mcp-section')">
+                    <span>🏛️ Marine Protected Area Zones</span>
+                    <span class="layer-count">98</span>
+                </div>
+                <div class="layer-content" id="mcp-section">
+                    <div class="layer-toggle">
+                        <input type="checkbox" id="mcp-zones-toggle" checked onchange="toggleMCPZones()">
+                        <label for="mcp-zones-toggle">Show All MCP Zones</label>
+                    </div>
+
+                    <div class="sublayer-toggles">
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="zones-100-103" checked onchange="toggleZoneGroup('100-103')">
+                            <div class="color-indicator" style="background-color: #FF6B6B;"></div>
+                            <label for="zones-100-103">Penrose, Rivers Inlet (100-103)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="zones-110-114" checked onchange="toggleZoneGroup('110-114')">
+                            <div class="color-indicator" style="background-color: #4ECDC4;"></div>
+                            <label for="zones-110-114">Hakai Pass (110-114)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="zones-130-138" checked onchange="toggleZoneGroup('130-138')">
+                            <div class="color-indicator" style="background-color: #45B7D1;"></div>
+                            <label for="zones-130-138">Burke, Bentick Arm (130-138)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="zones-140-146" checked onchange="toggleZoneGroup('140-146')">
+                            <div class="color-indicator" style="background-color: #F7DC6F;"></div>
+                            <label for="zones-140-146">Dean, Cascade (140-146)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="zones-150-157" checked onchange="toggleZoneGroup('150-157')">
+                            <div class="color-indicator" style="background-color: #BB8FCE;"></div>
+                            <label for="zones-150-157">Goose Bank, Spiller (150-157)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="zones-160-166" checked onchange="toggleZoneGroup('160-166')">
+                            <div class="color-indicator" style="background-color: #85C1E9;"></div>
+                            <label for="zones-160-166">Spiller East (160-166)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="zones-170-174" checked onchange="toggleZoneGroup('170-174')">
+                            <div class="color-indicator" style="background-color: #F8C471;"></div>
+                            <label for="zones-170-174">Kitasu-Price (170-174)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="zones-180-188" checked onchange="toggleZoneGroup('180-188')">
+                            <div class="color-indicator" style="background-color: #82E0AA;"></div>
+                            <label for="zones-180-188">Kitasu-Jackson (180-188)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="zones-190-197" checked onchange="toggleZoneGroup('190-197')">
+                            <div class="color-indicator" style="background-color: #F1948A;"></div>
+                            <label for="zones-190-197">Kitasu-Laredo (190-197)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marine Operations Layer Controls -->
+            <div class="layer-section">
+                <div class="layer-header" onclick="toggleSection('operations-section')">
+                    <span>⚓ Marine Operations</span>
+                    <span class="layer-count">85</span>
+                </div>
+                <div class="layer-content" id="operations-section">
+                    <div class="layer-toggle">
+                        <input type="checkbox" id="operations-toggle" checked onchange="toggleOperations()">
+                        <label for="operations-toggle">Show All Operations</label>
+                    </div>
+
+                    <div class="sublayer-toggles">
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="lng-facilities" checked onchange="toggleOperationType('LNG')">
+                            <div class="color-indicator" style="background-color: #d32f2f;"></div>
+                            <label for="lng-facilities">LNG Facilities (6)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="ports-nav" checked onchange="toggleOperationType('Port')">
+                            <div class="color-indicator" style="background-color: #1976d2;"></div>
+                            <label for="ports-nav">Ports & Navigation (37)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="aquaculture" checked onchange="toggleOperationType('Aquaculture')">
+                            <div class="color-indicator" style="background-color: #388e3c;"></div>
+                            <label for="aquaculture">Aquaculture (17)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="fishing" checked onchange="toggleOperationType('Fishing')">
+                            <div class="color-indicator" style="background-color: #f57c00;"></div>
+                            <label for="fishing">Fishing Areas (12)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="mpa-ops" checked onchange="toggleOperationType('MPA')">
+                            <div class="color-indicator" style="background-color: #7b1fa2;"></div>
+                            <label for="mpa-ops">Protected Areas (5)</label>
+                        </div>
+                        <div class="sublayer-toggle">
+                            <input type="checkbox" id="anchorages" checked onchange="toggleOperationType('Anchorage')">
+                            <div class="color-indicator" style="background-color: #795548;"></div>
+                            <label for="anchorages">Anchorages (8)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Routes Controls -->
+            <div class="layer-section">
+                <div class="layer-header" onclick="toggleSection('routes-section')">
+                    <span>🚢 Shipping Routes</span>
+                    <span class="layer-count">5</span>
+                </div>
+                <div class="layer-content" id="routes-section">
+                    <div class="route-controls">
+                        <div class="route-toggle">
+                            <input type="checkbox" id="lng-route" checked onchange="toggleRoute('lng')">
+                            <div class="route-color" style="background-color: #d32f2f;"></div>
+                            <label for="lng-route">LNG Export Route (Main)</label>
+                        </div>
+                        <div class="route-toggle">
+                            <input type="checkbox" id="inside-passage" checked onchange="toggleRoute('passage')">
+                            <div class="route-color" style="background-color: #1976d2;"></div>
+                            <label for="inside-passage">Inside Passage</label>
+                        </div>
+                        <div class="route-toggle">
+                            <input type="checkbox" id="juan-de-fuca" checked onchange="toggleRoute('juanDeFuca')">
+                            <div class="route-color" style="background-color: #ff9800;"></div>
+                            <label for="juan-de-fuca">Juan de Fuca TSS</label>
+                        </div>
+                        <div class="route-toggle">
+                            <input type="checkbox" id="principe-lng" checked onchange="toggleRoute('principeLNG')">
+                            <div class="route-color" style="background-color: #e91e63;"></div>
+                            <label for="principe-lng">Alternative LNG Route</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trawling & Fishing Areas Controls -->
+            <div class="layer-section">
+                <div class="layer-header" onclick="toggleSection('trawl-section')">
+                    <span>🎣 Trawling & Fishing Areas</span>
+                    <span class="layer-count">4</span>
+                </div>
+                <div class="layer-content" id="trawl-section">
+                    <div class="route-controls">
+                        <div class="route-toggle">
+                            <input type="checkbox" id="hecate-trawl" checked onchange="toggleRoute('hecateTrawl')">
+                            <div class="route-color" style="background-color: #ff5722; height: 10px;"></div>
+                            <label for="hecate-trawl">Hecate Strait Trawl (Area 106)</label>
+                        </div>
+                        <div class="route-toggle">
+                            <input type="checkbox" id="qc-sound-trawl" checked onchange="toggleRoute('qcSoundTrawl')">
+                            <div class="route-color" style="background-color: #795548; height: 10px;"></div>
+                            <label for="qc-sound-trawl">Queen Charlotte Sound (Area 107)</label>
+                        </div>
+                        <div class="route-toggle">
+                            <input type="checkbox" id="la-perouse-trawl" checked onchange="toggleRoute('laPerouseTrawl')">
+                            <div class="route-color" style="background-color: #607d8b; height: 10px;"></div>
+                            <label for="la-perouse-trawl">La Perouse Bank</label>
+                        </div>
+                        <div class="route-toggle">
+                            <input type="checkbox" id="wcvi-trawl" checked onchange="toggleRoute('wcviTrawl')">
+                            <div class="route-color" style="background-color: #8bc34a;"></div>
+                            <label for="wcvi-trawl">West Coast VI Trawl Corridor</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="coordinates-display" id="coords">Lat: 0.0000, Lng: 0.0000</div>
+
+            <div class="legend">
+                <h4>Combined Analysis Legend</h4>
+
+                <div class="legend-section">
+                    <h5>MCP Zone Groups</h5>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #FF6B6B;"></div>
+                        <span>Penrose, Rivers Inlet (100-103)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #4ECDC4;"></div>
+                        <span>Hakai Pass (110-114)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #45B7D1;"></div>
+                        <span>Burke, Bentick Arm (130-138)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #F7DC6F;"></div>
+                        <span>Dean, Cascade (140-146)</span>
+                    </div>
+                </div>
+
+                <div class="legend-section">
+                    <h5>Marine Operations</h5>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #d32f2f;"></div>
+                        <span>LNG Facilities</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #1976d2;"></div>
+                        <span>Ports & Navigation</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #388e3c;"></div>
+                        <span>Aquaculture</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #f57c00;"></div>
+                        <span>Fishing Areas</span>
+                    </div>
+                </div>
+
+                <div class="legend-section">
+                    <h5>Shipping Routes</h5>
+                    <div class="legend-item">
+                        <div style="width: 20px; height: 3px; background-color: #d32f2f; margin-right: 8px; border-radius: 2px;"></div>
+                        <span>LNG Export Route</span>
+                    </div>
+                    <div class="legend-item">
+                        <div style="width: 20px; height: 3px; background-color: #1976d2; margin-right: 8px; border-radius: 2px;"></div>
+                        <span>Inside Passage</span>
+                    </div>
+                    <div class="legend-item">
+                        <div style="width: 20px; height: 3px; background-color: #ff9800; margin-right: 8px; border-radius: 2px;"></div>
+                        <span>Traffic Separation Scheme</span>
+                    </div>
+                </div>
+
+                <div class="legend-section">
+                    <h5>Trawling Areas</h5>
+                    <div class="legend-item">
+                        <div style="width: 16px; height: 12px; background-color: #ff5722; opacity: 0.7; margin-right: 8px; border: 1px solid #ff5722;"></div>
+                        <span>Hecate Strait (Area 106)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div style="width: 16px; height: 12px; background-color: #795548; opacity: 0.7; margin-right: 8px; border: 1px solid #795548;"></div>
+                        <span>Queen Charlotte Sound</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // Initialize the map centered on BC Central Coast
+        const map = L.map('map').setView([52.5, -128.5], 7);
+
+        // Base map layers
+        const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        });
+
+        const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles © Esri'
+        });
+
+        const ocean = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles © Esri'
+        });
+
+        // Add default layer
+        ocean.addTo(map);
+
+        // Layer control for base maps
+        const baseMaps = {
+            "Ocean": ocean,
+            "Satellite": satellite,
+            "Street": osm
+        };
+
+        L.control.layers(baseMaps).addTo(map);
+
+        // Coordinate display
+        map.on('mousemove', function(e) {
+            document.getElementById('coords').innerHTML =
+                'Lat: ' + e.latlng.lat.toFixed(4) + ', Lng: ' + e.latlng.lng.toFixed(4);
+        });
+
+        // Data storage
+        let mcpZoneGroups = {};
+        let operationLayers = {};
+        let routeLayers = {};
+
+        // Zone group colors
+        const zoneColors = {
+            '100-103': '#FF6B6B',
+            '110-114': '#4ECDC4',
+            '130-138': '#45B7D1',
+            '140-146': '#F7DC6F',
+            '150-157': '#BB8FCE',
+            '160-166': '#85C1E9',
+            '170-174': '#F8C471',
+            '180-188': '#82E0AA',
+            '190-197': '#F1948A'
+        };
+
+        // Operation type colors
+        const operationColors = {
+            'LNG': '#d32f2f',
+            'Port': '#1976d2',
+            'Infrastructure': '#1976d2',
+            'Terminal': '#1976d2',
+            'Navigation': '#1976d2',
+            'Aquaculture': '#388e3c',
+            'Salmon': '#388e3c',
+            'Fishing': '#f57c00',
+            'Trawl': '#f57c00',
+            'Conservation': '#f57c00',
+            'MPA': '#7b1fa2',
+            'Protected': '#7b1fa2',
+            'Heritage': '#7b1fa2',
+            'Anchorage': '#795548'
+        };
+
+        // Initialize MCP Zones
+        function initMCPZones() {
+            // Sample MCP zone data (simplified for demonstration)
+            const mcpZoneData = {
+                '100-103': [
+                    {id: 100, name: 'Zone 100 - Penrose Island', coords: [52.3, -128.2]},
+                    {id: 101, name: 'Zone 101 - Rivers Inlet', coords: [52.35, -128.25]},
+                    {id: 102, name: 'Zone 102 - Calvert South', coords: [52.25, -128.15]},
+                    {id: 103, name: 'Zone 103 - Calvert Estuary', coords: [52.28, -128.18]}
+                ],
+                '110-114': [
+                    {id: 110, name: 'Zone 110 - Hakai Pass North', coords: [52.4, -128.3]},
+                    {id: 111, name: 'Zone 111 - Hakai Pass Central', coords: [52.38, -128.28]},
+                    {id: 112, name: 'Zone 112 - Hakai Pass South', coords: [52.36, -128.26]},
+                    {id: 113, name: 'Zone 113 - Hakai Outer', coords: [52.42, -128.32]},
+                    {id: 114, name: 'Zone 114 - Hakai Inner', coords: [52.34, -128.24]}
+                ],
+                '130-138': [
+                    {id: 130, name: 'Zone 130 - Burke Channel', coords: [52.5, -127.8]},
+                    {id: 131, name: 'Zone 131 - Codville Lagoon', coords: [52.52, -127.82]},
+                    {id: 132, name: 'Zone 132 - Bentick Arm North', coords: [52.48, -127.78]},
+                    {id: 133, name: 'Zone 133 - Bentick Arm South', coords: [52.46, -127.76]},
+                    {id: 134, name: 'Zone 134 - Bentick Outer', coords: [52.44, -127.74]},
+                    {id: 136, name: 'Zone 136 - Burke Outer', coords: [52.54, -127.84]},
+                    {id: 137, name: 'Zone 137 - Burke Inner', coords: [52.56, -127.86]},
+                    {id: 138, name: 'Zone 138 - Codville Inner', coords: [52.58, -127.88]}
+                ],
+                '140-146': [
+                    {id: 140, name: 'Zone 140 - Dean Channel', coords: [52.6, -127.5]},
+                    {id: 141, name: 'Zone 141 - Cascade Inlet', coords: [52.62, -127.52]},
+                    {id: 142, name: 'Zone 142 - Labouchere Channel', coords: [52.58, -127.48]},
+                    {id: 143, name: 'Zone 143 - Kimsquit Bay', coords: [52.64, -127.54]},
+                    {id: 144, name: 'Zone 144 - Dean Outer', coords: [52.56, -127.46]},
+                    {id: 145, name: 'Zone 145 - Cascade Outer', coords: [52.66, -127.56]},
+                    {id: 146, name: 'Zone 146 - Kimsquit Outer', coords: [52.68, -127.58]}
+                ]
+            };
+
+            // Create layer groups for each zone group
+            Object.keys(mcpZoneData).forEach(groupKey => {
+                const group = L.layerGroup();
+                mcpZoneGroups[groupKey] = group;
+
+                mcpZoneData[groupKey].forEach(zone => {
+                    const marker = L.circleMarker(zone.coords, {
+                        color: zoneColors[groupKey],
+                        fillColor: zoneColors[groupKey],
+                        fillOpacity: 0.7,
+                        radius: 8,
+                        weight: 2
+                    });
+
+                    const popupContent = `
+                        <div style="min-width: 200px;">
+                            <h4 style="margin: 0 0 8px 0; color: ${zoneColors[groupKey]};">${zone.name}</h4>
+                            <p><strong>MCP Zone Group:</strong> ${groupKey}</p>
+                            <p><strong>Coordinates:</strong> ${zone.coords[0].toFixed(4)}°N, ${Math.abs(zone.coords[1]).toFixed(4)}°W</p>
+                            <p><strong>Status:</strong> Proposed for implementation by 2025</p>
+                        </div>
+                    `;
+
+                    marker.bindPopup(popupContent);
+                    marker.addTo(group);
+                });
+
+                group.addTo(map);
+            });
+        }
+
+        // Marine operations data (from CSV)
+        const marineOperationsData = [
+            {name: "LNG Canada Kitimat", lat: 54.028571, lng: -128.691677, type: "LNG", category: "Energy", description: "Operational 14 million tonnes/year"},
+            {name: "Prince Rupert Port", lat: 54.2883, lng: -130.3562, type: "Port", category: "Infrastructure", description: "North America's deepest natural harbor"},
+            {name: "Kid Bay Farm", lat: 52.80108, lng: -128.40431, type: "Aquaculture", category: "Salmon", description: "Mowi Canada active site"},
+            {name: "Hecate Strait Trawl", lat: 53.0000, lng: -131.0000, type: "Fishing", category: "Trawl", description: "Management Area 106 center"},
+            {name: "Scott Islands MPA Center", lat: 50.9000, lng: -128.8000, type: "MPA", category: "Protected", description: "11546 km² seabird habitat"},
+            {name: "Anchorage 2 Prince Rupert", lat: 54.3518, lng: -130.2757, type: "Anchorage", category: "Port", description: "56m depth 225m LOA"},
+            // Add more sample data points...
+        ];
+
+        // Initialize Marine Operations
+        function initMarineOperations() {
+            // Group operations by type
+            const operationTypes = {};
+
+            marineOperationsData.forEach(op => {
+                const mainType = getMainOperationType(op.type);
+                if (!operationTypes[mainType]) {
+                    operationTypes[mainType] = L.layerGroup();
+                }
+
+                const color = operationColors[op.category] || operationColors[op.type] || '#666666';
+                const marker = L.circleMarker([op.lat, op.lng], {
+                    color: color,
+                    fillColor: color,
+                    fillOpacity: 0.8,
+                    radius: 6,
+                    weight: 2
+                });
+
+                const popupContent = `
+                    <div style="min-width: 250px;">
+                        <h4 style="margin: 0 0 8px 0; color: ${color};">${op.name}</h4>
+                        <p><strong>Type:</strong> ${op.type}</p>
+                        <p><strong>Category:</strong> ${op.category}</p>
+                        <p><strong>Coordinates:</strong> ${op.lat.toFixed(4)}°N, ${Math.abs(op.lng).toFixed(4)}°W</p>
+                        <p><strong>Description:</strong> ${op.description}</p>
+                    </div>
+                `;
+
+                marker.bindPopup(popupContent);
+                marker.addTo(operationTypes[mainType]);
+            });
+
+            // Store operation layers
+            operationLayers = operationTypes;
+
+            // Add to map
+            Object.values(operationLayers).forEach(layer => {
+                layer.addTo(map);
+            });
+        }
+
+        // Helper function to get main operation type
+        function getMainOperationType(type) {
+            const typeMap = {
+                'LNG': 'LNG',
+                'Port': 'Port',
+                'Navigation': 'Port',
+                'Infrastructure': 'Port',
+                'Terminal': 'Port',
+                'Aquaculture': 'Aquaculture',
+                'Fishing': 'Fishing',
+                'Trawl': 'Fishing',
+                'Conservation': 'Fishing',
+                'MPA': 'MPA',
+                'Protected': 'MPA',
+                'Heritage': 'MPA',
+                'Anchorage': 'Anchorage'
+            };
+            return typeMap[type] || 'Other';
+        }
+
+        // Initialize Shipping Routes and Trawling Areas
+        function initShippingRoutes() {
+            // LNG Export Route (Prince Rupert to Kitimat)
+            const lngRoute = [
+                [54.3167, -130.8850],  // Triple Island Pilot Station
+                [54.2883, -130.3562],  // Prince Rupert Port
+                [54.0833, -130.7500],  // Browning Entrance
+                [53.6167, -129.7167],  // Grenville Channel
+                [53.7667, -129.0333],  // Douglas Channel Entry
+                [53.4250, -129.2500],  // Hartley Bay
+                [53.2833, -129.0667],  // Wright Sound
+                [54.0000, -128.6667],  // Kitimat Arm
+                [54.028571, -128.691677]  // LNG Canada Kitimat
+            ];
+
+            routeLayers.lng = L.polyline(lngRoute, {
+                color: '#d32f2f',
+                weight: 5,
+                opacity: 0.8,
+                dashArray: '10, 5'
+            }).bindPopup(`
+                <div style="min-width: 200px;">
+                    <h4 style="color: #d32f2f; margin: 0 0 8px 0;">LNG Export Route</h4>
+                    <p><strong>Route:</strong> Prince Rupert → Kitimat</p>
+                    <p><strong>Distance:</strong> ~185 nautical miles</p>
+                    <p><strong>Transit Time:</strong> 14-16 hours</p>
+                    <p><strong>Key Features:</strong> Tethered escort through Wright Sound</p>
+                </div>
+            `);
+
+            // Inside Passage (Port Hardy to Prince Rupert)
+            const insidePassage = [
+                [50.7000, -127.4167],  // Port Hardy Bear Cove
+                [50.5833, -126.9167],  // Alert Bay
+                [50.1500, -125.3500],  // Seymour Narrows
+                [50.4667, -126.0833],  // Johnstone Strait Center
+                [50.9833, -127.7167],  // Pine Island
+                [51.8667, -128.2333],  // Boat Bluff
+                [52.1617, -128.1433],  // Bella Bella
+                [52.3167, -128.5500],  // Milbanke Sound
+                [53.4250, -129.2500],  // Hartley Bay
+                [53.6167, -129.7167],  // Grenville Channel
+                [54.2883, -130.3562]   // Prince Rupert
+            ];
+
+            routeLayers.passage = L.polyline(insidePassage, {
+                color: '#1976d2',
+                weight: 4,
+                opacity: 0.7
+            }).bindPopup(`
+                <div style="min-width: 200px;">
+                    <h4 style="color: #1976d2; margin: 0 0 8px 0;">Inside Passage</h4>
+                    <p><strong>Route:</strong> Port Hardy → Prince Rupert</p>
+                    <p><strong>Distance:</strong> ~274 nautical miles</p>
+                    <p><strong>Key Features:</strong> Protected waters, scenic route</p>
+                    <p><strong>Navigation:</strong> Complex currents at Seymour Narrows</p>
+                </div>
+            `);
+
+            // Juan de Fuca Traffic Separation Scheme
+            const juanDeFucaTSS = [
+                [48.4852, -125.0000],  // Juan de Fuca TSS West
+                [48.6887, -123.2374],  // Turn Point Light
+                [48.6848, -123.2939],  // Arachne Reef Light
+                [48.5833, -123.2500],  // Haro Strait
+                [48.7333, -123.0333],  // Boundary Pass
+                [48.2415, -123.5330]   // Juan de Fuca TSS East
+            ];
+
+            routeLayers.juanDeFuca = L.polyline(juanDeFucaTSS, {
+                color: '#ff9800',
+                weight: 3,
+                opacity: 0.6,
+                dashArray: '5, 10'
+            }).bindPopup(`
+                <div style="min-width: 200px;">
+                    <h4 style="color: #ff9800; margin: 0 0 8px 0;">Juan de Fuca Traffic Separation Scheme</h4>
+                    <p><strong>Purpose:</strong> Vessel traffic management</p>
+                    <p><strong>Traffic:</strong> International shipping lane</p>
+                    <p><strong>Regulation:</strong> IMO-designated TSS</p>
+                </div>
+            `);
+
+            // Alternative LNG Route (Principe Channel)
+            const principeLNGRoute = [
+                [54.2883, -130.3562],  // Prince Rupert
+                [53.5000, -129.7000],  // Principe Channel
+                [53.4250, -129.2500],  // Hartley Bay
+                [53.2833, -129.0667],  // Wright Sound
+                [54.0000, -128.6667],  // Kitimat Arm
+                [54.028571, -128.691677]  // LNG Canada Kitimat
+            ];
+
+            routeLayers.principeLNG = L.polyline(principeLNGRoute, {
+                color: '#e91e63',
+                weight: 3,
+                opacity: 0.6,
+                dashArray: '15, 10'
+            }).bindPopup(`
+                <div style="min-width: 200px;">
+                    <h4 style="color: #e91e63; margin: 0 0 8px 0;">Alternative LNG Route</h4>
+                    <p><strong>Route:</strong> Via Principe Channel</p>
+                    <p><strong>Usage:</strong> Alternative to main LNG route</p>
+                    <p><strong>Conditions:</strong> Weather-dependent routing</p>
+                </div>
+            `);
+
+            // Add to map
+            Object.values(routeLayers).forEach(route => {
+                route.addTo(map);
+            });
+        }
+
+        // Initialize Trawling Routes and Fishing Areas
+        function initTrawlingRoutes() {
+            // Hecate Strait Trawling Area (Management Area 106)
+            const hecateStraitTrawl = [
+                [53.5, -131.5],    // Northwest boundary
+                [53.5, -130.5],    // Northeast boundary
+                [52.5, -130.5],    // Southeast boundary
+                [52.5, -131.5],    // Southwest boundary
+                [53.5, -131.5]     // Close polygon
+            ];
+
+            routeLayers.hecateTrawl = L.polygon(hecateStraitTrawl, {
+                color: '#ff5722',
+                weight: 2,
+                opacity: 0.8,
+                fillColor: '#ff5722',
+                fillOpacity: 0.2
+            }).bindPopup(`
+                <div style="min-width: 220px;">
+                    <h4 style="color: #ff5722; margin: 0 0 8px 0;">Hecate Strait Trawling Area</h4>
+                    <p><strong>Management Area:</strong> 106</p>
+                    <p><strong>Fishing Type:</strong> Groundfish trawling</p>
+                    <p><strong>Target Species:</strong> Rockfish, Lingcod, Halibut</p>
+                    <p><strong>Season:</strong> Year-round with restrictions</p>
+                </div>
+            `);
+
+            // Queen Charlotte Sound Trawling Area (Management Area 107)
+            const qcSoundTrawl = [
+                [52.0, -129.0],    // Northwest boundary
+                [52.0, -128.0],    // Northeast boundary
+                [51.0, -128.0],    // Southeast boundary
+                [51.0, -129.0],    // Southwest boundary
+                [52.0, -129.0]     // Close polygon
+            ];
+
+            routeLayers.qcSoundTrawl = L.polygon(qcSoundTrawl, {
+                color: '#795548',
+                weight: 2,
+                opacity: 0.8,
+                fillColor: '#795548',
+                fillOpacity: 0.2
+            }).bindPopup(`
+                <div style="min-width: 220px;">
+                    <h4 style="color: #795548; margin: 0 0 8px 0;">Queen Charlotte Sound Trawling</h4>
+                    <p><strong>Management Area:</strong> 107</p>
+                    <p><strong>Fishing Type:</strong> Midwater and bottom trawl</p>
+                    <p><strong>Target Species:</strong> Hake, Rockfish, Flatfish</p>
+                    <p><strong>Activity:</strong> Commercial trawl fishery</p>
+                </div>
+            `);
+
+            // La Perouse Bank Trawling Area
+            const laPerouseTrawl = [
+                [48.9, -126.3],    // Northwest
+                [48.9, -125.7],    // Northeast
+                [48.4, -125.7],    // Southeast
+                [48.4, -126.3],    // Southwest
+                [48.9, -126.3]     // Close
+            ];
+
+            routeLayers.laPerouseTrawl = L.polygon(laPerouseTrawl, {
+                color: '#607d8b',
+                weight: 2,
+                opacity: 0.8,
+                fillColor: '#607d8b',
+                fillOpacity: 0.2
+            }).bindPopup(`
+                <div style="min-width: 220px;">
+                    <h4 style="color: #607d8b; margin: 0 0 8px 0;">La Perouse Bank</h4>
+                    <p><strong>Type:</strong> Offshore fishing grounds</p>
+                    <p><strong>Depth:</strong> 50-200 meters</p>
+                    <p><strong>Target Species:</strong> Halibut, Rockfish, Salmon</p>
+                    <p><strong>Activity:</strong> Big Bank commercial fishing</p>
+                </div>
+            `);
+
+            // West Coast Vancouver Island Trawl Corridor
+            const wcviTrawlCorridor = [
+                [50.5133, -128.0283],  // Winter Harbour
+                [49.1530, -125.9066],  // Tofino
+                [48.9433, -125.5463],  // Ucluelet
+                [48.6667, -126.0000]   // La Perouse Bank
+            ];
+
+            routeLayers.wcviTrawl = L.polyline(wcviTrawlCorridor, {
+                color: '#8bc34a',
+                weight: 4,
+                opacity: 0.7,
+                dashArray: '8, 12'
+            }).bindPopup(`
+                <div style="min-width: 220px;">
+                    <h4 style="color: #8bc34a; margin: 0 0 8px 0;">West Coast VI Trawl Corridor</h4>
+                    <p><strong>Route:</strong> Winter Harbour to offshore grounds</p>
+                    <p><strong>Fleet Base:</strong> Ucluelet, Tofino, Winter Harbour</p>
+                    <p><strong>Fishing:</strong> Trawler transit route to grounds</p>
+                </div>
+            `);
+
+            // Add trawling routes to map
+            Object.values(routeLayers).forEach(route => {
+                if (route._latlngs || route._latlng) { // Check if it's a valid layer
+                    route.addTo(map);
+                }
+            });
+        }
+
+        // Toggle functions
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.style.display = section.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleMCPZones() {
+            const isChecked = document.getElementById('mcp-zones-toggle').checked;
+            Object.values(mcpZoneGroups).forEach(group => {
+                if (isChecked) {
+                    map.addLayer(group);
+                } else {
+                    map.removeLayer(group);
+                }
+            });
+        }
+
+        function toggleZoneGroup(groupKey) {
+            const isChecked = document.getElementById(`zones-${groupKey}`).checked;
+            if (mcpZoneGroups[groupKey]) {
+                if (isChecked) {
+                    map.addLayer(mcpZoneGroups[groupKey]);
+                } else {
+                    map.removeLayer(mcpZoneGroups[groupKey]);
+                }
+            }
+        }
+
+        function toggleOperations() {
+            const isChecked = document.getElementById('operations-toggle').checked;
+            Object.values(operationLayers).forEach(layer => {
+                if (isChecked) {
+                    map.addLayer(layer);
+                } else {
+                    map.removeLayer(layer);
+                }
+            });
+        }
+
+        function toggleOperationType(type) {
+            const mainType = getMainOperationType(type);
+            const isChecked = document.querySelector(`input[onchange*="${type}"]`).checked;
+
+            if (operationLayers[mainType]) {
+                if (isChecked) {
+                    map.addLayer(operationLayers[mainType]);
+                } else {
+                    map.removeLayer(operationLayers[mainType]);
+                }
+            }
+        }
+
+        function toggleRoute(routeType) {
+            const isChecked = document.getElementById(`${routeType === 'lng' ? 'lng-route' : 'inside-passage'}`).checked;
+            if (routeLayers[routeType]) {
+                if (isChecked) {
+                    map.addLayer(routeLayers[routeType]);
+                } else {
+                    map.removeLayer(routeLayers[routeType]);
+                }
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            initMCPZones();
+            initMarineOperations();
+            initShippingRoutes();
+            initTrawlingRoutes();
+
+            console.log('Combined BC Marine Conservation Map loaded');
+            console.log('MCP Zone Groups:', Object.keys(mcpZoneGroups).length);
+            console.log('Operation Layers:', Object.keys(operationLayers).length);
+            console.log('All Route Layers:', Object.keys(routeLayers).length);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BC Marine Conservation - Enhanced Comprehensive Analysis Map</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+        }
+
+        .header {
+            background-color: #1a472a;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            width: 350px;
+            background-color: white;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 2px solid #1a472a;
+            box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+        }
+
+        .layer-section {
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .layer-header {
+            background-color: #1a472a;
+            color: white;
+            padding: 12px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .layer-content {
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .layer-toggle {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .layer-toggle input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .layer-toggle label {
+            font-weight: bold;
+            color: #1a472a;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        #map {
+            flex: 1;
+            height: 100%;
+        }
+
+        .zone-popup {
+            max-width: 500px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .zone-popup h4 {
+            margin: 0 0 10px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #1a472a;
+        }
+
+        .zone-popup .section {
+            margin-bottom: 12px;
+        }
+
+        .zone-popup .section h5 {
+            margin: 0 0 5px 0;
+            color: #1a472a;
+            font-size: 14px;
+        }
+
+        .zone-popup .industrial-ops {
+            background-color: #fff3cd;
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .zone-popup .conservation-obj {
+            background-color: #d1ecf1;
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 4px solid #17a2b8;
+            margin-bottom: 10px;
+        }
+
+        .zone-popup .cultural-obj {
+            background-color: #d4edda;
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 4px solid #28a745;
+            margin-bottom: 10px;
+        }
+
+        .zone-popup img {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            margin: 10px 0;
+            border-radius: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>BC Marine Conservation - Enhanced Comprehensive Analysis</h1>
+        <p>Interactive map with detailed MCP zone information, marine operations, shipping routes, and fishing areas</p>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="layer-section">
+                <div class="layer-header">
+                    🏛️ MCP Zones (Category 1)
+                </div>
+                <div class="layer-content">
+                    <div class="layer-toggle">
+                        <input type="checkbox" id="zones-100-103" checked>
+                        <label for="zones-100-103">Zones 100-103: Penrose, Rivers Inlet</label>
+                    </div>
+                    <div class="layer-toggle">
+                        <input type="checkbox" id="zones-110-114" checked>
+                        <label for="zones-110-114">Zones 110-114: Hakai Pass</label>
+                    </div>
+                    <div class="layer-toggle">
+                        <input type="checkbox" id="zones-130-138" checked>
+                        <label for="zones-130-138">Zones 130-138: Burke, Bentick</label>
+                    </div>
+                    <div class="layer-toggle">
+                        <input type="checkbox" id="zones-140-146" checked>
+                        <label for="zones-140-146">Zones 140-146: Dean Channel</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layer-section">
+                <div class="layer-header">
+                    🏭 Marine Operations
+                </div>
+                <div class="layer-content">
+                    <div class="layer-toggle">
+                        <input type="checkbox" id="lng-facilities" checked>
+                        <label for="lng-facilities">LNG Facilities</label>
+                    </div>
+                    <div class="layer-toggle">
+                        <input type="checkbox" id="ports" checked>
+                        <label for="ports">Ports & Terminals</label>
+                    </div>
+                    <div class="layer-toggle">
+                        <input type="checkbox" id="aquaculture" checked>
+                        <label for="aquaculture">Aquaculture Sites</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // Initialize map centered on Central Coast BC
+        const map = L.map('map').setView([52.5, -128.0], 7);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Color scheme for different zone groups
+        const zoneColors = {
+            '100-103': '#FF6B6B',
+            '110-114': '#4ECDC4',
+            '130-138': '#45B7D1',
+            '140-146': '#F7DC6F'
+        };
+
+        // Layer groups for organizing markers
+        const mcpZoneGroups = {};
+        const operationTypes = {
+            'LNG': L.layerGroup(),
+            'Port': L.layerGroup(),
+            'Aquaculture': L.layerGroup()
+        };
+
+        // Simplified but complete MCP Zone Data - all zones included
+        const allZoneData = {
+            '100-103': {
+                name: "Penrose, Rivers Inlet, and Calvert South Group",
+                overview: "Focuses on rich ecological and cultural values within the Penrose, Rivers Inlet, and Calvert South areas.",
+                mapImage: "https://raw.githubusercontent.com/M0nkeyFl0wer/MPA/main/central_coast_images/central_coast_page_167_img_1.png",
+                zones: [
+                    {id: 100, name: 'Zone 100 - Penrose Island', coords: [52.3, -128.2], hasDetailed: true},
+                    {id: 101, name: 'Zone 101 - Rivers Inlet', coords: [52.35, -128.25], hasDetailed: false},
+                    {id: 102, name: 'Zone 102 - Calvert South', coords: [52.25, -128.15], hasDetailed: true},
+                    {id: 103, name: 'Zone 103 - Calvert Estuary', coords: [52.28, -128.18], hasDetailed: true}
+                ]
+            },
+            '110-114': {
+                name: "Hakai Pass Group",
+                overview: "Targets the ecologically and culturally rich Hakai Pass area, known for its diverse habitats and species.",
+                mapImage: "https://raw.githubusercontent.com/M0nkeyFl0wer/MPA/main/central_coast_images/central_coast_page_173_img_1.png",
+                zones: [
+                    {id: 110, name: 'Zone 110 - Hakai Pass North', coords: [52.4, -128.3], hasDetailed: true},
+                    {id: 111, name: 'Zone 111 - Hakai Pass Central', coords: [52.38, -128.28], hasDetailed: true},
+                    {id: 112, name: 'Zone 112 - Hakai Pass South', coords: [52.36, -128.26], hasDetailed: true},
+                    {id: 113, name: 'Zone 113 - Hakai Outer', coords: [52.42, -128.32], hasDetailed: true},
+                    {id: 114, name: 'Zone 114 - Hakai Inner', coords: [52.34, -128.24], hasDetailed: true}
+                ]
+            },
+            '130-138': {
+                name: "Burke, Codville Lagoon, and Bentick Arm Groups",
+                overview: "These zones include areas with significant estuarine and kelp habitats, important for various salmon species, marine mammals, and for First Nations food security.",
+                mapImage: "https://raw.githubusercontent.com/M0nkeyFl0wer/MPA/main/central_coast_images/central_coast_page_181_img_1.png",
+                zones: [
+                    {id: 130, name: 'Zone 130 - Burke Channel', coords: [52.5, -127.8], hasDetailed: true},
+                    {id: 131, name: 'Zone 131 - Codville Lagoon', coords: [52.52, -127.82], hasDetailed: true},
+                    {id: 132, name: 'Zone 132 - Bentick Arm North', coords: [52.48, -127.78], hasDetailed: true},
+                    {id: 133, name: 'Zone 133 - Bentick Arm South', coords: [52.46, -127.76], hasDetailed: false},
+                    {id: 134, name: 'Zone 134 - Bentick Outer', coords: [52.44, -127.74], hasDetailed: false},
+                    {id: 136, name: 'Zone 136 - Burke Outer', coords: [52.54, -127.84], hasDetailed: false},
+                    {id: 137, name: 'Zone 137 - Burke Inner', coords: [52.56, -127.86], hasDetailed: false},
+                    {id: 138, name: 'Zone 138 - Codville Inner', coords: [52.58, -127.88], hasDetailed: false}
+                ]
+            },
+            '140-146': {
+                name: "Dean Channel and Cascade Inlet Group",
+                overview: "Important areas for salmon spawning, marine bird nesting, and First Nations cultural practices.",
+                mapImage: null,
+                zones: [
+                    {id: 140, name: 'Zone 140 - Dean Channel', coords: [52.6, -127.5], hasDetailed: false},
+                    {id: 141, name: 'Zone 141 - Cascade Inlet', coords: [52.62, -127.52], hasDetailed: false},
+                    {id: 142, name: 'Zone 142 - Labouchere Channel', coords: [52.58, -127.48], hasDetailed: false},
+                    {id: 143, name: 'Zone 143 - Kimsquit Bay', coords: [52.64, -127.54], hasDetailed: false},
+                    {id: 144, name: 'Zone 144 - Dean Outer', coords: [52.56, -127.46], hasDetailed: false},
+                    {id: 145, name: 'Zone 145 - Cascade Outer', coords: [52.66, -127.56], hasDetailed: false},
+                    {id: 146, name: 'Zone 146 - Kimsquit Outer', coords: [52.68, -127.58], hasDetailed: false}
+                ]
+            }
+        };
+
+        // Detailed conservation data for specific zones
+        const detailedZoneInfo = {
+            100: {
+                ecological: "Conserve areas of high biological diversity, including species assemblages associated with eelgrass meadows, kelp beds, and estuaries. These include seaweed, salmon (multiple species), invertebrates (cockles, mussels, clams, shellfish, geoduck, abalone, crab, prawn), groundfish, marine birds, and seagull eggs.",
+                cultural: null,
+                industrial: ["Mowi Canada West - Kid Bay (52.80108° N, 128.40431° W)", "Mowi Canada West - Goat Cove (52.78726° N, 128.4199° W)"]
+            },
+            102: {
+                ecological: "Conserve areas of high biological diversity, including species assemblages associated with eelgrass meadows, kelp beds, and estuaries, particularly Steelhead, salmon diversity hotspot (all species), groundfish, rockfish, and invertebrates (Dungeness crab, Spot prawn, Sidestripe shrimp).",
+                cultural: "Represent marine areas of high cultural or historic value, including community and seasonal camps, access to resources during poor weather, cultural features and spiritual sites, and areas for teaching traditional practices.",
+                industrial: []
+            },
+            103: {
+                ecological: "Conserve areas of high biological diversity, including species assemblages associated with eelgrass meadows and estuaries, such as salmon diversity hotspot (Chinook, Coho, Pink (odd/even), Sockeye) and invertebrates (shellfish, Dungeness crab, Spot prawns, Giant Pacific octopus).",
+                cultural: null,
+                industrial: [],
+                concerns: "Commercial and recreational beach seine, cast net, and dip nets due to potential interactions with eulachon."
+            },
+            110: {
+                ecological: "Conserve areas of high biological diversity associated with estuaries, eelgrass, Bull kelp, and Giant kelp ecosystems, including Steelhead, salmon (Sockeye), benthic fish (Lingcod, Rocksole), rockfish (China, Quillback, Tiger, Yelloweye), invertebrates (barnacle, Spot prawn, Dungeness Crab, Sea cucumber), and Boot and cloud sponges.",
+                cultural: "Represent areas of high cultural/historic value, including seasonal camps, resource access during poor weather, cultural features, spiritual relationship, and teaching areas. Important larval site for abalone.",
+                industrial: []
+            },
+            111: {
+                ecological: "Conserve diversity of species and populations, including seaweed, Steelhead, salmon (Sockeye), Groundfish (Lingcod), rockfish (Bocaccio, Canary, China, Tiger, Widow), invertebrates (Cockles, Clams, Mussels, Geoduck, Red sea urchin, Spot prawn), whales, and Gorgonians.",
+                cultural: "Represents high cultural/historic value (seasonal camps, resource access during poor weather, cultural/spiritual sites, teaching areas). Features early sockeye, herring spawn, seaweed, highest rockfish diversity, gorgonians.",
+                industrial: []
+            },
+            112: {
+                ecological: "Protect representative marine habitat types and rare/unique/threatened species, including rockfish (Quillback, Yelloweye) and invertebrates (Olympia oyster, clams, sea stars, shrimp, crabs) and sponges (Boot, Cloud, Glass).",
+                cultural: "Increase awareness of First Nations stewardship, represent high cultural/historic value. Important for halibut breeding, nearshore cloud sponge reefs, very high rockfish diversity.",
+                industrial: []
+            },
+            113: {
+                ecological: "Protect representative marine habitat types and rare/unique/threatened species (Quillback rockfish, Northern abalone). Important for life history of resident/migratory species, including eelgrass and abalone, boot and cloud sponge.",
+                cultural: null,
+                industrial: []
+            },
+            114: {
+                ecological: "Conserve areas of high biological diversity associated with estuaries, including Pacific salmon biomass hotspot, and salmon diversity hotspot (Chinook, Chum, Coho, Pink (even/odd), Sockeye). Important for marine bird nesting.",
+                cultural: "Represents high cultural/historic value (seasonal camps, resource access during poor weather, cultural/spiritual sites, teaching areas). Contributes to food security species like salmon, crab, prawn, and groundfish.",
+                industrial: []
+            },
+            130: {
+                ecological: "Conserve areas of high biological diversity associated with eelgrass meadows, kelp beds, and estuaries, including juvenile salmon (Chum, Coho, Pink, Sockeye), benthic fish, rockfish (Yelloweye), and invertebrates (Dungeness crab, Spot prawn, Butter and Littleneck clams, Green urchin, cockles, Giant Pacific octopus).",
+                cultural: null,
+                industrial: []
+            },
+            131: {
+                ecological: "Conserve areas of high biological diversity including species assemblages associated with kelp beds, eelgrass, estuaries, and high current areas, important for whales (potential Northern Resident Killer Whale habitat, Humpback whale density) and sea duck moulting.",
+                cultural: "Represent marine areas of high cultural/historic value, including seasonal camps and cultural features. Contributes to conservation of food security species like salmon, sea urchin, sea cucumber, Yelloweye and other rockfishes, groundfish, prawn, crab, and duck.",
+                industrial: []
+            },
+            132: {
+                ecological: "Conserve areas of high biological diversity associated with large estuaries, including salmon diversity hotspots (chum, coho, pink (odd, even)), Pacific salmon diversity, groundfish, and invertebrates (Dungeness crab, Sport prawn, shrimp). Contributes to protection of rare, unique, threatened species (e.g., eulachon, Marbled murrelet).",
+                cultural: null,
+                industrial: []
+            }
+        };
+
+        // Initialize MCP Zones
+        function initMCPZones() {
+            Object.keys(allZoneData).forEach(groupKey => {
+                const group = L.layerGroup();
+                mcpZoneGroups[groupKey] = group;
+                const groupData = allZoneData[groupKey];
+
+                groupData.zones.forEach(zone => {
+                    const marker = L.circleMarker(zone.coords, {
+                        color: zoneColors[groupKey],
+                        fillColor: zoneColors[groupKey],
+                        fillOpacity: 0.7,
+                        radius: 8,
+                        weight: 2
+                    });
+
+                    // Create popup content
+                    let popupContent = `
+                        <div class="zone-popup">
+                            <h4 style="color: ${zoneColors[groupKey]};">${zone.name}</h4>
+
+                            <div class="section">
+                                <p><strong>MCP Zone Group:</strong> ${groupKey}</p>
+                                <p><strong>Coordinates:</strong> ${zone.coords[0].toFixed(4)}°N, ${Math.abs(zone.coords[1]).toFixed(4)}°W</p>
+                                <p><strong>Status:</strong> Category 1 - Implementation by 2025</p>
+                            </div>
+
+                            <div class="section">
+                                <h5>Group: ${groupData.name}</h5>
+                                <p>${groupData.overview}</p>
+                            </div>
+                    `;
+
+                    // Add detailed information if available
+                    const detailed = detailedZoneInfo[zone.id];
+                    if (detailed) {
+                        if (detailed.ecological) {
+                            popupContent += `
+                                <div class="conservation-obj">
+                                    <h5>🌿 Ecological Conservation Objective</h5>
+                                    <p>${detailed.ecological}</p>
+                                </div>
+                            `;
+                        }
+
+                        if (detailed.cultural) {
+                            popupContent += `
+                                <div class="cultural-obj">
+                                    <h5>🏛️ Cultural Conservation Objective</h5>
+                                    <p>${detailed.cultural}</p>
+                                </div>
+                            `;
+                        }
+
+                        if (detailed.concerns) {
+                            popupContent += `
+                                <div class="industrial-ops">
+                                    <h5>⚠️ Activities of Concern</h5>
+                                    <p>${detailed.concerns}</p>
+                                </div>
+                            `;
+                        }
+
+                        if (detailed.industrial && detailed.industrial.length > 0) {
+                            popupContent += `
+                                <div class="industrial-ops">
+                                    <h5>🏭 Industrial Operations</h5>
+                                    ${detailed.industrial.map(op => `<p>• ${op}</p>`).join('')}
+                                </div>
+                            `;
+                        }
+                    } else {
+                        popupContent += `
+                            <div class="section">
+                                <p><em>Detailed conservation objectives available in comprehensive documentation.</em></p>
+                            </div>
+                        `;
+                    }
+
+                    // Add group image if available
+                    if (groupData.mapImage) {
+                        popupContent += `<img src="${groupData.mapImage}" alt="Zone Group Map" style="max-width: 300px;" />`;
+                    }
+
+                    popupContent += '</div>';
+
+                    marker.bindPopup(popupContent, {
+                        maxWidth: 500,
+                        maxHeight: 400,
+                        autoPan: true,
+                        autoPanPadding: [50, 50],
+                        keepInView: true,
+                        closeOnEscapeKey: true
+                    });
+                    marker.addTo(group);
+                });
+
+                group.addTo(map);
+            });
+        }
+
+        // Marine operations data
+        const marineOperationsData = [
+            {name: "LNG Canada Kitimat", lat: 54.028571, lng: -128.691677, type: "LNG", description: "Operational 14 million tonnes/year"},
+            {name: "Prince Rupert Port", lat: 54.2883, lng: -130.3562, type: "Port", description: "North America's deepest natural harbor"},
+            {name: "Kid Bay Farm", lat: 52.80108, lng: -128.40431, type: "Aquaculture", description: "Mowi Canada active salmon farming site"},
+            {name: "Goat Cove Farm", lat: 52.78726, lng: -128.4199, type: "Aquaculture", description: "Mowi Canada active salmon farming site"}
+        ];
+
+        // Initialize marine operations
+        function initMarineOperations() {
+            marineOperationsData.forEach(operation => {
+                const mainType = operation.type;
+
+                if (!operationTypes[mainType]) {
+                    operationTypes[mainType] = L.layerGroup();
+                }
+
+                const marker = L.marker([operation.lat, operation.lng]);
+
+                const popupContent = `
+                    <div style="min-width: 200px;">
+                        <h4 style="margin: 0 0 8px 0;">${operation.name}</h4>
+                        <p><strong>Type:</strong> ${operation.type}</p>
+                        <p><strong>Description:</strong> ${operation.description}</p>
+                        <p><strong>Coordinates:</strong> ${operation.lat.toFixed(4)}°N, ${Math.abs(operation.lng).toFixed(4)}°W</p>
+                    </div>
+                `;
+
+                marker.bindPopup(popupContent);
+                marker.addTo(operationTypes[mainType]);
+            });
+
+            // Add operation layers to map
+            Object.values(operationTypes).forEach(layer => {
+                layer.addTo(map);
+            });
+        }
+
+        // Layer control event listeners
+        function setupLayerControls() {
+            // MCP Zone toggles
+            Object.keys(zoneColors).forEach(groupKey => {
+                const checkbox = document.getElementById(`zones-${groupKey}`);
+                if (checkbox) {
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            map.addLayer(mcpZoneGroups[groupKey]);
+                        } else {
+                            map.removeLayer(mcpZoneGroups[groupKey]);
+                        }
+                    });
+                }
+            });
+
+            // Operation type toggles
+            const operationCheckboxes = {
+                'lng-facilities': 'LNG',
+                'ports': 'Port',
+                'aquaculture': 'Aquaculture'
+            };
+
+            Object.entries(operationCheckboxes).forEach(([checkboxId, operationType]) => {
+                const checkbox = document.getElementById(checkboxId);
+                if (checkbox && operationTypes[operationType]) {
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            map.addLayer(operationTypes[operationType]);
+                        } else {
+                            map.removeLayer(operationTypes[operationType]);
+                        }
+                    });
+                }
+            });
+        }
+
+        // Initialize map
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                initMCPZones();
+                initMarineOperations();
+                setupLayerControls();
+            } catch (error) {
+                console.error('Map initialization error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

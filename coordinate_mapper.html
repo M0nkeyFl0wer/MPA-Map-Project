@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zone Coordinate Mapper</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { position: relative; display: inline-block; }
+        #map { border: 2px solid #000; cursor: crosshair; }
+        .coordinates { margin-top: 10px; }
+        .zone-info { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>BC Coast Zone Coordinate Mapper</h1>
+    <p>Click on the red zone rectangles to get their coordinates:</p>
+
+    <div class="container">
+        <img id="map" src="https://github.com/M0nkeyFl0wer/MPA/raw/main/central_coast_images/central_coast_page_164_img_0.png" alt="BC Coast Map">
+    </div>
+
+    <div class="coordinates">
+        <strong>Click coordinates:</strong> <span id="coords">None</span>
+    </div>
+
+    <div class="zone-info">
+        <h3>Recorded Zone Coordinates:</h3>
+        <div id="zoneList"></div>
+        <button onclick="clearZones()">Clear All</button>
+    </div>
+
+    <script>
+        const map = document.getElementById('map');
+        const coordsDisplay = document.getElementById('coords');
+        const zoneList = document.getElementById('zoneList');
+        let zones = [];
+
+        map.addEventListener('click', function(e) {
+            const rect = map.getBoundingClientRect();
+            const x = Math.round(e.clientX - rect.left);
+            const y = Math.round(e.clientY - rect.top);
+
+            // Calculate percentage positions for responsive scaling
+            const xPercent = ((x / map.offsetWidth) * 100).toFixed(2);
+            const yPercent = ((y / map.offsetHeight) * 100).toFixed(2);
+
+            coordsDisplay.textContent = `X: ${x}px (${xPercent}%), Y: ${y}px (${yPercent}%)`;
+
+            // Add to zones list
+            const zoneName = prompt('Enter zone name (e.g., "Zone 100"):');
+            if (zoneName) {
+                zones.push({
+                    name: zoneName,
+                    x: x,
+                    y: y,
+                    xPercent: xPercent,
+                    yPercent: yPercent
+                });
+                updateZoneList();
+            }
+        });
+
+        function updateZoneList() {
+            zoneList.innerHTML = zones.map(zone =>
+                `<div><strong>${zone.name}:</strong> [${zone.x}, ${zone.y}] (${zone.xPercent}%, ${zone.yPercent}%)</div>`
+            ).join('');
+        }
+
+        function clearZones() {
+            zones = [];
+            updateZoneList();
+        }
+    </script>
+</body>
+</html>

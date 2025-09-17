@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BC Coast Marine Protected Areas - Interactive Zone Map</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .controls {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e1e5e9;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e1e5e9;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #2a5298;
+            color: white;
+            border-color: #2a5298;
+        }
+
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 140px);
+        }
+
+        .map-container {
+            flex: 5;
+            position: relative;
+            overflow: auto;
+            background: #e3f2fd;
+            min-height: 800px;
+        }
+
+        .map-image {
+            width: 150%;
+            height: auto;
+            min-width: 1000px;
+            object-fit: contain;
+        }
+
+        .zone-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .zone-boundary {
+            fill: rgba(255, 193, 7, 0.3);
+            stroke: #ff6b35;
+            stroke-width: 2;
+            cursor: pointer;
+            pointer-events: all;
+            transition: all 0.3s ease;
+        }
+
+        .zone-boundary:hover {
+            fill: rgba(255, 193, 7, 0.6);
+            stroke-width: 3;
+        }
+
+        .zone-label {
+            font-size: 12px;
+            font-weight: bold;
+            fill: #1e3c72;
+            text-anchor: middle;
+            pointer-events: none;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        .sidebar {
+            width: 300px;
+            background: white;
+            border-left: 1px solid #e1e5e9;
+            overflow-y: auto;
+            padding: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .sidebar h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .zone-info {
+            display: none;
+        }
+
+        .zone-info.active {
+            display: block;
+        }
+
+        .zone-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .zone-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .zone-name {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 0.25rem;
+        }
+
+        .zone-details {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-section {
+            margin-bottom: 1rem;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-content {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .species-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .species-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e1e5e9;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .zone-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            font-size: 0.8rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 15px;
+            margin-right: 0.5rem;
+            border-radius: 3px;
+        }
+
+
+        .region-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .region-tab {
+            padding: 0.5rem 1rem;
+            background: #f8f9fa;
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .region-tab:hover, .region-tab.active {
+            background: #2a5298;
+            color: white;
+            border-color: #2a5298;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: 300px;
+                border-left: none;
+                border-top: 1px solid #e1e5e9;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>BC Coast Marine Protected Areas</h1>
+        <p>Interactive map of marine conservation zones and their ecological significance</p>
+    </header>
+
+    <div class="controls">
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search zones by number, species, or location...">
+        </div>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-region="all">All Regions</button>
+            <button class="filter-btn" data-region="central">Central Coast</button>
+            <button class="filter-btn" data-region="north">North Coast</button>
+            <button class="filter-btn" data-region="nvi">North Vancouver Island</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="map-container">
+            <img src="https://github.com/M0nkeyFl0wer/MPA/raw/main/central_coast_images/central_coast_page_164_img_0.png"
+                 alt="BC Coast Marine Protected Areas Map"
+                 class="map-image"
+                 id="mainMap">
+
+            <svg class="zone-overlay" id="zoneOverlay" viewBox="0 0 750 900" preserveAspectRatio="xMidYMid meet">
+                <!-- Zone boundaries will be dynamically added here -->
+            </svg>
+
+            <div class="legend">
+                <h4 style="margin-bottom: 0.5rem;">Legend</h4>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: rgba(255, 193, 7, 0.5); border: 2px solid #ff6b35;"></div>
+                    Marine Protected Area Zones
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #1e3c72;"></div>
+                    Category 1 (Implementation by 2025)
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #2a5298;"></div>
+                    Category 2 & 3 Areas
+                </div>
+            </div>
+
+        </div>
+
+        <div class="sidebar">
+            <div class="region-tabs">
+                <button class="region-tab active" data-region="central">Central</button>
+                <button class="region-tab" data-region="north">North</button>
+                <button class="region-tab" data-region="nvi">NVI</button>
+            </div>
+
+            <div id="defaultInfo">
+                <h3>Marine Protected Area Network</h3>
+                <p style="margin-bottom: 1rem; line-height: 1.6; font-size: 0.9rem;">
+                    Click on any zone to view detailed information about its ecological conservation objectives,
+                    cultural significance, and marine species.
+                </p>
+                <div class="detail-section">
+                    <div class="detail-label">Total Zones</div>
+                    <div class="detail-content">100+ marine protected areas across BC coast</div>
+                </div>
+                <div class="detail-section">
+                    <div class="detail-label">Key Species Protected</div>
+                    <div class="species-tags">
+                        <span class="species-tag">Salmon</span>
+                        <span class="species-tag">Rockfish</span>
+                        <span class="species-tag">Eulachon</span>
+                        <span class="species-tag">Killer Whales</span>
+                        <span class="species-tag">Sea Otters</span>
+                        <span class="species-tag">Kelp Forests</span>
+                        <span class="species-tag">Sponge Reefs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="zone-info" id="zoneDetails">
+                <!-- Zone details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for detailed zone view -->
+    <div class="modal" id="zoneModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Zone Details</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div id="modalBody">
+                <!-- Modal content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="zone_data.js"></script>
+    <script src="interactive_map.js"></script>
+</body>
+</html>

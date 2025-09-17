@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BC Marine Conservation Research - Interactive Maps</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        .header {
+            background-color: #2c5f2d;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .map-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .map-card:hover {
+            transform: translateY(-5px);
+        }
+        .map-title {
+            color: #2c5f2d;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .map-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .map-button {
+            display: inline-block;
+            background-color: #2c5f2d;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .map-button:hover {
+            background-color: #1e4220;
+        }
+        .stats {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c5f2d;
+        }
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        .footer {
+            text-align: center;
+            color: #666;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>BC Marine Conservation Research</h1>
+            <p>Interactive Maps for Marine Protected Areas and Operations Analysis</p>
+        </div>
+
+        <div class="stats">
+            <h2 style="text-align: center; color: #2c5f2d; margin-bottom: 20px;">Research Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">183</div>
+                    <div class="stat-label">Total Mapped Locations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98</div>
+                    <div class="stat-label">MCP Zones (100-197)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">85</div>
+                    <div class="stat-label">Marine Operations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Protected Areas</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-grid">
+            <div class="map-card">
+                <h2 class="map-title">🌊 Enhanced Comprehensive MCP Analysis</h2>
+                <p class="map-description">
+                    <strong>FEATURED MAP:</strong> Complete MCP zone analysis with detailed ecological and cultural conservation objectives,
+                    industrial operations data, zone group images, and comprehensive popup information for each zone.
+                </p>
+                <ul style="color: #666; margin-bottom: 20px;">
+                    <li>Detailed conservation objectives for each zone</li>
+                    <li>Industrial operations and impact analysis</li>
+                    <li>Zone group overview maps and images</li>
+                    <li>Cultural and ecological context information</li>
+                </ul>
+                <a href="bc_comprehensive_enhanced_map.html" class="map-button">View Enhanced Map →</a>
+            </div>
+
+            <div class="map-card">
+                <h2 class="map-title">🗺️ Combined Marine Analysis</h2>
+                <p class="map-description">
+                    Comprehensive combined map showing MCP zones, marine operations, shipping routes, and fishing areas.
+                    Full integration of all marine data with layer controls and detailed information popups.
+                </p>
+                <ul style="color: #666; margin-bottom: 20px;">
+                    <li>All MCP zones with basic information</li>
+                    <li>Marine operations and shipping routes</li>
+                    <li>Layer controls for selective viewing</li>
+                    <li>Professional cartographic presentation</li>
+                </ul>
+                <a href="bc_combined_marine_map.html" class="map-button">View Combined Map →</a>
+            </div>
+
+            <div class="map-card">
+                <h2 class="map-title">🌊 Central Coast Marine Protected Areas</h2>
+                <p class="map-description">
+                    Interactive map showing all Central Coast MCP zones (100-197) with detailed zone information,
+                    images, and descriptions. Covers the Bella Bella region with 9 major zone groups including
+                    Hakai Pass, Burke Channel, Dean Channel, and more.
+                </p>
+                <ul style="color: #666; margin-bottom: 20px;">
+                    <li>98 numbered MCP zones (100-197)</li>
+                    <li>Zone group navigation and filtering</li>
+                    <li>Detailed zone images and descriptions</li>
+                    <li>Coordinate display and boundaries</li>
+                </ul>
+                <a href="central_coast_mcp_map.html" class="map-button">View Central Coast Map →</a>
+            </div>
+
+            <div class="map-card">
+                <h2 class="map-title">⚓ North Shelf Marine Operations</h2>
+                <p class="map-description">
+                    Comprehensive analysis map showing 85 marine operations with exact GPS coordinates.
+                    Color-coded by industry type including LNG facilities, ports, aquaculture, fishing areas,
+                    and their relationship to Marine Protected Areas.
+                </p>
+                <ul style="color: #666; margin-bottom: 20px;">
+                    <li>85 marine locations with GPS coordinates</li>
+                    <li>Industry category filtering and analysis</li>
+                    <li>Major shipping routes (LNG & Inside Passage)</li>
+                    <li>Professional operations analysis tools</li>
+                </ul>
+                <a href="bc_marine_operations_map.html" class="map-button">View Operations Map →</a>
+            </div>
+        </div>
+
+        <div class="stats">
+            <h3 style="color: #2c5f2d; margin-bottom: 15px;">Key Features</h3>
+            <ul style="color: #666; line-height: 1.8;">
+                <li><strong>Interactive Navigation:</strong> Click, zoom, and explore with layer controls</li>
+                <li><strong>Detailed Information:</strong> Popup windows with coordinates, descriptions, and context</li>
+                <li><strong>Multiple Base Maps:</strong> Street, satellite, and ocean view options</li>
+                <li><strong>Professional Quality:</strong> Suitable for research, analysis, and presentations</li>
+                <li><strong>Mobile Friendly:</strong> Responsive design works on all devices</li>
+                <li><strong>Real Data:</strong> Authentic GPS coordinates from official marine charts</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p><strong>BC Marine Conservation Research</strong> | Interactive mapping for marine protected area analysis</p>
+            <p>Data sources: DFO, Transport Canada, Parks Canada, Marine Plan Partnership</p>
+            <p>🤖 Generated with <a href="https://claude.ai/code" style="color: #2c5f2d;">Claude Code</a></p>
+        </div>
+    </div>
+</body>
+</html>

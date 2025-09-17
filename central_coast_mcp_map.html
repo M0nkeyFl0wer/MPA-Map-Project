@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Coast Marine Protected Areas - Interactive Zone Map</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+        }
+
+        .header {
+            background-color: #2c5f2d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+        }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 100px);
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: white;
+            padding: 20px;
+            overflow-y: auto;
+            border-right: 2px solid #2c5f2d;
+        }
+
+        .zone-group {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .zone-group-header {
+            background-color: #2c5f2d;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .zone-group-header:hover {
+            background-color: #1e4220;
+        }
+
+        .zone-list {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .zone-item {
+            padding: 5px;
+            margin: 2px 0;
+            background-color: white;
+            border-radius: 3px;
+            cursor: pointer;
+            border-left: 4px solid #2c5f2d;
+        }
+
+        .zone-item:hover {
+            background-color: #e8f5e8;
+        }
+
+        .map-container {
+            flex: 1;
+            position: relative;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .zone-popup {
+            max-width: 400px;
+        }
+
+        .zone-popup h3 {
+            margin: 0 0 10px 0;
+            color: #2c5f2d;
+        }
+
+        .zone-popup img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        .coordinates-display {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            z-index: 1000;
+        }
+
+        .legend {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        .legend h4 {
+            margin: 0 0 10px 0;
+            color: #2c5f2d;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Central Coast Marine Protected Areas</h1>
+        <p>Interactive Zone Map - Zones 100-197 | Bella Bella Region, British Columbia</p>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h3>Zone Groups</h3>
+
+            <div class="zone-group">
+                <div class="zone-group-header" onclick="toggleZoneGroup('group1')">
+                    1. Penrose, Rivers Inlet, and Calvert South (100-103)
+                </div>
+                <div class="zone-list" id="group1">
+                    <div class="zone-item" onclick="focusZone(100)">Zone 100 - Penrose Island</div>
+                    <div class="zone-item" onclick="focusZone(101)">Zone 101 - Rivers Inlet</div>
+                    <div class="zone-item" onclick="focusZone(102)">Zone 102 - Calvert South</div>
+                    <div class="zone-item" onclick="focusZone(103)">Zone 103 - Calvert Estuary</div>
+                </div>
+            </div>
+
+            <div class="zone-group">
+                <div class="zone-group-header" onclick="toggleZoneGroup('group2')">
+                    2. Hakai Pass Group (110-114)
+                </div>
+                <div class="zone-list" id="group2">
+                    <div class="zone-item" onclick="focusZone(110)">Zone 110 - Hakai Pass North</div>
+                    <div class="zone-item" onclick="focusZone(111)">Zone 111 - Hakai Pass Central</div>
+                    <div class="zone-item" onclick="focusZone(112)">Zone 112 - Hakai Pass South</div>
+                    <div class="zone-item" onclick="focusZone(113)">Zone 113 - Hakai Outer</div>
+                    <div class="zone-item" onclick="focusZone(114)">Zone 114 - Hakai Inner</div>
+                </div>
+            </div>
+
+            <div class="zone-group">
+                <div class="zone-group-header" onclick="toggleZoneGroup('group3')">
+                    3. Burke, Codville Lagoon, Bentick Arm (130-134, 136-138)
+                </div>
+                <div class="zone-list" id="group3">
+                    <div class="zone-item" onclick="focusZone(130)">Zone 130 - Burke Channel</div>
+                    <div class="zone-item" onclick="focusZone(131)">Zone 131 - Codville Lagoon</div>
+                    <div class="zone-item" onclick="focusZone(132)">Zone 132 - Bentick Arm North</div>
+                    <div class="zone-item" onclick="focusZone(133)">Zone 133 - Bentick Arm South</div>
+                    <div class="zone-item" onclick="focusZone(134)">Zone 134 - Bentick Outer</div>
+                    <div class="zone-item" onclick="focusZone(136)">Zone 136 - Burke Outer</div>
+                    <div class="zone-item" onclick="focusZone(137)">Zone 137 - Burke Inner</div>
+                    <div class="zone-item" onclick="focusZone(138)">Zone 138 - Codville Inner</div>
+                </div>
+            </div>
+
+            <div class="zone-group">
+                <div class="zone-group-header" onclick="toggleZoneGroup('group4')">
+                    4. Dean, Cascade, Labouchere, Kimsquit (140-146)
+                </div>
+                <div class="zone-list" id="group4">
+                    <div class="zone-item" onclick="focusZone(140)">Zone 140 - Dean Channel</div>
+                    <div class="zone-item" onclick="focusZone(141)">Zone 141 - Cascade Inlet</div>
+                    <div class="zone-item" onclick="focusZone(142)">Zone 142 - Labouchere Channel</div>
+                    <div class="zone-item" onclick="focusZone(143)">Zone 143 - Kimsquit Bay</div>
+                    <div class="zone-item" onclick="focusZone(144)">Zone 144 - Dean Outer</div>
+                    <div class="zone-item" onclick="focusZone(145)">Zone 145 - Cascade Outer</div>
+                    <div class="zone-item" onclick="focusZone(146)">Zone 146 - Kimsquit Outer</div>
+                </div>
+            </div>
+
+            <div class="zone-group">
+                <div class="zone-group-header" onclick="toggleZoneGroup('group5')">
+                    5. Goose Bank, Spiller Outer, Spiller North (150-157)
+                </div>
+                <div class="zone-list" id="group5">
+                    <div class="zone-item" onclick="focusZone(150)">Zone 150 - Goose Bank North</div>
+                    <div class="zone-item" onclick="focusZone(151)">Zone 151 - Goose Bank South</div>
+                    <div class="zone-item" onclick="focusZone(152)">Zone 152 - Spiller Outer</div>
+                    <div class="zone-item" onclick="focusZone(153)">Zone 153 - Spiller North</div>
+                    <div class="zone-item" onclick="focusZone(154)">Zone 154 - Goose Bank Central</div>
+                    <div class="zone-item" onclick="focusZone(155)">Zone 155 - Spiller Central</div>
+                    <div class="zone-item" onclick="focusZone(156)">Zone 156 - Goose Bank Outer</div>
+                    <div class="zone-item" onclick="focusZone(157)">Zone 157 - Spiller Inner</div>
+                </div>
+            </div>
+
+            <div class="zone-group">
+                <div class="zone-group-header" onclick="toggleZoneGroup('group6')">
+                    6. Spiller East Group (160-166)
+                </div>
+                <div class="zone-list" id="group6">
+                    <div class="zone-item" onclick="focusZone(160)">Zone 160 - Spiller East North</div>
+                    <div class="zone-item" onclick="focusZone(161)">Zone 161 - Spiller East Central</div>
+                    <div class="zone-item" onclick="focusZone(162)">Zone 162 - Spiller East South</div>
+                    <div class="zone-item" onclick="focusZone(163)">Zone 163 - Bella Bella Nearshore</div>
+                    <div class="zone-item" onclick="focusZone(164)">Zone 164 - Bella Bella EBSA</div>
+                    <div class="zone-item" onclick="focusZone(165)">Zone 165 - Spiller East Outer</div>
+                    <div class="zone-item" onclick="focusZone(166)">Zone 166 - Bella Bella Outer</div>
+                </div>
+            </div>
+
+            <div class="zone-group">
+                <div class="zone-group-header" onclick="toggleZoneGroup('group7')">
+                    7. Kitasu-Price, Kitasu-Aristazabal (170-174)
+                </div>
+                <div class="zone-list" id="group7">
+                    <div class="zone-item" onclick="focusZone(170)">Zone 170 - Kitasu Bay</div>
+                    <div class="zone-item" onclick="focusZone(171)">Zone 171 - Price Island</div>
+                    <div class="zone-item" onclick="focusZone(172)">Zone 172 - Aristazabal North</div>
+                    <div class="zone-item" onclick="focusZone(173)">Zone 173 - Aristazabal South</div>
+                    <div class="zone-item" onclick="focusZone(174)">Zone 174 - Kitasu Outer</div>
+                </div>
+            </div>
+
+            <div class="zone-group">
+                <div class="zone-group-header" onclick="toggleZoneGroup('group8')">
+                    8. Kitasu-Jackson, Millbanke (180-188)
+                </div>
+                <div class="zone-list" id="group8">
+                    <div class="zone-item" onclick="focusZone(180)">Zone 180 - Jackson Passage</div>
+                    <div class="zone-item" onclick="focusZone(181)">Zone 181 - Millbanke Sound North</div>
+                    <div class="zone-item" onclick="focusZone(182)">Zone 182 - Millbanke Sound South</div>
+                    <div class="zone-item" onclick="focusZone(183)">Zone 183 - Jackson North</div>
+                    <div class="zone-item" onclick="focusZone(184)">Zone 184 - Jackson South</div>
+                    <div class="zone-item" onclick="focusZone(185)">Zone 185 - Millbanke Central</div>
+                    <div class="zone-item" onclick="focusZone(186)">Zone 186 - Millbanke Outer</div>
+                    <div class="zone-item" onclick="focusZone(187)">Zone 187 - Jackson Outer</div>
+                    <div class="zone-item" onclick="focusZone(188)">Zone 188 - Kitasu Central</div>
+                </div>
+            </div>
+
+            <div class="zone-group">
+                <div class="zone-group-header" onclick="toggleZoneGroup('group9')">
+                    9. Kitasu-Laredo Group (190-197)
+                </div>
+                <div class="zone-list" id="group9">
+                    <div class="zone-item" onclick="focusZone(190)">Zone 190 - Laredo Channel</div>
+                    <div class="zone-item" onclick="focusZone(191)">Zone 191 - Laredo Sound</div>
+                    <div class="zone-item" onclick="focusZone(192)">Zone 192 - Kitasu Southeast</div>
+                    <div class="zone-item" onclick="focusZone(193)">Zone 193 - Laredo Inlet</div>
+                    <div class="zone-item" onclick="focusZone(194)">Zone 194 - Laredo Outer</div>
+                    <div class="zone-item" onclick="focusZone(195)">Zone 195 - Kitasu Southwest</div>
+                    <div class="zone-item" onclick="focusZone(196)">Zone 196 - Laredo South</div>
+                    <div class="zone-item" onclick="focusZone(197)">Zone 197 - Kitasu Laredo Outer</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="coordinates-display" id="coords">Lat: 0.0000, Lng: 0.0000</div>
+
+            <div class="legend">
+                <h4>Zone Types</h4>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #d32f2f;"></div>
+                    <span>Protected Management Zone (PMZ)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #f57c00;"></div>
+                    <span>Special Management Zone (SMZ)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #388e3c;"></div>
+                    <span>General Management Zone (GMZ)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #1976d2;"></div>
+                    <span>Key Reference Point</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // Initialize the map centered on Bella Bella region
+        const map = L.map('map').setView([52.6, -128.8], 8);
+
+        // Add base map layers
+        const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        });
+
+        const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
+
+        // Add default layer
+        osm.addTo(map);
+
+        // Layer control
+        const baseMaps = {
+            "OpenStreetMap": osm,
+            "Satellite": satellite
+        };
+
+        L.control.layers(baseMaps).addTo(map);
+
+        // Coordinate display
+        map.on('mousemove', function(e) {
+            document.getElementById('coords').innerHTML =
+                'Lat: ' + e.latlng.lat.toFixed(4) + ', Lng: ' + e.latlng.lng.toFixed(4);
+        });
+
+        // Zone data structure - coordinates will be added as we extract them
+        const zoneData = {
+            // Bella Bella as reference point
+            'bella_bella': {
+                coords: [52.1617, -128.1372],
+                name: 'Bella Bella',
+                type: 'reference',
+                description: 'Key reference point for Central Coast Marine Protected Areas'
+            },
+
+            // Placeholder coordinates for zones - to be updated with extracted data
+            100: { coords: [52.3, -128.2], name: 'Zone 100 - Penrose Island', type: 'pmz', image: 'central_coast_page_167_img_1.png' },
+            101: { coords: [52.35, -128.25], name: 'Zone 101 - Rivers Inlet', type: 'pmz', image: 'central_coast_page_167_img_1.png' },
+            102: { coords: [52.25, -128.15], name: 'Zone 102 - Calvert South', type: 'smz', image: 'central_coast_page_167_img_1.png' },
+            103: { coords: [52.28, -128.18], name: 'Zone 103 - Calvert Estuary', type: 'pmz', image: 'central_coast_page_167_img_1.png' },
+
+            110: { coords: [52.4, -128.3], name: 'Zone 110 - Hakai Pass North', type: 'pmz', image: 'central_coast_page_173_img_1.png' },
+            111: { coords: [52.38, -128.28], name: 'Zone 111 - Hakai Pass Central', type: 'smz', image: 'central_coast_page_173_img_1.png' },
+            112: { coords: [52.36, -128.26], name: 'Zone 112 - Hakai Pass South', type: 'pmz', image: 'central_coast_page_173_img_1.png' },
+            113: { coords: [52.42, -128.32], name: 'Zone 113 - Hakai Outer', type: 'gmz', image: 'central_coast_page_173_img_1.png' },
+            114: { coords: [52.34, -128.24], name: 'Zone 114 - Hakai Inner', type: 'pmz', image: 'central_coast_page_173_img_1.png' },
+
+            // Add more zones as coordinates are extracted...
+        };
+
+        // Color scheme for different zone types
+        const zoneColors = {
+            'pmz': '#d32f2f',    // Red for Protected Management Zones
+            'smz': '#f57c00',    // Orange for Special Management Zones
+            'gmz': '#388e3c',    // Green for General Management Zones
+            'reference': '#1976d2' // Blue for reference points
+        };
+
+        // Add markers for each zone
+        const zoneMarkers = {};
+
+        Object.keys(zoneData).forEach(zoneId => {
+            const zone = zoneData[zoneId];
+            const marker = L.circleMarker(zone.coords, {
+                color: zoneColors[zone.type],
+                fillColor: zoneColors[zone.type],
+                fillOpacity: 0.7,
+                radius: zone.type === 'reference' ? 8 : 6,
+                weight: 2
+            });
+
+            // Create popup content
+            let popupContent = `<div class="zone-popup">
+                <h3>${zone.name}</h3>
+                <p><strong>Type:</strong> ${zone.type.toUpperCase()}</p>
+                <p><strong>Coordinates:</strong> ${zone.coords[0].toFixed(4)}, ${zone.coords[1].toFixed(4)}</p>`;
+
+            if (zone.image) {
+                popupContent += `<img src="central_coast_images/${zone.image}" alt="${zone.name} Map">`;
+            }
+
+            if (zone.description) {
+                popupContent += `<p>${zone.description}</p>`;
+            }
+
+            popupContent += '</div>';
+
+            marker.bindPopup(popupContent);
+            marker.addTo(map);
+
+            zoneMarkers[zoneId] = marker;
+        });
+
+        // Zone group toggle functionality
+        function toggleZoneGroup(groupId) {
+            const zoneList = document.getElementById(groupId);
+            if (zoneList.style.display === 'none' || zoneList.style.display === '') {
+                zoneList.style.display = 'block';
+            } else {
+                zoneList.style.display = 'none';
+            }
+        }
+
+        // Focus on specific zone
+        function focusZone(zoneId) {
+            if (zoneData[zoneId]) {
+                map.setView(zoneData[zoneId].coords, 12);
+                if (zoneMarkers[zoneId]) {
+                    zoneMarkers[zoneId].openPopup();
+                }
+            }
+        }
+
+        // Add overall region boundary (approximated from StoryMap bounds)
+        const centralCoastBounds = [
+            [52.16, -129.44],  // Southwest corner
+            [53.05, -128.15]   // Northeast corner
+        ];
+
+        const regionBoundary = L.rectangle(centralCoastBounds, {
+            color: '#2c5f2d',
+            weight: 3,
+            fillOpacity: 0.1,
+            dashArray: '10, 10'
+        }).addTo(map);
+
+        regionBoundary.bindPopup('<div class="zone-popup"><h3>Central Coast Marine Protected Area Region</h3><p>Coordinate Range: 52.16°N to 53.05°N, 128.15°W to 129.44°W</p><p>Total Zones: 100-197 (98 zones)</p></div>');
+
+        console.log('Central Coast MCP Interactive Map Loaded');
+        console.log('Total zones configured:', Object.keys(zoneData).length);
+    </script>
+</body>
+</html>

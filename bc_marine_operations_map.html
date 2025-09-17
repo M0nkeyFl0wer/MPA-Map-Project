@@ -1,0 +1,4606 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_040f2aa840c84b0233e83153f38e9a4e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+</head>
+<body>
+    
+    
+    <div style="position: fixed;
+                top: 10px; left: 10px; width: 300px; height: auto;
+                background-color: white; border:2px solid grey; z-index:9999;
+                font-size:14px; padding: 10px">
+    <h4>BC Marine Operations Legend</h4>
+    <p><i class="fa fa-fire" style="color:red"></i> LNG Facilities</p>
+    <p><i class="fa fa-anchor" style="color:blue"></i> Ports/Navigation</p>
+    <p><i class="fa fa-leaf" style="color:green"></i> Aquaculture/Salmon Farms</p>
+    <p><i class="fa fa-ship" style="color:yellow"></i> Fishing/Trawl Areas</p>
+    <p><i class="fa fa-shield" style="color:purple"></i> Marine Protected Areas</p>
+    <p><i class="fa fa-anchor" style="color:orange"></i> Anchorages</p>
+    <hr>
+    <p><strong>Routes:</strong></p>
+    <p><span style="color:red; font-weight:bold;">—</span> LNG Export Route</p>
+    <p><span style="color:blue; font-weight:bold;">—</span> Inside Passage</p>
+    </div>
+    
+    
+            <div class="folium-map" id="map_040f2aa840c84b0233e83153f38e9a4e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_040f2aa840c84b0233e83153f38e9a4e = L.map(
+                "map_040f2aa840c84b0233e83153f38e9a4e",
+                {
+                    center: [52.5, -128.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e8c9340d12eb4a9b6f183a2670b56562 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e8c9340d12eb4a9b6f183a2670b56562.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var tile_layer_87181207a73a4e5405c5db51564062b5 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_87181207a73a4e5405c5db51564062b5.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var tile_layer_de580855d6c987682e9c0deae9edd0c3 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_de580855d6c987682e9c0deae9edd0c3.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_9457ad8322df892992196828e0308737 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_650c9cf1880b2a277bd31f0055f5d8f5 = L.marker(
+                [54.3167, -130.885],
+                {
+}
+            ).addTo(feature_group_9457ad8322df892992196828e0308737);
+        
+    
+            var icon_3e0c3c93f2cbe1146bbab0a144ecb576 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0e6598f30eeb206a4ce4e799747f0837 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_6e9006597cbb4fd48ea52555609b787a = $(`<div id="html_6e9006597cbb4fd48ea52555609b787a" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Triple Island Pilot Station</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Pilotage</p>             <p><strong>Coordinates:</strong> 54.3167°N, 130.8850°W</p>             <p><strong>Description:</strong> Primary boarding point for Prince Rupert</p>         </div>         </div>`)[0];
+                popup_0e6598f30eeb206a4ce4e799747f0837.setContent(html_6e9006597cbb4fd48ea52555609b787a);
+            
+        
+
+        marker_650c9cf1880b2a277bd31f0055f5d8f5.bindPopup(popup_0e6598f30eeb206a4ce4e799747f0837)
+        ;
+
+        
+    
+    
+            marker_650c9cf1880b2a277bd31f0055f5d8f5.bindTooltip(
+                `<div>
+                     Triple Island Pilot Station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_650c9cf1880b2a277bd31f0055f5d8f5.setIcon(icon_3e0c3c93f2cbe1146bbab0a144ecb576);
+            
+    
+            feature_group_9457ad8322df892992196828e0308737.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_134a01ee6d4cdafc00de2d553a5b7b60 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_778fa66403d50138a7e1054b4224c60c = L.marker(
+                [54.2883, -130.3562],
+                {
+}
+            ).addTo(feature_group_134a01ee6d4cdafc00de2d553a5b7b60);
+        
+    
+            var icon_7733fae68cf6f7eb24697f0f68ebc704 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8be4c88fcc6471713ee222be2c0b3232 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ec06864a3f060bf18b533983f2e38448 = $(`<div id="html_ec06864a3f060bf18b533983f2e38448" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Prince Rupert Port</h4>             <p><strong>Type:</strong> Port</p>             <p><strong>Category:</strong> Infrastructure</p>             <p><strong>Coordinates:</strong> 54.2883°N, 130.3562°W</p>             <p><strong>Description:</strong> North America's deepest natural harbor</p>         </div>         </div>`)[0];
+                popup_8be4c88fcc6471713ee222be2c0b3232.setContent(html_ec06864a3f060bf18b533983f2e38448);
+            
+        
+
+        marker_778fa66403d50138a7e1054b4224c60c.bindPopup(popup_8be4c88fcc6471713ee222be2c0b3232)
+        ;
+
+        
+    
+    
+            marker_778fa66403d50138a7e1054b4224c60c.bindTooltip(
+                `<div>
+                     Prince Rupert Port
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_778fa66403d50138a7e1054b4224c60c.setIcon(icon_7733fae68cf6f7eb24697f0f68ebc704);
+            
+    
+            var marker_fe13b2514f51901ce2c84b8eb58831b9 = L.marker(
+                [55.9333, -129.9833],
+                {
+}
+            ).addTo(feature_group_134a01ee6d4cdafc00de2d553a5b7b60);
+        
+    
+            var icon_ad7037c0182322010d8f6809a4d7649c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_06c1d1dcc0c54a13d010333d4c37c0fc = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_5dab3f73f2f899ac3696298106957696 = $(`<div id="html_5dab3f73f2f899ac3696298106957696" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Stewart World Port</h4>             <p><strong>Type:</strong> Port</p>             <p><strong>Category:</strong> Infrastructure</p>             <p><strong>Coordinates:</strong> 55.9333°N, 129.9833°W</p>             <p><strong>Description:</strong> Most northerly ice-free port</p>         </div>         </div>`)[0];
+                popup_06c1d1dcc0c54a13d010333d4c37c0fc.setContent(html_5dab3f73f2f899ac3696298106957696);
+            
+        
+
+        marker_fe13b2514f51901ce2c84b8eb58831b9.bindPopup(popup_06c1d1dcc0c54a13d010333d4c37c0fc)
+        ;
+
+        
+    
+    
+            marker_fe13b2514f51901ce2c84b8eb58831b9.bindTooltip(
+                `<div>
+                     Stewart World Port
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fe13b2514f51901ce2c84b8eb58831b9.setIcon(icon_ad7037c0182322010d8f6809a4d7649c);
+            
+    
+            var marker_4a052e994e537f940751ea19cea75697 = L.marker(
+                [54.0283, -128.69],
+                {
+}
+            ).addTo(feature_group_134a01ee6d4cdafc00de2d553a5b7b60);
+        
+    
+            var icon_0e99569d86e669fe0c901fcf68c609c5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e9cba3c02ea220f686b48016efbb1bd3 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_52240185ae63262d095f984340232dcd = $(`<div id="html_52240185ae63262d095f984340232dcd" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Kitimat Terminal Berth 1</h4>             <p><strong>Type:</strong> LNG</p>             <p><strong>Category:</strong> Infrastructure</p>             <p><strong>Coordinates:</strong> 54.0283°N, 128.6900°W</p>             <p><strong>Description:</strong> LNG loading berth</p>         </div>         </div>`)[0];
+                popup_e9cba3c02ea220f686b48016efbb1bd3.setContent(html_52240185ae63262d095f984340232dcd);
+            
+        
+
+        marker_4a052e994e537f940751ea19cea75697.bindPopup(popup_e9cba3c02ea220f686b48016efbb1bd3)
+        ;
+
+        
+    
+    
+            marker_4a052e994e537f940751ea19cea75697.bindTooltip(
+                `<div>
+                     Kitimat Terminal Berth 1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4a052e994e537f940751ea19cea75697.setIcon(icon_0e99569d86e669fe0c901fcf68c609c5);
+            
+    
+            var marker_77386481485e5b656b9dea5641703201 = L.marker(
+                [54.0287, -128.6933],
+                {
+}
+            ).addTo(feature_group_134a01ee6d4cdafc00de2d553a5b7b60);
+        
+    
+            var icon_8d331de3ef49154acd97eeae884fc9bc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cc05ba11fc6f490fc2d7ebe5d26b8c83 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ca8f9cf8f1e1f02424b09ab6a5c6c02b = $(`<div id="html_ca8f9cf8f1e1f02424b09ab6a5c6c02b" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Kitimat Terminal Berth 2</h4>             <p><strong>Type:</strong> LNG</p>             <p><strong>Category:</strong> Infrastructure</p>             <p><strong>Coordinates:</strong> 54.0287°N, 128.6933°W</p>             <p><strong>Description:</strong> LNG loading berth</p>         </div>         </div>`)[0];
+                popup_cc05ba11fc6f490fc2d7ebe5d26b8c83.setContent(html_ca8f9cf8f1e1f02424b09ab6a5c6c02b);
+            
+        
+
+        marker_77386481485e5b656b9dea5641703201.bindPopup(popup_cc05ba11fc6f490fc2d7ebe5d26b8c83)
+        ;
+
+        
+    
+    
+            marker_77386481485e5b656b9dea5641703201.bindTooltip(
+                `<div>
+                     Kitimat Terminal Berth 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_77386481485e5b656b9dea5641703201.setIcon(icon_8d331de3ef49154acd97eeae884fc9bc);
+            
+    
+            feature_group_134a01ee6d4cdafc00de2d553a5b7b60.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_53da1fd756608e41c216b1cf414632f8 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_71f86a641e07379e79e64eb7c2b256c4 = L.marker(
+                [52.3167, -128.55],
+                {
+}
+            ).addTo(feature_group_53da1fd756608e41c216b1cf414632f8);
+        
+    
+            var icon_2fe3aeaf3dac99b4122c604bdf97e94b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dd52b3c89642cd80a12333872d8ee9f4 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_6f7c623947860870ce70d05aa457f20c = $(`<div id="html_6f7c623947860870ce70d05aa457f20c" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Milbanke Sound</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Waypoint</p>             <p><strong>Coordinates:</strong> 52.3167°N, 128.5500°W</p>             <p><strong>Description:</strong> Critical junction Seaforth/Finlayson Channels</p>         </div>         </div>`)[0];
+                popup_dd52b3c89642cd80a12333872d8ee9f4.setContent(html_6f7c623947860870ce70d05aa457f20c);
+            
+        
+
+        marker_71f86a641e07379e79e64eb7c2b256c4.bindPopup(popup_dd52b3c89642cd80a12333872d8ee9f4)
+        ;
+
+        
+    
+    
+            marker_71f86a641e07379e79e64eb7c2b256c4.bindTooltip(
+                `<div>
+                     Milbanke Sound
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_71f86a641e07379e79e64eb7c2b256c4.setIcon(icon_2fe3aeaf3dac99b4122c604bdf97e94b);
+            
+    
+            var marker_2022940a0274e8361fda384c261bb255 = L.marker(
+                [51.9333, -131.0167],
+                {
+}
+            ).addTo(feature_group_53da1fd756608e41c216b1cf414632f8);
+        
+    
+            var icon_7a98985a24506e10a94330acd06f592b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_603798569e794925d005797bf164d5d2 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_afe5fe0b999a1d48d1902893e01b743b = $(`<div id="html_afe5fe0b999a1d48d1902893e01b743b" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Cape St James</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Waypoint</p>             <p><strong>Coordinates:</strong> 51.9333°N, 131.0167°W</p>             <p><strong>Description:</strong> Southernmost Kunghit Island</p>         </div>         </div>`)[0];
+                popup_603798569e794925d005797bf164d5d2.setContent(html_afe5fe0b999a1d48d1902893e01b743b);
+            
+        
+
+        marker_2022940a0274e8361fda384c261bb255.bindPopup(popup_603798569e794925d005797bf164d5d2)
+        ;
+
+        
+    
+    
+            marker_2022940a0274e8361fda384c261bb255.bindTooltip(
+                `<div>
+                     Cape St James
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2022940a0274e8361fda384c261bb255.setIcon(icon_7a98985a24506e10a94330acd06f592b);
+            
+    
+            var marker_26834e8b424014fce64c9ec22897bb57 = L.marker(
+                [48.4233, -123.2167],
+                {
+}
+            ).addTo(feature_group_53da1fd756608e41c216b1cf414632f8);
+        
+    
+            var icon_60aafee25ec6c997fbb6b9a373d9345f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ecf70377971a4271d6146615ef3701f9 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_6b75c3b76104b02f4eb9e21f841ff366 = $(`<div id="html_6b75c3b76104b02f4eb9e21f841ff366" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Discovery Island</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Waypoint</p>             <p><strong>Coordinates:</strong> 48.4233°N, 123.2167°W</p>             <p><strong>Description:</strong> Victoria approaches</p>         </div>         </div>`)[0];
+                popup_ecf70377971a4271d6146615ef3701f9.setContent(html_6b75c3b76104b02f4eb9e21f841ff366);
+            
+        
+
+        marker_26834e8b424014fce64c9ec22897bb57.bindPopup(popup_ecf70377971a4271d6146615ef3701f9)
+        ;
+
+        
+    
+    
+            marker_26834e8b424014fce64c9ec22897bb57.bindTooltip(
+                `<div>
+                     Discovery Island
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_26834e8b424014fce64c9ec22897bb57.setIcon(icon_60aafee25ec6c997fbb6b9a373d9345f);
+            
+    
+            var marker_aa1b14a9c686a144875dc38073f377df = L.marker(
+                [48.298, -123.5317],
+                {
+}
+            ).addTo(feature_group_53da1fd756608e41c216b1cf414632f8);
+        
+    
+            var icon_dfc5911880573308e6300eea22b8e40d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_56a7b3f4ca1412d2bc2d52573bbfcb80 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c54065e7121813af55263400581f8727 = $(`<div id="html_c54065e7121813af55263400581f8727" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Race Rocks</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Waypoint</p>             <p><strong>Coordinates:</strong> 48.2980°N, 123.5317°W</p>             <p><strong>Description:</strong> Juan de Fuca hazard</p>         </div>         </div>`)[0];
+                popup_56a7b3f4ca1412d2bc2d52573bbfcb80.setContent(html_c54065e7121813af55263400581f8727);
+            
+        
+
+        marker_aa1b14a9c686a144875dc38073f377df.bindPopup(popup_56a7b3f4ca1412d2bc2d52573bbfcb80)
+        ;
+
+        
+    
+    
+            marker_aa1b14a9c686a144875dc38073f377df.bindTooltip(
+                `<div>
+                     Race Rocks
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_aa1b14a9c686a144875dc38073f377df.setIcon(icon_dfc5911880573308e6300eea22b8e40d);
+            
+    
+            var marker_794446cd95d4b5f515d5177975089119 = L.marker(
+                [51.8667, -128.2333],
+                {
+}
+            ).addTo(feature_group_53da1fd756608e41c216b1cf414632f8);
+        
+    
+            var icon_158c490cb1d07825a458c573e3435777 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0f5727882d33e4255fa0b14e88a9c415 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_e5ab0e1810d3698cabcceb7cee096f8f = $(`<div id="html_e5ab0e1810d3698cabcceb7cee096f8f" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Boat Bluff</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Waypoint</p>             <p><strong>Coordinates:</strong> 51.8667°N, 128.2333°W</p>             <p><strong>Description:</strong> Central Coast waypoint</p>         </div>         </div>`)[0];
+                popup_0f5727882d33e4255fa0b14e88a9c415.setContent(html_e5ab0e1810d3698cabcceb7cee096f8f);
+            
+        
+
+        marker_794446cd95d4b5f515d5177975089119.bindPopup(popup_0f5727882d33e4255fa0b14e88a9c415)
+        ;
+
+        
+    
+    
+            marker_794446cd95d4b5f515d5177975089119.bindTooltip(
+                `<div>
+                     Boat Bluff
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_794446cd95d4b5f515d5177975089119.setIcon(icon_158c490cb1d07825a458c573e3435777);
+            
+    
+            var marker_5ef3980201760521992753bf48ca74ce = L.marker(
+                [51.4333, -128.0167],
+                {
+}
+            ).addTo(feature_group_53da1fd756608e41c216b1cf414632f8);
+        
+    
+            var icon_645037cc47a001189561ccbfccf3e1fb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d7a22440fabccac18058487707489456 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_7474cb2209d26dc71a0dbae824889b61 = $(`<div id="html_7474cb2209d26dc71a0dbae824889b61" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Cape Calvert</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Waypoint</p>             <p><strong>Coordinates:</strong> 51.4333°N, 128.0167°W</p>             <p><strong>Description:</strong> Outer passage marker</p>         </div>         </div>`)[0];
+                popup_d7a22440fabccac18058487707489456.setContent(html_7474cb2209d26dc71a0dbae824889b61);
+            
+        
+
+        marker_5ef3980201760521992753bf48ca74ce.bindPopup(popup_d7a22440fabccac18058487707489456)
+        ;
+
+        
+    
+    
+            marker_5ef3980201760521992753bf48ca74ce.bindTooltip(
+                `<div>
+                     Cape Calvert
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5ef3980201760521992753bf48ca74ce.setIcon(icon_645037cc47a001189561ccbfccf3e1fb);
+            
+    
+            var marker_a16040b4522c268cc6fb56a0ea2896a4 = L.marker(
+                [52.1617, -128.1433],
+                {
+}
+            ).addTo(feature_group_53da1fd756608e41c216b1cf414632f8);
+        
+    
+            var icon_e9e9ea52230163940a83f58d2fe79bb4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d9a67824ac0afe90afda50c04d409021 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_dcade13f66936d239160a4d0acf2ea90 = $(`<div id="html_dcade13f66936d239160a4d0acf2ea90" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Bella Bella</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Waypoint</p>             <p><strong>Coordinates:</strong> 52.1617°N, 128.1433°W</p>             <p><strong>Description:</strong> Heiltsuk territory center</p>         </div>         </div>`)[0];
+                popup_d9a67824ac0afe90afda50c04d409021.setContent(html_dcade13f66936d239160a4d0acf2ea90);
+            
+        
+
+        marker_a16040b4522c268cc6fb56a0ea2896a4.bindPopup(popup_d9a67824ac0afe90afda50c04d409021)
+        ;
+
+        
+    
+    
+            marker_a16040b4522c268cc6fb56a0ea2896a4.bindTooltip(
+                `<div>
+                     Bella Bella
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a16040b4522c268cc6fb56a0ea2896a4.setIcon(icon_e9e9ea52230163940a83f58d2fe79bb4);
+            
+    
+            feature_group_53da1fd756608e41c216b1cf414632f8.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_2a729df10e188b4170e8de2365b4df9c = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_e2ea2b0fd202497953f051838f4956a4 = L.marker(
+                [50.7, -127.4167],
+                {
+}
+            ).addTo(feature_group_2a729df10e188b4170e8de2365b4df9c);
+        
+    
+            var icon_2b5bc3c4deea876efce10b462cb99fa5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f8025348c205fe917f00bbb9b085c073 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_2b7d68ddf24196b48db4960c91325481 = $(`<div id="html_2b7d68ddf24196b48db4960c91325481" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Port Hardy Bear Cove</h4>             <p><strong>Type:</strong> Port</p>             <p><strong>Category:</strong> Terminal</p>             <p><strong>Coordinates:</strong> 50.7000°N, 127.4167°W</p>             <p><strong>Description:</strong> BC Ferries southern terminus</p>         </div>         </div>`)[0];
+                popup_f8025348c205fe917f00bbb9b085c073.setContent(html_2b7d68ddf24196b48db4960c91325481);
+            
+        
+
+        marker_e2ea2b0fd202497953f051838f4956a4.bindPopup(popup_f8025348c205fe917f00bbb9b085c073)
+        ;
+
+        
+    
+    
+            marker_e2ea2b0fd202497953f051838f4956a4.bindTooltip(
+                `<div>
+                     Port Hardy Bear Cove
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e2ea2b0fd202497953f051838f4956a4.setIcon(icon_2b5bc3c4deea876efce10b462cb99fa5);
+            
+    
+            var marker_34bbacbed4934b2439a5f18f005d4fdf = L.marker(
+                [49.3, -122.96],
+                {
+}
+            ).addTo(feature_group_2a729df10e188b4170e8de2365b4df9c);
+        
+    
+            var icon_6e234f4cce9b145b20fc9c25bd62eb96 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_69374c7ed24b9591ec25aaabb8cdb495 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_00e8cdac4bb4699a6cc4871cf74c62a1 = $(`<div id="html_00e8cdac4bb4699a6cc4871cf74c62a1" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Westridge Terminal</h4>             <p><strong>Type:</strong> Port</p>             <p><strong>Category:</strong> Terminal</p>             <p><strong>Coordinates:</strong> 49.3000°N, 122.9600°W</p>             <p><strong>Description:</strong> Trans Mountain origin point</p>         </div>         </div>`)[0];
+                popup_69374c7ed24b9591ec25aaabb8cdb495.setContent(html_00e8cdac4bb4699a6cc4871cf74c62a1);
+            
+        
+
+        marker_34bbacbed4934b2439a5f18f005d4fdf.bindPopup(popup_69374c7ed24b9591ec25aaabb8cdb495)
+        ;
+
+        
+    
+    
+            marker_34bbacbed4934b2439a5f18f005d4fdf.bindTooltip(
+                `<div>
+                     Westridge Terminal
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_34bbacbed4934b2439a5f18f005d4fdf.setIcon(icon_6e234f4cce9b145b20fc9c25bd62eb96);
+            
+    
+            feature_group_2a729df10e188b4170e8de2365b4df9c.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_05aeb8982d198c647b885ab56d5109f5 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_4b8d23f3a22cb9174a28f07d6753d384 = L.marker(
+                [54.028571, -128.691677],
+                {
+}
+            ).addTo(feature_group_05aeb8982d198c647b885ab56d5109f5);
+        
+    
+            var icon_2551faeb6ca9adeedaa50f1a98222621 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "fire",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0a108cf36447f70534b898902733d9ef = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_da0a77e6693e4944d95fced04eee26c8 = $(`<div id="html_da0a77e6693e4944d95fced04eee26c8" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">LNG Canada Kitimat</h4>             <p><strong>Type:</strong> LNG</p>             <p><strong>Category:</strong> Energy</p>             <p><strong>Coordinates:</strong> 54.0286°N, 128.6917°W</p>             <p><strong>Description:</strong> Operational 14 million tonnes/year</p>         </div>         </div>`)[0];
+                popup_0a108cf36447f70534b898902733d9ef.setContent(html_da0a77e6693e4944d95fced04eee26c8);
+            
+        
+
+        marker_4b8d23f3a22cb9174a28f07d6753d384.bindPopup(popup_0a108cf36447f70534b898902733d9ef)
+        ;
+
+        
+    
+    
+            marker_4b8d23f3a22cb9174a28f07d6753d384.bindTooltip(
+                `<div>
+                     LNG Canada Kitimat
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4b8d23f3a22cb9174a28f07d6753d384.setIcon(icon_2551faeb6ca9adeedaa50f1a98222621);
+            
+    
+            var marker_2a5a02d6f35595e17698235338d02a09 = L.marker(
+                [49.665, -123.255],
+                {
+}
+            ).addTo(feature_group_05aeb8982d198c647b885ab56d5109f5);
+        
+    
+            var icon_788070df1d9c07fe0be3fee19c558018 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "fire",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_aadce1c63137746113273d9245516bd0 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_35e2b2a35322d8399b809102a3b89bfb = $(`<div id="html_35e2b2a35322d8399b809102a3b89bfb" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Woodfibre LNG</h4>             <p><strong>Type:</strong> LNG</p>             <p><strong>Category:</strong> Energy</p>             <p><strong>Coordinates:</strong> 49.6650°N, 123.2550°W</p>             <p><strong>Description:</strong> Under construction near Squamish</p>         </div>         </div>`)[0];
+                popup_aadce1c63137746113273d9245516bd0.setContent(html_35e2b2a35322d8399b809102a3b89bfb);
+            
+        
+
+        marker_2a5a02d6f35595e17698235338d02a09.bindPopup(popup_aadce1c63137746113273d9245516bd0)
+        ;
+
+        
+    
+    
+            marker_2a5a02d6f35595e17698235338d02a09.bindTooltip(
+                `<div>
+                     Woodfibre LNG
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2a5a02d6f35595e17698235338d02a09.setIcon(icon_788070df1d9c07fe0be3fee19c558018);
+            
+    
+            var marker_907e1283ce89516dd4b07345db0d89a7 = L.marker(
+                [54.0167, -128.6833],
+                {
+}
+            ).addTo(feature_group_05aeb8982d198c647b885ab56d5109f5);
+        
+    
+            var icon_c0036fa3f6b9dea0f762d2acbc631ab5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "fire",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ea46535d737a8f4529bd9d1fec7247f4 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_8f873d0f70c2838c226653a58ebde42b = $(`<div id="html_8f873d0f70c2838c226653a58ebde42b" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Cedar LNG</h4>             <p><strong>Type:</strong> LNG</p>             <p><strong>Category:</strong> Energy</p>             <p><strong>Coordinates:</strong> 54.0167°N, 128.6833°W</p>             <p><strong>Description:</strong> Haisla Nation floating facility</p>         </div>         </div>`)[0];
+                popup_ea46535d737a8f4529bd9d1fec7247f4.setContent(html_8f873d0f70c2838c226653a58ebde42b);
+            
+        
+
+        marker_907e1283ce89516dd4b07345db0d89a7.bindPopup(popup_ea46535d737a8f4529bd9d1fec7247f4)
+        ;
+
+        
+    
+    
+            marker_907e1283ce89516dd4b07345db0d89a7.bindTooltip(
+                `<div>
+                     Cedar LNG
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_907e1283ce89516dd4b07345db0d89a7.setIcon(icon_c0036fa3f6b9dea0f762d2acbc631ab5);
+            
+    
+            var marker_b6266092d8a62b9cdaca61e2c0187988 = L.marker(
+                [54.9667, -130.1],
+                {
+}
+            ).addTo(feature_group_05aeb8982d198c647b885ab56d5109f5);
+        
+    
+            var icon_f18002f8717872bee707958395164c12 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "fire",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ac083ff16f5ec01ab05f3c19f279e6fc = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ea583b771f26e3ccd936b273557c8cb5 = $(`<div id="html_ea583b771f26e3ccd936b273557c8cb5" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Ksi Lisims LNG</h4>             <p><strong>Type:</strong> LNG</p>             <p><strong>Category:</strong> Energy</p>             <p><strong>Coordinates:</strong> 54.9667°N, 130.1000°W</p>             <p><strong>Description:</strong> Nisga'a Nation Pearse Island project</p>         </div>         </div>`)[0];
+                popup_ac083ff16f5ec01ab05f3c19f279e6fc.setContent(html_ea583b771f26e3ccd936b273557c8cb5);
+            
+        
+
+        marker_b6266092d8a62b9cdaca61e2c0187988.bindPopup(popup_ac083ff16f5ec01ab05f3c19f279e6fc)
+        ;
+
+        
+    
+    
+            marker_b6266092d8a62b9cdaca61e2c0187988.bindTooltip(
+                `<div>
+                     Ksi Lisims LNG
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b6266092d8a62b9cdaca61e2c0187988.setIcon(icon_f18002f8717872bee707958395164c12);
+            
+    
+            feature_group_05aeb8982d198c647b885ab56d5109f5.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_7b6c09bd173d57b222c616d5eaa22c9f = L.marker(
+                [52.80108, -128.40431],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_c068a8427cfcc499b08ca8a352758422 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6c1ab6699dc1a103c5c6f8332ee38c21 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_fbec23dcb84770d551edf5d551001e2a = $(`<div id="html_fbec23dcb84770d551edf5d551001e2a" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Kid Bay Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 52.8011°N, 128.4043°W</p>             <p><strong>Description:</strong> Mowi Canada active site</p>         </div>         </div>`)[0];
+                popup_6c1ab6699dc1a103c5c6f8332ee38c21.setContent(html_fbec23dcb84770d551edf5d551001e2a);
+            
+        
+
+        marker_7b6c09bd173d57b222c616d5eaa22c9f.bindPopup(popup_6c1ab6699dc1a103c5c6f8332ee38c21)
+        ;
+
+        
+    
+    
+            marker_7b6c09bd173d57b222c616d5eaa22c9f.bindTooltip(
+                `<div>
+                     Kid Bay Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7b6c09bd173d57b222c616d5eaa22c9f.setIcon(icon_c068a8427cfcc499b08ca8a352758422);
+            
+    
+            var marker_bafb7262ac03c5e2a33e7bb87c39d5e7 = L.marker(
+                [52.78726, -128.4199],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_31d11d7b293ddb291b1da317cc0f2805 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d30b0e09b3f16a7f37764647d3146748 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_989af8e0fa9e241b822c05206301518f = $(`<div id="html_989af8e0fa9e241b822c05206301518f" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Goat Cove Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 52.7873°N, 128.4199°W</p>             <p><strong>Description:</strong> Mowi Canada active site</p>         </div>         </div>`)[0];
+                popup_d30b0e09b3f16a7f37764647d3146748.setContent(html_989af8e0fa9e241b822c05206301518f);
+            
+        
+
+        marker_bafb7262ac03c5e2a33e7bb87c39d5e7.bindPopup(popup_d30b0e09b3f16a7f37764647d3146748)
+        ;
+
+        
+    
+    
+            marker_bafb7262ac03c5e2a33e7bb87c39d5e7.bindTooltip(
+                `<div>
+                     Goat Cove Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bafb7262ac03c5e2a33e7bb87c39d5e7.setIcon(icon_31d11d7b293ddb291b1da317cc0f2805);
+            
+    
+            var marker_79a35cfc92c0a65bbffa8ef750fefae5 = L.marker(
+                [50.45861, -127.88988],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_e082b1c749d3d02f22811fbf58937908 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_03ae04923e036ac5d70095bd2f57ee28 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_59088163464d3e7c82220a4af955d557 = $(`<div id="html_59088163464d3e7c82220a4af955d557" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Koskimo Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 50.4586°N, 127.8899°W</p>             <p><strong>Description:</strong> Mowi Canada active site</p>         </div>         </div>`)[0];
+                popup_03ae04923e036ac5d70095bd2f57ee28.setContent(html_59088163464d3e7c82220a4af955d557);
+            
+        
+
+        marker_79a35cfc92c0a65bbffa8ef750fefae5.bindPopup(popup_03ae04923e036ac5d70095bd2f57ee28)
+        ;
+
+        
+    
+    
+            marker_79a35cfc92c0a65bbffa8ef750fefae5.bindTooltip(
+                `<div>
+                     Koskimo Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_79a35cfc92c0a65bbffa8ef750fefae5.setIcon(icon_e082b1c749d3d02f22811fbf58937908);
+            
+    
+            var marker_c4684f85271f2ec0a7f220d22c190dd6 = L.marker(
+                [50.73446, -127.44641],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_d2bc940f7824d3aeedf0fb551f71da20 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f5dea7fb8e9403883f8c14dfbc272e9f = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_26bd978076e31fa7c68ca731e85afe03 = $(`<div id="html_26bd978076e31fa7c68ca731e85afe03" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Hardy Bay Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 50.7345°N, 127.4464°W</p>             <p><strong>Description:</strong> Mowi Canada active site</p>         </div>         </div>`)[0];
+                popup_f5dea7fb8e9403883f8c14dfbc272e9f.setContent(html_26bd978076e31fa7c68ca731e85afe03);
+            
+        
+
+        marker_c4684f85271f2ec0a7f220d22c190dd6.bindPopup(popup_f5dea7fb8e9403883f8c14dfbc272e9f)
+        ;
+
+        
+    
+    
+            marker_c4684f85271f2ec0a7f220d22c190dd6.bindTooltip(
+                `<div>
+                     Hardy Bay Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c4684f85271f2ec0a7f220d22c190dd6.setIcon(icon_d2bc940f7824d3aeedf0fb551f71da20);
+            
+    
+            var marker_34d5c1508a07bb6c796409e94739484c = L.marker(
+                [50.88414, -127.5004],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_e79252efd14f921c728a996e2feaf0e6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_badc69e38ea9c52260736b3e67617560 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_a4536b57025edb5dd7baf1e9ffb54d96 = $(`<div id="html_a4536b57025edb5dd7baf1e9ffb54d96" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Shelter Pass Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 50.8841°N, 127.5004°W</p>             <p><strong>Description:</strong> Mowi Canada active site</p>         </div>         </div>`)[0];
+                popup_badc69e38ea9c52260736b3e67617560.setContent(html_a4536b57025edb5dd7baf1e9ffb54d96);
+            
+        
+
+        marker_34d5c1508a07bb6c796409e94739484c.bindPopup(popup_badc69e38ea9c52260736b3e67617560)
+        ;
+
+        
+    
+    
+            marker_34d5c1508a07bb6c796409e94739484c.bindTooltip(
+                `<div>
+                     Shelter Pass Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_34d5c1508a07bb6c796409e94739484c.setIcon(icon_e79252efd14f921c728a996e2feaf0e6);
+            
+    
+            var marker_a06b18c4a140496395cb06c7a0bccb7d = L.marker(
+                [50.48562, -127.87618],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_8f19c77ae10721ec9b2bfbd9caf9d35f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a404aebd1bd4c5f7f7b9720170c19a6e = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_392ec9de7dd8dd800b30efea98ee9857 = $(`<div id="html_392ec9de7dd8dd800b30efea98ee9857" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Monday Rock Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 50.4856°N, 127.8762°W</p>             <p><strong>Description:</strong> Mowi Canada active site</p>         </div>         </div>`)[0];
+                popup_a404aebd1bd4c5f7f7b9720170c19a6e.setContent(html_392ec9de7dd8dd800b30efea98ee9857);
+            
+        
+
+        marker_a06b18c4a140496395cb06c7a0bccb7d.bindPopup(popup_a404aebd1bd4c5f7f7b9720170c19a6e)
+        ;
+
+        
+    
+    
+            marker_a06b18c4a140496395cb06c7a0bccb7d.bindTooltip(
+                `<div>
+                     Monday Rock Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a06b18c4a140496395cb06c7a0bccb7d.setIcon(icon_8f19c77ae10721ec9b2bfbd9caf9d35f);
+            
+    
+            var marker_a9576ea5806cb26103e1988c34bdee9b = L.marker(
+                [49.309053, -126.007418],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_7bef2f8770ed7b3e8554364f3a59e008 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2d006b285d75118499bc07200e06a7b0 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_301d5b57f2e38c47d5ee0902b71554a6 = $(`<div id="html_301d5b57f2e38c47d5ee0902b71554a6" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Bawden Point Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 49.3091°N, 126.0074°W</p>             <p><strong>Description:</strong> Cermaq Clayoquot Sound</p>         </div>         </div>`)[0];
+                popup_2d006b285d75118499bc07200e06a7b0.setContent(html_301d5b57f2e38c47d5ee0902b71554a6);
+            
+        
+
+        marker_a9576ea5806cb26103e1988c34bdee9b.bindPopup(popup_2d006b285d75118499bc07200e06a7b0)
+        ;
+
+        
+    
+    
+            marker_a9576ea5806cb26103e1988c34bdee9b.bindTooltip(
+                `<div>
+                     Bawden Point Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a9576ea5806cb26103e1988c34bdee9b.setIcon(icon_7bef2f8770ed7b3e8554364f3a59e008);
+            
+    
+            var marker_1ee202e8b91c2f3f79009f341d07a7e3 = L.marker(
+                [49.405, -126.15055],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_2f37c05ba973366be5d50cc6b11ae4f3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b03f3c15b2fd330274d4d0d4d709600d = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_d9e83d465aec6effc81d5c1835e53f12 = $(`<div id="html_d9e83d465aec6effc81d5c1835e53f12" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Dixon Bay Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 49.4050°N, 126.1505°W</p>             <p><strong>Description:</strong> Cermaq Clayoquot Sound</p>         </div>         </div>`)[0];
+                popup_b03f3c15b2fd330274d4d0d4d709600d.setContent(html_d9e83d465aec6effc81d5c1835e53f12);
+            
+        
+
+        marker_1ee202e8b91c2f3f79009f341d07a7e3.bindPopup(popup_b03f3c15b2fd330274d4d0d4d709600d)
+        ;
+
+        
+    
+    
+            marker_1ee202e8b91c2f3f79009f341d07a7e3.bindTooltip(
+                `<div>
+                     Dixon Bay Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1ee202e8b91c2f3f79009f341d07a7e3.setIcon(icon_2f37c05ba973366be5d50cc6b11ae4f3);
+            
+    
+            var marker_aa3033a776af3b2f46428294d238372e = L.marker(
+                [49.32437, -126.04849],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_7dcbf9b269cde8c833e2fa332c002787 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d147b9e07460a45bebf0d98304709248 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_63506ac4195dd334f0e87fca2a4b2f1e = $(`<div id="html_63506ac4195dd334f0e87fca2a4b2f1e" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Ross Pass Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 49.3244°N, 126.0485°W</p>             <p><strong>Description:</strong> Cermaq Clayoquot Sound</p>         </div>         </div>`)[0];
+                popup_d147b9e07460a45bebf0d98304709248.setContent(html_63506ac4195dd334f0e87fca2a4b2f1e);
+            
+        
+
+        marker_aa3033a776af3b2f46428294d238372e.bindPopup(popup_d147b9e07460a45bebf0d98304709248)
+        ;
+
+        
+    
+    
+            marker_aa3033a776af3b2f46428294d238372e.bindTooltip(
+                `<div>
+                     Ross Pass Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_aa3033a776af3b2f46428294d238372e.setIcon(icon_7dcbf9b269cde8c833e2fa332c002787);
+            
+    
+            var marker_ecc548c12a68a69e80300a6e6557e425 = L.marker(
+                [49.26548, -125.81247],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_ebd605887c8a3f7fdf5280cd97a0069c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_75eb40e32485846d7dcf04fbf2afb2db = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_e5801707747f3ee30327bef1792eee32 = $(`<div id="html_e5801707747f3ee30327bef1792eee32" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Bedwell Sound Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 49.2655°N, 125.8125°W</p>             <p><strong>Description:</strong> Cermaq Clayoquot Sound</p>         </div>         </div>`)[0];
+                popup_75eb40e32485846d7dcf04fbf2afb2db.setContent(html_e5801707747f3ee30327bef1792eee32);
+            
+        
+
+        marker_ecc548c12a68a69e80300a6e6557e425.bindPopup(popup_75eb40e32485846d7dcf04fbf2afb2db)
+        ;
+
+        
+    
+    
+            marker_ecc548c12a68a69e80300a6e6557e425.bindTooltip(
+                `<div>
+                     Bedwell Sound Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ecc548c12a68a69e80300a6e6557e425.setIcon(icon_ebd605887c8a3f7fdf5280cd97a0069c);
+            
+    
+            var marker_4f13ffb154c86b75d3458834d01bdbdf = L.marker(
+                [49.11916, -125.72549],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_20df3f56b8fdf6c0e95eb551f12ce05f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1c6819153e5c0321f7d1cb73fab2e2d8 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_a43c517d1ebb84cea1203cc7436d1baa = $(`<div id="html_a43c517d1ebb84cea1203cc7436d1baa" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Indian Bay Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 49.1192°N, 125.7255°W</p>             <p><strong>Description:</strong> Creative Salmon organic</p>         </div>         </div>`)[0];
+                popup_1c6819153e5c0321f7d1cb73fab2e2d8.setContent(html_a43c517d1ebb84cea1203cc7436d1baa);
+            
+        
+
+        marker_4f13ffb154c86b75d3458834d01bdbdf.bindPopup(popup_1c6819153e5c0321f7d1cb73fab2e2d8)
+        ;
+
+        
+    
+    
+            marker_4f13ffb154c86b75d3458834d01bdbdf.bindTooltip(
+                `<div>
+                     Indian Bay Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4f13ffb154c86b75d3458834d01bdbdf.setIcon(icon_20df3f56b8fdf6c0e95eb551f12ce05f);
+            
+    
+            var marker_b208c7412837ec2f053b6ca56b91b6da = L.marker(
+                [49.12945, -125.71093],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_e9bc72d6e6571ec6351c92df99b81a15 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_db43823d309cd69b935c6f0289b06a7e = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_fd16f54c26567bc49798e8c200acc44a = $(`<div id="html_fd16f54c26567bc49798e8c200acc44a" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Eagle Bay Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 49.1294°N, 125.7109°W</p>             <p><strong>Description:</strong> Creative Salmon organic</p>         </div>         </div>`)[0];
+                popup_db43823d309cd69b935c6f0289b06a7e.setContent(html_fd16f54c26567bc49798e8c200acc44a);
+            
+        
+
+        marker_b208c7412837ec2f053b6ca56b91b6da.bindPopup(popup_db43823d309cd69b935c6f0289b06a7e)
+        ;
+
+        
+    
+    
+            marker_b208c7412837ec2f053b6ca56b91b6da.bindTooltip(
+                `<div>
+                     Eagle Bay Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b208c7412837ec2f053b6ca56b91b6da.setIcon(icon_e9bc72d6e6571ec6351c92df99b81a15);
+            
+    
+            var marker_dfb491839f20b1cdd1a78b40d22a163b = L.marker(
+                [49.16641, -125.7686],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_88b37a13da82d062ac7d34acdd2930f6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5875400688a5ad296f020521844c8363 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_f8a043e55e4d3589f2a26ef9293461bc = $(`<div id="html_f8a043e55e4d3589f2a26ef9293461bc" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Dawley Pass Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 49.1664°N, 125.7686°W</p>             <p><strong>Description:</strong> Creative Salmon organic</p>         </div>         </div>`)[0];
+                popup_5875400688a5ad296f020521844c8363.setContent(html_f8a043e55e4d3589f2a26ef9293461bc);
+            
+        
+
+        marker_dfb491839f20b1cdd1a78b40d22a163b.bindPopup(popup_5875400688a5ad296f020521844c8363)
+        ;
+
+        
+    
+    
+            marker_dfb491839f20b1cdd1a78b40d22a163b.bindTooltip(
+                `<div>
+                     Dawley Pass Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dfb491839f20b1cdd1a78b40d22a163b.setIcon(icon_88b37a13da82d062ac7d34acdd2930f6);
+            
+    
+            var marker_d4898aa7accfec71c2e3ca13f0f8754d = L.marker(
+                [49.88622, -126.76977],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_e9ddc82644e9e47501339c52db61cc4d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_58e473bda9a7d5d28b9335703bf94ad9 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_93351fef562669190f8a35d883dfe0af = $(`<div id="html_93351fef562669190f8a35d883dfe0af" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Lutes Creek Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 49.8862°N, 126.7698°W</p>             <p><strong>Description:</strong> Cermaq Esperanza Inlet</p>         </div>         </div>`)[0];
+                popup_58e473bda9a7d5d28b9335703bf94ad9.setContent(html_93351fef562669190f8a35d883dfe0af);
+            
+        
+
+        marker_d4898aa7accfec71c2e3ca13f0f8754d.bindPopup(popup_58e473bda9a7d5d28b9335703bf94ad9)
+        ;
+
+        
+    
+    
+            marker_d4898aa7accfec71c2e3ca13f0f8754d.bindTooltip(
+                `<div>
+                     Lutes Creek Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d4898aa7accfec71c2e3ca13f0f8754d.setIcon(icon_e9ddc82644e9e47501339c52db61cc4d);
+            
+    
+            var marker_9cf5512812e2facfe3eac67f5d6cfdb8 = L.marker(
+                [49.8876, -126.79088],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_a6de91dc5a6bfc601979dd8ff5acbb0a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7d67f91eff6dc9fcf91deeba85873237 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_12db6139b79e22d6fb7168c58728ebbc = $(`<div id="html_12db6139b79e22d6fb7168c58728ebbc" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Steamer Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 49.8876°N, 126.7909°W</p>             <p><strong>Description:</strong> Cermaq Esperanza Inlet</p>         </div>         </div>`)[0];
+                popup_7d67f91eff6dc9fcf91deeba85873237.setContent(html_12db6139b79e22d6fb7168c58728ebbc);
+            
+        
+
+        marker_9cf5512812e2facfe3eac67f5d6cfdb8.bindPopup(popup_7d67f91eff6dc9fcf91deeba85873237)
+        ;
+
+        
+    
+    
+            marker_9cf5512812e2facfe3eac67f5d6cfdb8.bindTooltip(
+                `<div>
+                     Steamer Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9cf5512812e2facfe3eac67f5d6cfdb8.setIcon(icon_a6de91dc5a6bfc601979dd8ff5acbb0a);
+            
+    
+            var marker_7d08f2d27949930376ee931669a32daf = L.marker(
+                [49.64012, -126.32735],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_a27fdf69a607e46b9ee8125dceeccb49 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a8f1670dbeec193503c0eda07a4e0679 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_de7a7b4664a37fe7836a4b4772743e72 = $(`<div id="html_de7a7b4664a37fe7836a4b4772743e72" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Muchalat South Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 49.6401°N, 126.3273°W</p>             <p><strong>Description:</strong> Cermaq Nootka Sound</p>         </div>         </div>`)[0];
+                popup_a8f1670dbeec193503c0eda07a4e0679.setContent(html_de7a7b4664a37fe7836a4b4772743e72);
+            
+        
+
+        marker_7d08f2d27949930376ee931669a32daf.bindPopup(popup_a8f1670dbeec193503c0eda07a4e0679)
+        ;
+
+        
+    
+    
+            marker_7d08f2d27949930376ee931669a32daf.bindTooltip(
+                `<div>
+                     Muchalat South Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7d08f2d27949930376ee931669a32daf.setIcon(icon_a27fdf69a607e46b9ee8125dceeccb49);
+            
+    
+            var marker_c388046cfcca4babf2e69cd876d98320 = L.marker(
+                [49.65623, -126.42849],
+                {
+}
+            ).addTo(feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1);
+        
+    
+            var icon_95c8e64e5e440cc5c3d9344054432127 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "leaf",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_842a87a1947406b70ba645e2557064c3 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_f3f4a43378ae17b04155c9e601217b01 = $(`<div id="html_f3f4a43378ae17b04155c9e601217b01" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Williamson Farm</h4>             <p><strong>Type:</strong> Aquaculture</p>             <p><strong>Category:</strong> Salmon</p>             <p><strong>Coordinates:</strong> 49.6562°N, 126.4285°W</p>             <p><strong>Description:</strong> Cermaq Nootka Sound</p>         </div>         </div>`)[0];
+                popup_842a87a1947406b70ba645e2557064c3.setContent(html_f3f4a43378ae17b04155c9e601217b01);
+            
+        
+
+        marker_c388046cfcca4babf2e69cd876d98320.bindPopup(popup_842a87a1947406b70ba645e2557064c3)
+        ;
+
+        
+    
+    
+            marker_c388046cfcca4babf2e69cd876d98320.bindTooltip(
+                `<div>
+                     Williamson Farm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c388046cfcca4babf2e69cd876d98320.setIcon(icon_95c8e64e5e440cc5c3d9344054432127);
+            
+    
+            feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_ced29ce43ecabd1ded2b143eb393c761 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_86a88d46508ad585d06eda759a757ea8 = L.marker(
+                [53.0, -131.0],
+                {
+}
+            ).addTo(feature_group_ced29ce43ecabd1ded2b143eb393c761);
+        
+    
+            var icon_e10e26b9029c4c1000d9f0a56d393597 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d71f65e5341cbe1509a4a5a176ea560b = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_de740ee445e799ed3f73405923427c77 = $(`<div id="html_de740ee445e799ed3f73405923427c77" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Hecate Strait Trawl</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Trawl</p>             <p><strong>Coordinates:</strong> 53.0000°N, 131.0000°W</p>             <p><strong>Description:</strong> Management Area 106 center</p>         </div>         </div>`)[0];
+                popup_d71f65e5341cbe1509a4a5a176ea560b.setContent(html_de740ee445e799ed3f73405923427c77);
+            
+        
+
+        marker_86a88d46508ad585d06eda759a757ea8.bindPopup(popup_d71f65e5341cbe1509a4a5a176ea560b)
+        ;
+
+        
+    
+    
+            marker_86a88d46508ad585d06eda759a757ea8.bindTooltip(
+                `<div>
+                     Hecate Strait Trawl
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_86a88d46508ad585d06eda759a757ea8.setIcon(icon_e10e26b9029c4c1000d9f0a56d393597);
+            
+    
+            var marker_875e3eaeaae2c6817d6695a681c0705a = L.marker(
+                [51.5, -128.5],
+                {
+}
+            ).addTo(feature_group_ced29ce43ecabd1ded2b143eb393c761);
+        
+    
+            var icon_bfc71f68ffc64f3ed1d6b1084ab047d3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ef0432cacc6bbac30549a454b4777a20 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ecd145b53d2ee4361a13fec9d4c32d09 = $(`<div id="html_ecd145b53d2ee4361a13fec9d4c32d09" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Queen Charlotte Sound Trawl</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Trawl</p>             <p><strong>Coordinates:</strong> 51.5000°N, 128.5000°W</p>             <p><strong>Description:</strong> Management Area 107 center</p>         </div>         </div>`)[0];
+                popup_ef0432cacc6bbac30549a454b4777a20.setContent(html_ecd145b53d2ee4361a13fec9d4c32d09);
+            
+        
+
+        marker_875e3eaeaae2c6817d6695a681c0705a.bindPopup(popup_ef0432cacc6bbac30549a454b4777a20)
+        ;
+
+        
+    
+    
+            marker_875e3eaeaae2c6817d6695a681c0705a.bindTooltip(
+                `<div>
+                     Queen Charlotte Sound Trawl
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_875e3eaeaae2c6817d6695a681c0705a.setIcon(icon_bfc71f68ffc64f3ed1d6b1084ab047d3);
+            
+    
+            var marker_351b5cf44b5def008041bf8abfeb56fa = L.marker(
+                [48.6667, -126.0],
+                {
+}
+            ).addTo(feature_group_ced29ce43ecabd1ded2b143eb393c761);
+        
+    
+            var icon_c4d4800135e7a16f434863904596f421 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0312038a7898161ceb6ee9c42e63ed88 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_b93d986d4a4f88573f3b41595c1ead5c = $(`<div id="html_b93d986d4a4f88573f3b41595c1ead5c" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">La Perouse Bank</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Trawl</p>             <p><strong>Coordinates:</strong> 48.6667°N, 126.0000°W</p>             <p><strong>Description:</strong> Big Bank fishing grounds</p>         </div>         </div>`)[0];
+                popup_0312038a7898161ceb6ee9c42e63ed88.setContent(html_b93d986d4a4f88573f3b41595c1ead5c);
+            
+        
+
+        marker_351b5cf44b5def008041bf8abfeb56fa.bindPopup(popup_0312038a7898161ceb6ee9c42e63ed88)
+        ;
+
+        
+    
+    
+            marker_351b5cf44b5def008041bf8abfeb56fa.bindTooltip(
+                `<div>
+                     La Perouse Bank
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_351b5cf44b5def008041bf8abfeb56fa.setIcon(icon_c4d4800135e7a16f434863904596f421);
+            
+    
+            feature_group_ced29ce43ecabd1ded2b143eb393c761.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_548083161a1a421017f3597fca397603 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_5193a719848e6f4f137e6f90fad175b5 = L.marker(
+                [52.0067, -128.495],
+                {
+}
+            ).addTo(feature_group_548083161a1a421017f3597fca397603);
+        
+    
+            var icon_6e985c283f80f114db6a13269afc0d3a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_71b5548a34749f12182809dbf5ee625b = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_7aa9681c0efa7af3049a82479bb5dfbf = $(`<div id="html_7aa9681c0efa7af3049a82479bb5dfbf" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Goose Island RCA North</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Conservation</p>             <p><strong>Coordinates:</strong> 52.0067°N, 128.4950°W</p>             <p><strong>Description:</strong> Rockfish Conservation Area</p>         </div>         </div>`)[0];
+                popup_71b5548a34749f12182809dbf5ee625b.setContent(html_7aa9681c0efa7af3049a82479bb5dfbf);
+            
+        
+
+        marker_5193a719848e6f4f137e6f90fad175b5.bindPopup(popup_71b5548a34749f12182809dbf5ee625b)
+        ;
+
+        
+    
+    
+            marker_5193a719848e6f4f137e6f90fad175b5.bindTooltip(
+                `<div>
+                     Goose Island RCA North
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5193a719848e6f4f137e6f90fad175b5.setIcon(icon_6e985c283f80f114db6a13269afc0d3a);
+            
+    
+            var marker_ac5c6b6554c5b3da6b97d54892f6620b = L.marker(
+                [51.8433, -128.435],
+                {
+}
+            ).addTo(feature_group_548083161a1a421017f3597fca397603);
+        
+    
+            var icon_838e37e665289b5a64acf6eca3f7b742 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2d2790a9ae1730702f1daa3027f99cf3 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_a6cbd011266dabe2e8337375aa5e4faf = $(`<div id="html_a6cbd011266dabe2e8337375aa5e4faf" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Goose Island RCA South</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Conservation</p>             <p><strong>Coordinates:</strong> 51.8433°N, 128.4350°W</p>             <p><strong>Description:</strong> Rockfish Conservation Area</p>         </div>         </div>`)[0];
+                popup_2d2790a9ae1730702f1daa3027f99cf3.setContent(html_a6cbd011266dabe2e8337375aa5e4faf);
+            
+        
+
+        marker_ac5c6b6554c5b3da6b97d54892f6620b.bindPopup(popup_2d2790a9ae1730702f1daa3027f99cf3)
+        ;
+
+        
+    
+    
+            marker_ac5c6b6554c5b3da6b97d54892f6620b.bindTooltip(
+                `<div>
+                     Goose Island RCA South
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ac5c6b6554c5b3da6b97d54892f6620b.setIcon(icon_838e37e665289b5a64acf6eca3f7b742);
+            
+    
+            var marker_0116677377abb87f3fda584df49f9d95 = L.marker(
+                [52.0917, -128.495],
+                {
+}
+            ).addTo(feature_group_548083161a1a421017f3597fca397603);
+        
+    
+            var icon_e51fe2a126aca19296105051f804f336 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6bdaff0d80a3b646a5568e9208a6b31f = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_d1f610d13f50cc2b329dcce31e76ea41 = $(`<div id="html_d1f610d13f50cc2b329dcce31e76ea41" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">McMullin Group RCA North</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Conservation</p>             <p><strong>Coordinates:</strong> 52.0917°N, 128.4950°W</p>             <p><strong>Description:</strong> Rockfish Conservation Area</p>         </div>         </div>`)[0];
+                popup_6bdaff0d80a3b646a5568e9208a6b31f.setContent(html_d1f610d13f50cc2b329dcce31e76ea41);
+            
+        
+
+        marker_0116677377abb87f3fda584df49f9d95.bindPopup(popup_6bdaff0d80a3b646a5568e9208a6b31f)
+        ;
+
+        
+    
+    
+            marker_0116677377abb87f3fda584df49f9d95.bindTooltip(
+                `<div>
+                     McMullin Group RCA North
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0116677377abb87f3fda584df49f9d95.setIcon(icon_e51fe2a126aca19296105051f804f336);
+            
+    
+            var marker_f9a483c6792d5d4dd10290465edcd38a = L.marker(
+                [52.0067, -128.3883],
+                {
+}
+            ).addTo(feature_group_548083161a1a421017f3597fca397603);
+        
+    
+            var icon_8ceb8b7701f30d9c7342fe6fb4d4de3f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "orange",
+  "iconColor": "white",
+  "icon": "ship",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d16fcfed918df8e7e8e274f0f3f349f9 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_b38d84c8ff207496c6ad6ecf056e6cb0 = $(`<div id="html_b38d84c8ff207496c6ad6ecf056e6cb0" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">McMullin Group RCA South</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Conservation</p>             <p><strong>Coordinates:</strong> 52.0067°N, 128.3883°W</p>             <p><strong>Description:</strong> Rockfish Conservation Area</p>         </div>         </div>`)[0];
+                popup_d16fcfed918df8e7e8e274f0f3f349f9.setContent(html_b38d84c8ff207496c6ad6ecf056e6cb0);
+            
+        
+
+        marker_f9a483c6792d5d4dd10290465edcd38a.bindPopup(popup_d16fcfed918df8e7e8e274f0f3f349f9)
+        ;
+
+        
+    
+    
+            marker_f9a483c6792d5d4dd10290465edcd38a.bindTooltip(
+                `<div>
+                     McMullin Group RCA South
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f9a483c6792d5d4dd10290465edcd38a.setIcon(icon_8ceb8b7701f30d9c7342fe6fb4d4de3f);
+            
+    
+            feature_group_548083161a1a421017f3597fca397603.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_49a1f1f101270e29626369570e2fa525 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_f00421600a0e93768cd67b13c4cd57b2 = L.marker(
+                [50.7167, -127.4833],
+                {
+}
+            ).addTo(feature_group_49a1f1f101270e29626369570e2fa525);
+        
+    
+            var icon_193f90a8db83fb39778319be917b1720 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_792468a0ad70664d1cae328087b17386 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_eb14a46f4da0ef2cdcd85fcfaee4fbf9 = $(`<div id="html_eb14a46f4da0ef2cdcd85fcfaee4fbf9" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Port Hardy Fleet</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Port</p>             <p><strong>Coordinates:</strong> 50.7167°N, 127.4833°W</p>             <p><strong>Description:</strong> 1150m floats 195 slips</p>         </div>         </div>`)[0];
+                popup_792468a0ad70664d1cae328087b17386.setContent(html_eb14a46f4da0ef2cdcd85fcfaee4fbf9);
+            
+        
+
+        marker_f00421600a0e93768cd67b13c4cd57b2.bindPopup(popup_792468a0ad70664d1cae328087b17386)
+        ;
+
+        
+    
+    
+            marker_f00421600a0e93768cd67b13c4cd57b2.bindTooltip(
+                `<div>
+                     Port Hardy Fleet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f00421600a0e93768cd67b13c4cd57b2.setIcon(icon_193f90a8db83fb39778319be917b1720);
+            
+    
+            var marker_7939d207f16cad5c8dfc19fe40d7a878 = L.marker(
+                [54.3192, -130.3206],
+                {
+}
+            ).addTo(feature_group_49a1f1f101270e29626369570e2fa525);
+        
+    
+            var icon_6df0b10d7537a9a94419a1ff77cc7522 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fc24d9ca0e46232ba7c774b14a358f92 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_24f14ce410174ff37a55adc19102f1be = $(`<div id="html_24f14ce410174ff37a55adc19102f1be" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Prince Rupert Fleet</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Port</p>             <p><strong>Coordinates:</strong> 54.3192°N, 130.3206°W</p>             <p><strong>Description:</strong> Core fishing harbor</p>         </div>         </div>`)[0];
+                popup_fc24d9ca0e46232ba7c774b14a358f92.setContent(html_24f14ce410174ff37a55adc19102f1be);
+            
+        
+
+        marker_7939d207f16cad5c8dfc19fe40d7a878.bindPopup(popup_fc24d9ca0e46232ba7c774b14a358f92)
+        ;
+
+        
+    
+    
+            marker_7939d207f16cad5c8dfc19fe40d7a878.bindTooltip(
+                `<div>
+                     Prince Rupert Fleet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7939d207f16cad5c8dfc19fe40d7a878.setIcon(icon_6df0b10d7537a9a94419a1ff77cc7522);
+            
+    
+            var marker_9fb0a57f0c0e32e7d309a7311845893a = L.marker(
+                [54.3518, -130.2757],
+                {
+}
+            ).addTo(feature_group_49a1f1f101270e29626369570e2fa525);
+        
+    
+            var icon_95d79bbfeddb66ad7685cb6577eb6913 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fba227c325742a8ed1c1a9c43900dfaf = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_983c762a644620bb4797d21ddab7dfca = $(`<div id="html_983c762a644620bb4797d21ddab7dfca" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Anchorage 2 Prince Rupert</h4>             <p><strong>Type:</strong> Anchorage</p>             <p><strong>Category:</strong> Port</p>             <p><strong>Coordinates:</strong> 54.3518°N, 130.2757°W</p>             <p><strong>Description:</strong> 56m depth 225m LOA</p>         </div>         </div>`)[0];
+                popup_fba227c325742a8ed1c1a9c43900dfaf.setContent(html_983c762a644620bb4797d21ddab7dfca);
+            
+        
+
+        marker_9fb0a57f0c0e32e7d309a7311845893a.bindPopup(popup_fba227c325742a8ed1c1a9c43900dfaf)
+        ;
+
+        
+    
+    
+            marker_9fb0a57f0c0e32e7d309a7311845893a.bindTooltip(
+                `<div>
+                     Anchorage 2 Prince Rupert
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9fb0a57f0c0e32e7d309a7311845893a.setIcon(icon_95d79bbfeddb66ad7685cb6577eb6913);
+            
+    
+            var marker_a5e4650a7f3f43765286016424dd1818 = L.marker(
+                [54.3133, -130.3582],
+                {
+}
+            ).addTo(feature_group_49a1f1f101270e29626369570e2fa525);
+        
+    
+            var icon_762be3ed9249d0f4570fc0c429d540bc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e9a41768556352e1e50dcef68804b106 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_26597f691ba58233e38f645eafc14046 = $(`<div id="html_26597f691ba58233e38f645eafc14046" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Anchorage 7 Prince Rupert</h4>             <p><strong>Type:</strong> Anchorage</p>             <p><strong>Category:</strong> Port</p>             <p><strong>Coordinates:</strong> 54.3133°N, 130.3582°W</p>             <p><strong>Description:</strong> 55m depth 250m LOA</p>         </div>         </div>`)[0];
+                popup_e9a41768556352e1e50dcef68804b106.setContent(html_26597f691ba58233e38f645eafc14046);
+            
+        
+
+        marker_a5e4650a7f3f43765286016424dd1818.bindPopup(popup_e9a41768556352e1e50dcef68804b106)
+        ;
+
+        
+    
+    
+            marker_a5e4650a7f3f43765286016424dd1818.bindTooltip(
+                `<div>
+                     Anchorage 7 Prince Rupert
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a5e4650a7f3f43765286016424dd1818.setIcon(icon_762be3ed9249d0f4570fc0c429d540bc);
+            
+    
+            var marker_32fe73e94638a8bee33a1695fc01631e = L.marker(
+                [54.1312, -130.3525],
+                {
+}
+            ).addTo(feature_group_49a1f1f101270e29626369570e2fa525);
+        
+    
+            var icon_5b6d22c934dc540f8fa4976187e25120 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_56b0431a3db5c74d5c0893a5799757b7 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_355d3c295ed67fab8e54d4256c7f5564 = $(`<div id="html_355d3c295ed67fab8e54d4256c7f5564" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Anchorage 10 Ridley</h4>             <p><strong>Type:</strong> Anchorage</p>             <p><strong>Category:</strong> Port</p>             <p><strong>Coordinates:</strong> 54.1312°N, 130.3525°W</p>             <p><strong>Description:</strong> 400m vessel capacity</p>         </div>         </div>`)[0];
+                popup_56b0431a3db5c74d5c0893a5799757b7.setContent(html_355d3c295ed67fab8e54d4256c7f5564);
+            
+        
+
+        marker_32fe73e94638a8bee33a1695fc01631e.bindPopup(popup_56b0431a3db5c74d5c0893a5799757b7)
+        ;
+
+        
+    
+    
+            marker_32fe73e94638a8bee33a1695fc01631e.bindTooltip(
+                `<div>
+                     Anchorage 10 Ridley
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_32fe73e94638a8bee33a1695fc01631e.setIcon(icon_5b6d22c934dc540f8fa4976187e25120);
+            
+    
+            var marker_2541b5867ba15f7ff9c0b18a2f8a1433 = L.marker(
+                [54.1467, -130.625],
+                {
+}
+            ).addTo(feature_group_49a1f1f101270e29626369570e2fa525);
+        
+    
+            var icon_63691c907fd8f7640ebf8cdd66abba33 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7969f0fc46ee504c16ba3c5ca3262b7c = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_4fd1861dbbfd2fe78d3420a4e70db118 = $(`<div id="html_4fd1861dbbfd2fe78d3420a4e70db118" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Anchorage 30 Stephens</h4>             <p><strong>Type:</strong> Anchorage</p>             <p><strong>Category:</strong> Port</p>             <p><strong>Coordinates:</strong> 54.1467°N, 130.6250°W</p>             <p><strong>Description:</strong> 80m depth bulk/LNG</p>         </div>         </div>`)[0];
+                popup_7969f0fc46ee504c16ba3c5ca3262b7c.setContent(html_4fd1861dbbfd2fe78d3420a4e70db118);
+            
+        
+
+        marker_2541b5867ba15f7ff9c0b18a2f8a1433.bindPopup(popup_7969f0fc46ee504c16ba3c5ca3262b7c)
+        ;
+
+        
+    
+    
+            marker_2541b5867ba15f7ff9c0b18a2f8a1433.bindTooltip(
+                `<div>
+                     Anchorage 30 Stephens
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2541b5867ba15f7ff9c0b18a2f8a1433.setIcon(icon_63691c907fd8f7640ebf8cdd66abba33);
+            
+    
+            var marker_3c70b99ece98ec4f9fc1d82b560fac91 = L.marker(
+                [54.16, -130.64],
+                {
+}
+            ).addTo(feature_group_49a1f1f101270e29626369570e2fa525);
+        
+    
+            var icon_fa6c2c4c12b4a5c2003bfffcb1741536 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6cff9bb1db74fde3142629b602d0ec5a = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_92f9ebd7d5a6a99799ab47da61792356 = $(`<div id="html_92f9ebd7d5a6a99799ab47da61792356" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Anchorage 31 Stephens</h4>             <p><strong>Type:</strong> Anchorage</p>             <p><strong>Category:</strong> Port</p>             <p><strong>Coordinates:</strong> 54.1600°N, 130.6400°W</p>             <p><strong>Description:</strong> 72m depth bulk/LNG</p>         </div>         </div>`)[0];
+                popup_6cff9bb1db74fde3142629b602d0ec5a.setContent(html_92f9ebd7d5a6a99799ab47da61792356);
+            
+        
+
+        marker_3c70b99ece98ec4f9fc1d82b560fac91.bindPopup(popup_6cff9bb1db74fde3142629b602d0ec5a)
+        ;
+
+        
+    
+    
+            marker_3c70b99ece98ec4f9fc1d82b560fac91.bindTooltip(
+                `<div>
+                     Anchorage 31 Stephens
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3c70b99ece98ec4f9fc1d82b560fac91.setIcon(icon_fa6c2c4c12b4a5c2003bfffcb1741536);
+            
+    
+            var marker_e8892a489ee3763c41b6b03035b6df6e = L.marker(
+                [50.5133, -128.0283],
+                {
+}
+            ).addTo(feature_group_49a1f1f101270e29626369570e2fa525);
+        
+    
+            var icon_8a0d52fe0a2cbd51afb057c267b1c52b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dc247994b4582bc01a80f5e9774d1d2d = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_1423d2fc8b5331cfe4835817f648c606 = $(`<div id="html_1423d2fc8b5331cfe4835817f648c606" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Winter Harbour</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Port</p>             <p><strong>Coordinates:</strong> 50.5133°N, 128.0283°W</p>             <p><strong>Description:</strong> Trawler base northwest VI</p>         </div>         </div>`)[0];
+                popup_dc247994b4582bc01a80f5e9774d1d2d.setContent(html_1423d2fc8b5331cfe4835817f648c606);
+            
+        
+
+        marker_e8892a489ee3763c41b6b03035b6df6e.bindPopup(popup_dc247994b4582bc01a80f5e9774d1d2d)
+        ;
+
+        
+    
+    
+            marker_e8892a489ee3763c41b6b03035b6df6e.bindTooltip(
+                `<div>
+                     Winter Harbour
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e8892a489ee3763c41b6b03035b6df6e.setIcon(icon_8a0d52fe0a2cbd51afb057c267b1c52b);
+            
+    
+            var marker_bcbff5b0c6451837e72c16e12a3d2ff8 = L.marker(
+                [48.9433, -125.5463],
+                {
+}
+            ).addTo(feature_group_49a1f1f101270e29626369570e2fa525);
+        
+    
+            var icon_e59b1a8c2d01685ae163e093ac72096a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5068aa9d531e4913cd02d0b97b51cb46 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_53bff60e666c8dad818a71f019a12612 = $(`<div id="html_53bff60e666c8dad818a71f019a12612" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Ucluelet</h4>             <p><strong>Type:</strong> Fishing</p>             <p><strong>Category:</strong> Port</p>             <p><strong>Coordinates:</strong> 48.9433°N, 125.5463°W</p>             <p><strong>Description:</strong> West coast trawler base</p>         </div>         </div>`)[0];
+                popup_5068aa9d531e4913cd02d0b97b51cb46.setContent(html_53bff60e666c8dad818a71f019a12612);
+            
+        
+
+        marker_bcbff5b0c6451837e72c16e12a3d2ff8.bindPopup(popup_5068aa9d531e4913cd02d0b97b51cb46)
+        ;
+
+        
+    
+    
+            marker_bcbff5b0c6451837e72c16e12a3d2ff8.bindTooltip(
+                `<div>
+                     Ucluelet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bcbff5b0c6451837e72c16e12a3d2ff8.setIcon(icon_e59b1a8c2d01685ae163e093ac72096a);
+            
+    
+            var marker_929ace88785b66b841d1ed52b1e321d9 = L.marker(
+                [54.3192, -130.3206],
+                {
+}
+            ).addTo(feature_group_49a1f1f101270e29626369570e2fa525);
+        
+    
+            var icon_02c316ba296216bc7192e9ee181f4d4b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "anchor",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f286915e5bf1b5ec1334bb8dd5ccbd87 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_f2320077328ea25dfac029a50bf678df = $(`<div id="html_f2320077328ea25dfac029a50bf678df" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Rupert Harbour Entrance</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Port</p>             <p><strong>Coordinates:</strong> 54.3192°N, 130.3206°W</p>             <p><strong>Description:</strong> Main harbor entrance</p>         </div>         </div>`)[0];
+                popup_f286915e5bf1b5ec1334bb8dd5ccbd87.setContent(html_f2320077328ea25dfac029a50bf678df);
+            
+        
+
+        marker_929ace88785b66b841d1ed52b1e321d9.bindPopup(popup_f286915e5bf1b5ec1334bb8dd5ccbd87)
+        ;
+
+        
+    
+    
+            marker_929ace88785b66b841d1ed52b1e321d9.bindTooltip(
+                `<div>
+                     Rupert Harbour Entrance
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_929ace88785b66b841d1ed52b1e321d9.setIcon(icon_02c316ba296216bc7192e9ee181f4d4b);
+            
+    
+            feature_group_49a1f1f101270e29626369570e2fa525.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_229def9a6f683b3ca81590992322b17d = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_f2b866c6b249e58feb2df9fb2a94be08 = L.marker(
+                [48.4852, -125.0],
+                {
+}
+            ).addTo(feature_group_229def9a6f683b3ca81590992322b17d);
+        
+    
+            var icon_1c06599f6e642d9e07c79fa06d53d866 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2a62c125f3dafe5eb41ffe9268c6e70c = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_8415ab141ff1aedf75303ace33a8bd35 = $(`<div id="html_8415ab141ff1aedf75303ace33a8bd35" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Juan de Fuca TSS West</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> TSS</p>             <p><strong>Coordinates:</strong> 48.4852°N, 125.0000°W</p>             <p><strong>Description:</strong> Western entrance</p>         </div>         </div>`)[0];
+                popup_2a62c125f3dafe5eb41ffe9268c6e70c.setContent(html_8415ab141ff1aedf75303ace33a8bd35);
+            
+        
+
+        marker_f2b866c6b249e58feb2df9fb2a94be08.bindPopup(popup_2a62c125f3dafe5eb41ffe9268c6e70c)
+        ;
+
+        
+    
+    
+            marker_f2b866c6b249e58feb2df9fb2a94be08.bindTooltip(
+                `<div>
+                     Juan de Fuca TSS West
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f2b866c6b249e58feb2df9fb2a94be08.setIcon(icon_1c06599f6e642d9e07c79fa06d53d866);
+            
+    
+            var marker_3821346557220851a93a35cf5fe751a2 = L.marker(
+                [48.2415, -123.533],
+                {
+}
+            ).addTo(feature_group_229def9a6f683b3ca81590992322b17d);
+        
+    
+            var icon_11b4c9dfcde621fb91630255ec064808 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2cd44af1f10fc374c8a648a1c81d9897 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_f3c354074b249547bfe625c489354a2c = $(`<div id="html_f3c354074b249547bfe625c489354a2c" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Juan de Fuca TSS East</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> TSS</p>             <p><strong>Coordinates:</strong> 48.2415°N, 123.5330°W</p>             <p><strong>Description:</strong> Eastern approach</p>         </div>         </div>`)[0];
+                popup_2cd44af1f10fc374c8a648a1c81d9897.setContent(html_f3c354074b249547bfe625c489354a2c);
+            
+        
+
+        marker_3821346557220851a93a35cf5fe751a2.bindPopup(popup_2cd44af1f10fc374c8a648a1c81d9897)
+        ;
+
+        
+    
+    
+            marker_3821346557220851a93a35cf5fe751a2.bindTooltip(
+                `<div>
+                     Juan de Fuca TSS East
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3821346557220851a93a35cf5fe751a2.setIcon(icon_11b4c9dfcde621fb91630255ec064808);
+            
+    
+            var marker_8577c6d1f89645d9c9eb6473e9dc2d2b = L.marker(
+                [48.6887, -123.2374],
+                {
+}
+            ).addTo(feature_group_229def9a6f683b3ca81590992322b17d);
+        
+    
+            var icon_6d493daeae8840b610cc422750624ff3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7d5fb13fc119fdfec283805697aaa1e3 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_775e13992821e1d594f4d841dccda7c5 = $(`<div id="html_775e13992821e1d594f4d841dccda7c5" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Turn Point Light</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> TSS</p>             <p><strong>Coordinates:</strong> 48.6887°N, 123.2374°W</p>             <p><strong>Description:</strong> Haro Strait center</p>         </div>         </div>`)[0];
+                popup_7d5fb13fc119fdfec283805697aaa1e3.setContent(html_775e13992821e1d594f4d841dccda7c5);
+            
+        
+
+        marker_8577c6d1f89645d9c9eb6473e9dc2d2b.bindPopup(popup_7d5fb13fc119fdfec283805697aaa1e3)
+        ;
+
+        
+    
+    
+            marker_8577c6d1f89645d9c9eb6473e9dc2d2b.bindTooltip(
+                `<div>
+                     Turn Point Light
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8577c6d1f89645d9c9eb6473e9dc2d2b.setIcon(icon_6d493daeae8840b610cc422750624ff3);
+            
+    
+            var marker_e572b814b07b0773d9be359d63c24fc4 = L.marker(
+                [48.6848, -123.2939],
+                {
+}
+            ).addTo(feature_group_229def9a6f683b3ca81590992322b17d);
+        
+    
+            var icon_93ad2937359df5a311762248947bfe1d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3d37513810ecd41687f6488f94717bcd = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_02dee331154c5d222e150b756f83978e = $(`<div id="html_02dee331154c5d222e150b756f83978e" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Arachne Reef Light</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> TSS</p>             <p><strong>Coordinates:</strong> 48.6848°N, 123.2939°W</p>             <p><strong>Description:</strong> Special Operating Area</p>         </div>         </div>`)[0];
+                popup_3d37513810ecd41687f6488f94717bcd.setContent(html_02dee331154c5d222e150b756f83978e);
+            
+        
+
+        marker_e572b814b07b0773d9be359d63c24fc4.bindPopup(popup_3d37513810ecd41687f6488f94717bcd)
+        ;
+
+        
+    
+    
+            marker_e572b814b07b0773d9be359d63c24fc4.bindTooltip(
+                `<div>
+                     Arachne Reef Light
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e572b814b07b0773d9be359d63c24fc4.setIcon(icon_93ad2937359df5a311762248947bfe1d);
+            
+    
+            var marker_c363f7cab95ad852081404b39ce0f887 = L.marker(
+                [48.7333, -123.0333],
+                {
+}
+            ).addTo(feature_group_229def9a6f683b3ca81590992322b17d);
+        
+    
+            var icon_4498039a20379984a8edf2ec0475f1a2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fd9d1f6610ed0fbc0125e0bc01bcd3d7 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_22150fa6affd22c9fcfb0e49eed7133b = $(`<div id="html_22150fa6affd22c9fcfb0e49eed7133b" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Boundary Pass</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> TSS</p>             <p><strong>Coordinates:</strong> 48.7333°N, 123.0333°W</p>             <p><strong>Description:</strong> US waters connection</p>         </div>         </div>`)[0];
+                popup_fd9d1f6610ed0fbc0125e0bc01bcd3d7.setContent(html_22150fa6affd22c9fcfb0e49eed7133b);
+            
+        
+
+        marker_c363f7cab95ad852081404b39ce0f887.bindPopup(popup_fd9d1f6610ed0fbc0125e0bc01bcd3d7)
+        ;
+
+        
+    
+    
+            marker_c363f7cab95ad852081404b39ce0f887.bindTooltip(
+                `<div>
+                     Boundary Pass
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c363f7cab95ad852081404b39ce0f887.setIcon(icon_4498039a20379984a8edf2ec0475f1a2);
+            
+    
+            var marker_dd828db023b969fb1ce21ae7cbfefdea = L.marker(
+                [48.5833, -123.25],
+                {
+}
+            ).addTo(feature_group_229def9a6f683b3ca81590992322b17d);
+        
+    
+            var icon_8094ea08db06a0fcf89146283894d31c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c2ef57f56d6683b100e8051f615ad404 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_d582634c05088b992c1b522dd753242c = $(`<div id="html_d582634c05088b992c1b522dd753242c" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Haro Strait</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> TSS</p>             <p><strong>Coordinates:</strong> 48.5833°N, 123.2500°W</p>             <p><strong>Description:</strong> International waters</p>         </div>         </div>`)[0];
+                popup_c2ef57f56d6683b100e8051f615ad404.setContent(html_d582634c05088b992c1b522dd753242c);
+            
+        
+
+        marker_dd828db023b969fb1ce21ae7cbfefdea.bindPopup(popup_c2ef57f56d6683b100e8051f615ad404)
+        ;
+
+        
+    
+    
+            marker_dd828db023b969fb1ce21ae7cbfefdea.bindTooltip(
+                `<div>
+                     Haro Strait
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dd828db023b969fb1ce21ae7cbfefdea.setIcon(icon_8094ea08db06a0fcf89146283894d31c);
+            
+    
+            feature_group_229def9a6f683b3ca81590992322b17d.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_0b60bf3164e20cfce299dbc475c37723 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_fe2841cc25f4ef91de1a4f2a55b4b906 = L.marker(
+                [50.9, -128.8],
+                {
+}
+            ).addTo(feature_group_0b60bf3164e20cfce299dbc475c37723);
+        
+    
+            var icon_27e8c600dcb5a99b1368607970bf568f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "shield",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_48a47fb10ca64ad78e4e95caf96ff225 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c702a52e9734107c6231231d6056f871 = $(`<div id="html_c702a52e9734107c6231231d6056f871" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Scott Islands MPA Center</h4>             <p><strong>Type:</strong> MPA</p>             <p><strong>Category:</strong> Protected</p>             <p><strong>Coordinates:</strong> 50.9000°N, 128.8000°W</p>             <p><strong>Description:</strong> 11546 km² seabird habitat</p>         </div>         </div>`)[0];
+                popup_48a47fb10ca64ad78e4e95caf96ff225.setContent(html_c702a52e9734107c6231231d6056f871);
+            
+        
+
+        marker_fe2841cc25f4ef91de1a4f2a55b4b906.bindPopup(popup_48a47fb10ca64ad78e4e95caf96ff225)
+        ;
+
+        
+    
+    
+            marker_fe2841cc25f4ef91de1a4f2a55b4b906.bindTooltip(
+                `<div>
+                     Scott Islands MPA Center
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fe2841cc25f4ef91de1a4f2a55b4b906.setIcon(icon_27e8c600dcb5a99b1368607970bf568f);
+            
+    
+            var marker_61cd5b576b48fffcb6e77a151c0478a8 = L.marker(
+                [53.1889, -130.6503],
+                {
+}
+            ).addTo(feature_group_0b60bf3164e20cfce299dbc475c37723);
+        
+    
+            var icon_79fdc2faa8d4be51769febaa997478da = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "shield",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6dfb8cc38cde96795fa0a1d0c984e3a0 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_612ec73a72b044dd22b7687465127cee = $(`<div id="html_612ec73a72b044dd22b7687465127cee" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Glass Sponge North</h4>             <p><strong>Type:</strong> MPA</p>             <p><strong>Category:</strong> Protected</p>             <p><strong>Coordinates:</strong> 53.1889°N, 130.6503°W</p>             <p><strong>Description:</strong> Northern Reef center</p>         </div>         </div>`)[0];
+                popup_6dfb8cc38cde96795fa0a1d0c984e3a0.setContent(html_612ec73a72b044dd22b7687465127cee);
+            
+        
+
+        marker_61cd5b576b48fffcb6e77a151c0478a8.bindPopup(popup_6dfb8cc38cde96795fa0a1d0c984e3a0)
+        ;
+
+        
+    
+    
+            marker_61cd5b576b48fffcb6e77a151c0478a8.bindTooltip(
+                `<div>
+                     Glass Sponge North
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_61cd5b576b48fffcb6e77a151c0478a8.setIcon(icon_79fdc2faa8d4be51769febaa997478da);
+            
+    
+            var marker_ed6da54ad0d5b9a21a8be35e05557340 = L.marker(
+                [51.2831, -128.9256],
+                {
+}
+            ).addTo(feature_group_0b60bf3164e20cfce299dbc475c37723);
+        
+    
+            var icon_423c3e5464decd98f9cf7b1700103e61 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "shield",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ffcc6486750211f3d48ab5ca15787a54 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_9620d72ea6bca3ceb6759040a6beab83 = $(`<div id="html_9620d72ea6bca3ceb6759040a6beab83" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Glass Sponge South</h4>             <p><strong>Type:</strong> MPA</p>             <p><strong>Category:</strong> Protected</p>             <p><strong>Coordinates:</strong> 51.2831°N, 128.9256°W</p>             <p><strong>Description:</strong> Southern Reef center</p>         </div>         </div>`)[0];
+                popup_ffcc6486750211f3d48ab5ca15787a54.setContent(html_9620d72ea6bca3ceb6759040a6beab83);
+            
+        
+
+        marker_ed6da54ad0d5b9a21a8be35e05557340.bindPopup(popup_ffcc6486750211f3d48ab5ca15787a54)
+        ;
+
+        
+    
+    
+            marker_ed6da54ad0d5b9a21a8be35e05557340.bindTooltip(
+                `<div>
+                     Glass Sponge South
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ed6da54ad0d5b9a21a8be35e05557340.setIcon(icon_423c3e5464decd98f9cf7b1700103e61);
+            
+    
+            var marker_f2cc8ab0b8f73e5d4a02fbf80a9c43ec = L.marker(
+                [52.0, -131.2],
+                {
+}
+            ).addTo(feature_group_0b60bf3164e20cfce299dbc475c37723);
+        
+    
+            var icon_e7d0bbb37163d8ad157e14ec0b0499c7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "shield",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_41f4b6eab9015b292483180524749a55 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_28717dbc971003b57fb9e254bb255eb2 = $(`<div id="html_28717dbc971003b57fb9e254bb255eb2" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Gwaii Haanas NMCA</h4>             <p><strong>Type:</strong> MPA</p>             <p><strong>Category:</strong> Protected</p>             <p><strong>Coordinates:</strong> 52.0000°N, 131.2000°W</p>             <p><strong>Description:</strong> 3400 km² marine reserve</p>         </div>         </div>`)[0];
+                popup_41f4b6eab9015b292483180524749a55.setContent(html_28717dbc971003b57fb9e254bb255eb2);
+            
+        
+
+        marker_f2cc8ab0b8f73e5d4a02fbf80a9c43ec.bindPopup(popup_41f4b6eab9015b292483180524749a55)
+        ;
+
+        
+    
+    
+            marker_f2cc8ab0b8f73e5d4a02fbf80a9c43ec.bindTooltip(
+                `<div>
+                     Gwaii Haanas NMCA
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f2cc8ab0b8f73e5d4a02fbf80a9c43ec.setIcon(icon_e7d0bbb37163d8ad157e14ec0b0499c7);
+            
+    
+            feature_group_0b60bf3164e20cfce299dbc475c37723.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_269aca66cf19a5cb3d66c674707cdcc7 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_d94ef0ca92cbdbce2ca1ef6f021be111 = L.marker(
+                [52.0956, -131.22],
+                {
+}
+            ).addTo(feature_group_269aca66cf19a5cb3d66c674707cdcc7);
+        
+    
+            var icon_62d6d042961846e6c94006393755c1d7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "purple",
+  "iconColor": "white",
+  "icon": "shield",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_96b8fbd91920f570255c325f1ba3427b = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_0f5de9a52325a366e1f54090c2c3ef55 = $(`<div id="html_0f5de9a52325a366e1f54090c2c3ef55" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">SGang Gwaay</h4>             <p><strong>Type:</strong> MPA</p>             <p><strong>Category:</strong> Heritage</p>             <p><strong>Coordinates:</strong> 52.0956°N, 131.2200°W</p>             <p><strong>Description:</strong> UNESCO World Heritage</p>         </div>         </div>`)[0];
+                popup_96b8fbd91920f570255c325f1ba3427b.setContent(html_0f5de9a52325a366e1f54090c2c3ef55);
+            
+        
+
+        marker_d94ef0ca92cbdbce2ca1ef6f021be111.bindPopup(popup_96b8fbd91920f570255c325f1ba3427b)
+        ;
+
+        
+    
+    
+            marker_d94ef0ca92cbdbce2ca1ef6f021be111.bindTooltip(
+                `<div>
+                     SGang Gwaay
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d94ef0ca92cbdbce2ca1ef6f021be111.setIcon(icon_62d6d042961846e6c94006393755c1d7);
+            
+    
+            feature_group_269aca66cf19a5cb3d66c674707cdcc7.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_d31f871d068206becc0f7e15262e74a2 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_89b11c0a933241cd861d396a24202db7 = L.marker(
+                [50.15, -125.35],
+                {
+}
+            ).addTo(feature_group_d31f871d068206becc0f7e15262e74a2);
+        
+    
+            var icon_4cab59a33f6d12ee4b8804559b1e8834 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_72a3163cbdab79320dfbedc962ade6d6 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_189a18f6b5ab9e6871944ea67878c17e = $(`<div id="html_189a18f6b5ab9e6871944ea67878c17e" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Seymour Narrows</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Passage</p>             <p><strong>Coordinates:</strong> 50.1500°N, 125.3500°W</p>             <p><strong>Description:</strong> 15 knot currents</p>         </div>         </div>`)[0];
+                popup_72a3163cbdab79320dfbedc962ade6d6.setContent(html_189a18f6b5ab9e6871944ea67878c17e);
+            
+        
+
+        marker_89b11c0a933241cd861d396a24202db7.bindPopup(popup_72a3163cbdab79320dfbedc962ade6d6)
+        ;
+
+        
+    
+    
+            marker_89b11c0a933241cd861d396a24202db7.bindTooltip(
+                `<div>
+                     Seymour Narrows
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_89b11c0a933241cd861d396a24202db7.setIcon(icon_4cab59a33f6d12ee4b8804559b1e8834);
+            
+    
+            var marker_ef233a81e7b19562ada27f62d8499abf = L.marker(
+                [50.4667, -126.0833],
+                {
+}
+            ).addTo(feature_group_d31f871d068206becc0f7e15262e74a2);
+        
+    
+            var icon_f3674e921ca9253e0c10d399ab901606 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_15a90892146d5e3390746bc64dca6768 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_ea0f1df535fbf3d83b38c773b01ea4c8 = $(`<div id="html_ea0f1df535fbf3d83b38c773b01ea4c8" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Johnstone Strait Center</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Passage</p>             <p><strong>Coordinates:</strong> 50.4667°N, 126.0833°W</p>             <p><strong>Description:</strong> 110km major route</p>         </div>         </div>`)[0];
+                popup_15a90892146d5e3390746bc64dca6768.setContent(html_ea0f1df535fbf3d83b38c773b01ea4c8);
+            
+        
+
+        marker_ef233a81e7b19562ada27f62d8499abf.bindPopup(popup_15a90892146d5e3390746bc64dca6768)
+        ;
+
+        
+    
+    
+            marker_ef233a81e7b19562ada27f62d8499abf.bindTooltip(
+                `<div>
+                     Johnstone Strait Center
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ef233a81e7b19562ada27f62d8499abf.setIcon(icon_f3674e921ca9253e0c10d399ab901606);
+            
+    
+            var marker_3cd359a1731ba20332463a256a6a455c = L.marker(
+                [53.6167, -129.7167],
+                {
+}
+            ).addTo(feature_group_d31f871d068206becc0f7e15262e74a2);
+        
+    
+            var icon_5f7eae9f4796ed3146a8c263abf96903 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_084081752c6d3d2e17281b36bcda33f1 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_22474d2a37891b5818d36354f4f60244 = $(`<div id="html_22474d2a37891b5818d36354f4f60244" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Grenville Channel</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Passage</p>             <p><strong>Coordinates:</strong> 53.6167°N, 129.7167°W</p>             <p><strong>Description:</strong> 45nm narrow passage</p>         </div>         </div>`)[0];
+                popup_084081752c6d3d2e17281b36bcda33f1.setContent(html_22474d2a37891b5818d36354f4f60244);
+            
+        
+
+        marker_3cd359a1731ba20332463a256a6a455c.bindPopup(popup_084081752c6d3d2e17281b36bcda33f1)
+        ;
+
+        
+    
+    
+            marker_3cd359a1731ba20332463a256a6a455c.bindTooltip(
+                `<div>
+                     Grenville Channel
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3cd359a1731ba20332463a256a6a455c.setIcon(icon_5f7eae9f4796ed3146a8c263abf96903);
+            
+    
+            var marker_49ecf9e82c32c149cb2228c94fb85660 = L.marker(
+                [48.8558, -123.3072],
+                {
+}
+            ).addTo(feature_group_d31f871d068206becc0f7e15262e74a2);
+        
+    
+            var icon_bd6afb2cef2d5ad42f2996b4da84a7f7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_121560eed4ec0b479c717a89792f475e = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_030258c8196454be9c04292abfc279ba = $(`<div id="html_030258c8196454be9c04292abfc279ba" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Active Pass</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Passage</p>             <p><strong>Coordinates:</strong> 48.8558°N, 123.3072°W</p>             <p><strong>Description:</strong> BC Ferries route</p>         </div>         </div>`)[0];
+                popup_121560eed4ec0b479c717a89792f475e.setContent(html_030258c8196454be9c04292abfc279ba);
+            
+        
+
+        marker_49ecf9e82c32c149cb2228c94fb85660.bindPopup(popup_121560eed4ec0b479c717a89792f475e)
+        ;
+
+        
+    
+    
+            marker_49ecf9e82c32c149cb2228c94fb85660.bindTooltip(
+                `<div>
+                     Active Pass
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_49ecf9e82c32c149cb2228c94fb85660.setIcon(icon_bd6afb2cef2d5ad42f2996b4da84a7f7);
+            
+    
+            var marker_b3cb945b867f3120e32eea08e478168a = L.marker(
+                [50.2, -125.15],
+                {
+}
+            ).addTo(feature_group_d31f871d068206becc0f7e15262e74a2);
+        
+    
+            var icon_0ab42537bfa674c7efba146426051697 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_61739a80cf8c7b032b491444d15db02f = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_7dd14cfe3c0b22831cc986556f123eeb = $(`<div id="html_7dd14cfe3c0b22831cc986556f123eeb" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Surge Narrows</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Passage</p>             <p><strong>Coordinates:</strong> 50.2000°N, 125.1500°W</p>             <p><strong>Description:</strong> 16 knot maximum current</p>         </div>         </div>`)[0];
+                popup_61739a80cf8c7b032b491444d15db02f.setContent(html_7dd14cfe3c0b22831cc986556f123eeb);
+            
+        
+
+        marker_b3cb945b867f3120e32eea08e478168a.bindPopup(popup_61739a80cf8c7b032b491444d15db02f)
+        ;
+
+        
+    
+    
+            marker_b3cb945b867f3120e32eea08e478168a.bindTooltip(
+                `<div>
+                     Surge Narrows
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b3cb945b867f3120e32eea08e478168a.setIcon(icon_0ab42537bfa674c7efba146426051697);
+            
+    
+            feature_group_d31f871d068206becc0f7e15262e74a2.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_8325392db1a6ab9af7ff642142c95e4b = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_e399b1f7822017844b0f39ef451e8c71 = L.marker(
+                [54.3667, -132.3333],
+                {
+}
+            ).addTo(feature_group_8325392db1a6ab9af7ff642142c95e4b);
+        
+    
+            var icon_696efb195d7fc0719fa575734ec2c96c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_66b72a89383e7e290459e3a5b54a5ec9 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_5e26899c427f58824eeb59e6ecc60315 = $(`<div id="html_5e26899c427f58824eeb59e6ecc60315" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Dixon Entrance</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Boundary</p>             <p><strong>Coordinates:</strong> 54.3667°N, 132.3333°W</p>             <p><strong>Description:</strong> US-Canada disputed</p>         </div>         </div>`)[0];
+                popup_66b72a89383e7e290459e3a5b54a5ec9.setContent(html_5e26899c427f58824eeb59e6ecc60315);
+            
+        
+
+        marker_e399b1f7822017844b0f39ef451e8c71.bindPopup(popup_66b72a89383e7e290459e3a5b54a5ec9)
+        ;
+
+        
+    
+    
+            marker_e399b1f7822017844b0f39ef451e8c71.bindTooltip(
+                `<div>
+                     Dixon Entrance
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e399b1f7822017844b0f39ef451e8c71.setIcon(icon_696efb195d7fc0719fa575734ec2c96c);
+            
+    
+            feature_group_8325392db1a6ab9af7ff642142c95e4b.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_2cb04fe5a78a0308da9e5a7513c024bc = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_ebbef3130e55348c44260b8ea0875230 = L.marker(
+                [54.245, -130.445],
+                {
+}
+            ).addTo(feature_group_2cb04fe5a78a0308da9e5a7513c024bc);
+        
+    
+            var icon_a5169329394def2ab012a7413338d369 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_16cd71c2b9641d4a1b71f7dbdd1eea43 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_101d3b448a80220bb564c887d7c9104f = $(`<div id="html_101d3b448a80220bb564c887d7c9104f" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Anchorage 11 Digby</h4>             <p><strong>Type:</strong> Anchorage</p>             <p><strong>Category:</strong> Emergency</p>             <p><strong>Coordinates:</strong> 54.2450°N, 130.4450°W</p>             <p><strong>Description:</strong> Emergency only</p>         </div>         </div>`)[0];
+                popup_16cd71c2b9641d4a1b71f7dbdd1eea43.setContent(html_101d3b448a80220bb564c887d7c9104f);
+            
+        
+
+        marker_ebbef3130e55348c44260b8ea0875230.bindPopup(popup_16cd71c2b9641d4a1b71f7dbdd1eea43)
+        ;
+
+        
+    
+    
+            marker_ebbef3130e55348c44260b8ea0875230.bindTooltip(
+                `<div>
+                     Anchorage 11 Digby
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ebbef3130e55348c44260b8ea0875230.setIcon(icon_a5169329394def2ab012a7413338d369);
+            
+    
+            feature_group_2cb04fe5a78a0308da9e5a7513c024bc.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_271746d306cc90d922d2212dce00964a = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_eb5a3c41e9ab91d46acf585f7de0e922 = L.marker(
+                [52.3723, -127.4853],
+                {
+}
+            ).addTo(feature_group_271746d306cc90d922d2212dce00964a);
+        
+    
+            var icon_1fb06694b1dbeeda3438d80869334add = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eb7ade73b638af4581cf943d30b0b5b8 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_c956e318fe65a349644b31b9fe0488eb = $(`<div id="html_c956e318fe65a349644b31b9fe0488eb" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Elcho Harbour</h4>             <p><strong>Type:</strong> Anchorage</p>             <p><strong>Category:</strong> Shelter</p>             <p><strong>Coordinates:</strong> 52.3723°N, 127.4853°W</p>             <p><strong>Description:</strong> Storm shelter 22m depth</p>         </div>         </div>`)[0];
+                popup_eb7ade73b638af4581cf943d30b0b5b8.setContent(html_c956e318fe65a349644b31b9fe0488eb);
+            
+        
+
+        marker_eb5a3c41e9ab91d46acf585f7de0e922.bindPopup(popup_eb7ade73b638af4581cf943d30b0b5b8)
+        ;
+
+        
+    
+    
+            marker_eb5a3c41e9ab91d46acf585f7de0e922.bindTooltip(
+                `<div>
+                     Elcho Harbour
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_eb5a3c41e9ab91d46acf585f7de0e922.setIcon(icon_1fb06694b1dbeeda3438d80869334add);
+            
+    
+            feature_group_271746d306cc90d922d2212dce00964a.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_cdb131aa30405af052ae6395be1ed5b7 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_fd46a3dd591c32561eac78c0d58fc5b1 = L.marker(
+                [53.425, -129.25],
+                {
+}
+            ).addTo(feature_group_cdb131aa30405af052ae6395be1ed5b7);
+        
+    
+            var icon_e7883d5d4d29e3c959ebc2d0b6dfbf1b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_58a8a20f3b54a185395d829dd514bdec = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_44c7bf5eff821c53ba4e722e05650b7a = $(`<div id="html_44c7bf5eff821c53ba4e722e05650b7a" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Hartley Bay</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Services</p>             <p><strong>Coordinates:</strong> 53.4250°N, 129.2500°W</p>             <p><strong>Description:</strong> LNG escort tug station</p>         </div>         </div>`)[0];
+                popup_58a8a20f3b54a185395d829dd514bdec.setContent(html_44c7bf5eff821c53ba4e722e05650b7a);
+            
+        
+
+        marker_fd46a3dd591c32561eac78c0d58fc5b1.bindPopup(popup_58a8a20f3b54a185395d829dd514bdec)
+        ;
+
+        
+    
+    
+            marker_fd46a3dd591c32561eac78c0d58fc5b1.bindTooltip(
+                `<div>
+                     Hartley Bay
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_fd46a3dd591c32561eac78c0d58fc5b1.setIcon(icon_e7883d5d4d29e3c959ebc2d0b6dfbf1b);
+            
+    
+            var marker_bee5764361af88b5507dabcdc2c33d4a = L.marker(
+                [50.5833, -126.9167],
+                {
+}
+            ).addTo(feature_group_cdb131aa30405af052ae6395be1ed5b7);
+        
+    
+            var icon_2ea3278febb443ed3325a1013ed7370f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8949824ed015900b0979718da8976bdc = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_52d7da9b87818f0915408ad0a7209bc9 = $(`<div id="html_52d7da9b87818f0915408ad0a7209bc9" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Alert Bay</h4>             <p><strong>Type:</strong> Port</p>             <p><strong>Category:</strong> Services</p>             <p><strong>Coordinates:</strong> 50.5833°N, 126.9167°W</p>             <p><strong>Description:</strong> Cormorant Island port</p>         </div>         </div>`)[0];
+                popup_8949824ed015900b0979718da8976bdc.setContent(html_52d7da9b87818f0915408ad0a7209bc9);
+            
+        
+
+        marker_bee5764361af88b5507dabcdc2c33d4a.bindPopup(popup_8949824ed015900b0979718da8976bdc)
+        ;
+
+        
+    
+    
+            marker_bee5764361af88b5507dabcdc2c33d4a.bindTooltip(
+                `<div>
+                     Alert Bay
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bee5764361af88b5507dabcdc2c33d4a.setIcon(icon_2ea3278febb443ed3325a1013ed7370f);
+            
+    
+            var marker_52bd61fbc13fc1b4ebdf542eab0ecfbb = L.marker(
+                [49.153, -125.9066],
+                {
+}
+            ).addTo(feature_group_cdb131aa30405af052ae6395be1ed5b7);
+        
+    
+            var icon_8d7cdae510d63aef4a09f408a2fbbfca = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_20f72c8e4fc42fe7b8c078046ea6cb16 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_3c770aff4bf02f1a350016a3676aac49 = $(`<div id="html_3c770aff4bf02f1a350016a3676aac49" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Tofino</h4>             <p><strong>Type:</strong> Port</p>             <p><strong>Category:</strong> Services</p>             <p><strong>Coordinates:</strong> 49.1530°N, 125.9066°W</p>             <p><strong>Description:</strong> Clayoquot Sound center</p>         </div>         </div>`)[0];
+                popup_20f72c8e4fc42fe7b8c078046ea6cb16.setContent(html_3c770aff4bf02f1a350016a3676aac49);
+            
+        
+
+        marker_52bd61fbc13fc1b4ebdf542eab0ecfbb.bindPopup(popup_20f72c8e4fc42fe7b8c078046ea6cb16)
+        ;
+
+        
+    
+    
+            marker_52bd61fbc13fc1b4ebdf542eab0ecfbb.bindTooltip(
+                `<div>
+                     Tofino
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_52bd61fbc13fc1b4ebdf542eab0ecfbb.setIcon(icon_8d7cdae510d63aef4a09f408a2fbbfca);
+            
+    
+            var marker_ba5de5396cc2b426f4a4a45c764394cf = L.marker(
+                [50.0331, -125.2733],
+                {
+}
+            ).addTo(feature_group_cdb131aa30405af052ae6395be1ed5b7);
+        
+    
+            var icon_c3cda4f15a679630eccb155ffbdef11c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_81815c7154351e3fa1e93d8b780a9c1c = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_28d19ac7e1b34e25fd7848382415aba4 = $(`<div id="html_28d19ac7e1b34e25fd7848382415aba4" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Campbell River</h4>             <p><strong>Type:</strong> Port</p>             <p><strong>Category:</strong> Services</p>             <p><strong>Coordinates:</strong> 50.0331°N, 125.2733°W</p>             <p><strong>Description:</strong> Aquaculture headquarters</p>         </div>         </div>`)[0];
+                popup_81815c7154351e3fa1e93d8b780a9c1c.setContent(html_28d19ac7e1b34e25fd7848382415aba4);
+            
+        
+
+        marker_ba5de5396cc2b426f4a4a45c764394cf.bindPopup(popup_81815c7154351e3fa1e93d8b780a9c1c)
+        ;
+
+        
+    
+    
+            marker_ba5de5396cc2b426f4a4a45c764394cf.bindTooltip(
+                `<div>
+                     Campbell River
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ba5de5396cc2b426f4a4a45c764394cf.setIcon(icon_c3cda4f15a679630eccb155ffbdef11c);
+            
+    
+            feature_group_cdb131aa30405af052ae6395be1ed5b7.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_017de10632795ea012e1522ae52a4aaf = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_dade78b1ffa48079a7ce5243693727e5 = L.marker(
+                [53.7667, -129.0333],
+                {
+}
+            ).addTo(feature_group_017de10632795ea012e1522ae52a4aaf);
+        
+    
+            var icon_d264847a5699e6244470eb5dd8eb8d5b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "fire",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6aca39235cc56c8b9a527f85d8e2eeed = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_d874735e37302ea80fea264a9c69e672 = $(`<div id="html_d874735e37302ea80fea264a9c69e672" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Douglas Channel Entry</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> LNG</p>             <p><strong>Coordinates:</strong> 53.7667°N, 129.0333°W</p>             <p><strong>Description:</strong> LNG route start</p>         </div>         </div>`)[0];
+                popup_6aca39235cc56c8b9a527f85d8e2eeed.setContent(html_d874735e37302ea80fea264a9c69e672);
+            
+        
+
+        marker_dade78b1ffa48079a7ce5243693727e5.bindPopup(popup_6aca39235cc56c8b9a527f85d8e2eeed)
+        ;
+
+        
+    
+    
+            marker_dade78b1ffa48079a7ce5243693727e5.bindTooltip(
+                `<div>
+                     Douglas Channel Entry
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dade78b1ffa48079a7ce5243693727e5.setIcon(icon_d264847a5699e6244470eb5dd8eb8d5b);
+            
+    
+            var marker_79851dfd111966505de13e0eecb082f1 = L.marker(
+                [53.2833, -129.0667],
+                {
+}
+            ).addTo(feature_group_017de10632795ea012e1522ae52a4aaf);
+        
+    
+            var icon_2aba25f7e9a08264319710032f507b98 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "fire",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4b46339e1f2ad251e9fc84ae117ba293 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_af55a367a7ec4b23c66c1b186a9c66ce = $(`<div id="html_af55a367a7ec4b23c66c1b186a9c66ce" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Wright Sound</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> LNG</p>             <p><strong>Coordinates:</strong> 53.2833°N, 129.0667°W</p>             <p><strong>Description:</strong> Tethered escort point</p>         </div>         </div>`)[0];
+                popup_4b46339e1f2ad251e9fc84ae117ba293.setContent(html_af55a367a7ec4b23c66c1b186a9c66ce);
+            
+        
+
+        marker_79851dfd111966505de13e0eecb082f1.bindPopup(popup_4b46339e1f2ad251e9fc84ae117ba293)
+        ;
+
+        
+    
+    
+            marker_79851dfd111966505de13e0eecb082f1.bindTooltip(
+                `<div>
+                     Wright Sound
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_79851dfd111966505de13e0eecb082f1.setIcon(icon_2aba25f7e9a08264319710032f507b98);
+            
+    
+            var marker_b7d5bbad171680ddb209f5ef33b13df5 = L.marker(
+                [54.0, -128.6667],
+                {
+}
+            ).addTo(feature_group_017de10632795ea012e1522ae52a4aaf);
+        
+    
+            var icon_96b46345e924ab252150bb9ad580864c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "fire",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9f48f7529298897fb7dbfedc8cc5dde6 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_27ce6e8f3f5c1d262dc7a0d93ec03348 = $(`<div id="html_27ce6e8f3f5c1d262dc7a0d93ec03348" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Kitimat Arm</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> LNG</p>             <p><strong>Coordinates:</strong> 54.0000°N, 128.6667°W</p>             <p><strong>Description:</strong> Final approach Kitimat</p>         </div>         </div>`)[0];
+                popup_9f48f7529298897fb7dbfedc8cc5dde6.setContent(html_27ce6e8f3f5c1d262dc7a0d93ec03348);
+            
+        
+
+        marker_b7d5bbad171680ddb209f5ef33b13df5.bindPopup(popup_9f48f7529298897fb7dbfedc8cc5dde6)
+        ;
+
+        
+    
+    
+            marker_b7d5bbad171680ddb209f5ef33b13df5.bindTooltip(
+                `<div>
+                     Kitimat Arm
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b7d5bbad171680ddb209f5ef33b13df5.setIcon(icon_96b46345e924ab252150bb9ad580864c);
+            
+    
+            feature_group_017de10632795ea012e1522ae52a4aaf.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_c9176911fc1ef51584ed96cdf2bf97e5 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_7656fdb0a4051ed76d36e2fe5dc84ba4 = L.marker(
+                [54.0833, -130.75],
+                {
+}
+            ).addTo(feature_group_c9176911fc1ef51584ed96cdf2bf97e5);
+        
+    
+            var icon_7fc95d047545b8626fa310dbdef31946 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0da865dc62aebc83cbc8febbfd038fc3 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_11ace8bca1b627fdf277f71d87771f40 = $(`<div id="html_11ace8bca1b627fdf277f71d87771f40" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Browning Entrance</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Shipping</p>             <p><strong>Coordinates:</strong> 54.0833°N, 130.7500°W</p>             <p><strong>Description:</strong> Prince Rupert approach</p>         </div>         </div>`)[0];
+                popup_0da865dc62aebc83cbc8febbfd038fc3.setContent(html_11ace8bca1b627fdf277f71d87771f40);
+            
+        
+
+        marker_7656fdb0a4051ed76d36e2fe5dc84ba4.bindPopup(popup_0da865dc62aebc83cbc8febbfd038fc3)
+        ;
+
+        
+    
+    
+            marker_7656fdb0a4051ed76d36e2fe5dc84ba4.bindTooltip(
+                `<div>
+                     Browning Entrance
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7656fdb0a4051ed76d36e2fe5dc84ba4.setIcon(icon_7fc95d047545b8626fa310dbdef31946);
+            
+    
+            var marker_b4437447d4426463bcfd954b868fecd1 = L.marker(
+                [53.5, -129.7],
+                {
+}
+            ).addTo(feature_group_c9176911fc1ef51584ed96cdf2bf97e5);
+        
+    
+            var icon_f1e97c332f41e19ea58b7a3791d7b15d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0d886be5a5c33f0b59a97ccee96340f5 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_eed22f3de62bfd1b4e875fcb694e9732 = $(`<div id="html_eed22f3de62bfd1b4e875fcb694e9732" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Principe Channel</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Shipping</p>             <p><strong>Coordinates:</strong> 53.5000°N, 129.7000°W</p>             <p><strong>Description:</strong> Alternative LNG route</p>         </div>         </div>`)[0];
+                popup_0d886be5a5c33f0b59a97ccee96340f5.setContent(html_eed22f3de62bfd1b4e875fcb694e9732);
+            
+        
+
+        marker_b4437447d4426463bcfd954b868fecd1.bindPopup(popup_0d886be5a5c33f0b59a97ccee96340f5)
+        ;
+
+        
+    
+    
+            marker_b4437447d4426463bcfd954b868fecd1.bindTooltip(
+                `<div>
+                     Principe Channel
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b4437447d4426463bcfd954b868fecd1.setIcon(icon_f1e97c332f41e19ea58b7a3791d7b15d);
+            
+    
+            var marker_66c25441d64bc9ec75f3ee7afb846a09 = L.marker(
+                [55.0, -130.0],
+                {
+}
+            ).addTo(feature_group_c9176911fc1ef51584ed96cdf2bf97e5);
+        
+    
+            var icon_455b40d06674c3686337015aa9d0028a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a3864f03e9fc349c6a038679ee067af6 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_023233116c0b758b0852ff21bb18ed20 = $(`<div id="html_023233116c0b758b0852ff21bb18ed20" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Portland Canal</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Shipping</p>             <p><strong>Coordinates:</strong> 55.0000°N, 130.0000°W</p>             <p><strong>Description:</strong> Stewart port approach</p>         </div>         </div>`)[0];
+                popup_a3864f03e9fc349c6a038679ee067af6.setContent(html_023233116c0b758b0852ff21bb18ed20);
+            
+        
+
+        marker_66c25441d64bc9ec75f3ee7afb846a09.bindPopup(popup_a3864f03e9fc349c6a038679ee067af6)
+        ;
+
+        
+    
+    
+            marker_66c25441d64bc9ec75f3ee7afb846a09.bindTooltip(
+                `<div>
+                     Portland Canal
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_66c25441d64bc9ec75f3ee7afb846a09.setIcon(icon_455b40d06674c3686337015aa9d0028a);
+            
+    
+            var marker_cd7349b2d08f1c4ff4b4698629dbc958 = L.marker(
+                [49.5, -124.0],
+                {
+}
+            ).addTo(feature_group_c9176911fc1ef51584ed96cdf2bf97e5);
+        
+    
+            var icon_2addefab2a9835ca1eafde9640dcb14d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9e0d2cb7d5b87bc92d0f2e279e74da41 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_a0fe8ef6c42fdf3f0208cb21ee6fbadb = $(`<div id="html_a0fe8ef6c42fdf3f0208cb21ee6fbadb" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Strait of Georgia Center</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Shipping</p>             <p><strong>Coordinates:</strong> 49.5000°N, 124.0000°W</p>             <p><strong>Description:</strong> Major transit area</p>         </div>         </div>`)[0];
+                popup_9e0d2cb7d5b87bc92d0f2e279e74da41.setContent(html_a0fe8ef6c42fdf3f0208cb21ee6fbadb);
+            
+        
+
+        marker_cd7349b2d08f1c4ff4b4698629dbc958.bindPopup(popup_9e0d2cb7d5b87bc92d0f2e279e74da41)
+        ;
+
+        
+    
+    
+            marker_cd7349b2d08f1c4ff4b4698629dbc958.bindTooltip(
+                `<div>
+                     Strait of Georgia Center
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cd7349b2d08f1c4ff4b4698629dbc958.setIcon(icon_2addefab2a9835ca1eafde9640dcb14d);
+            
+    
+            feature_group_c9176911fc1ef51584ed96cdf2bf97e5.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_939b1b577d825159728d0a37c56c99a5 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_9298864de532e93f0c46041955f3cd02 = L.marker(
+                [49.2928, -122.9256],
+                {
+}
+            ).addTo(feature_group_939b1b577d825159728d0a37c56c99a5);
+        
+    
+            var icon_1023840155abd9ec9d904e929f1584aa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9cfad9f00803616a920460f60d31afbb = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_7e7f96cbe1029cf57c6040eb90ea7178 = $(`<div id="html_7e7f96cbe1029cf57c6040eb90ea7178" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Second Narrows</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Tanker</p>             <p><strong>Coordinates:</strong> 49.2928°N, 122.9256°W</p>             <p><strong>Description:</strong> Burrard Inlet constraint</p>         </div>         </div>`)[0];
+                popup_9cfad9f00803616a920460f60d31afbb.setContent(html_7e7f96cbe1029cf57c6040eb90ea7178);
+            
+        
+
+        marker_9298864de532e93f0c46041955f3cd02.bindPopup(popup_9cfad9f00803616a920460f60d31afbb)
+        ;
+
+        
+    
+    
+            marker_9298864de532e93f0c46041955f3cd02.bindTooltip(
+                `<div>
+                     Second Narrows
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_9298864de532e93f0c46041955f3cd02.setIcon(icon_1023840155abd9ec9d904e929f1584aa);
+            
+    
+            feature_group_939b1b577d825159728d0a37c56c99a5.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_15d5b60dd9c4dfd345751725c37a733f = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_d18b38f2224fe32af5860d2fe6360f95 = L.marker(
+                [54.3, -130.9167],
+                {
+}
+            ).addTo(feature_group_15d5b60dd9c4dfd345751725c37a733f);
+        
+    
+            var icon_31d4fea97ea1935a8f2a32494a94ddf8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_737c865ee67389bd0162d1d2939533a8 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_40a3d9651f779f06c139bdb707c9ac85 = $(`<div id="html_40a3d9651f779f06c139bdb707c9ac85" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Triple Island Anchorage</h4>             <p><strong>Type:</strong> Anchorage</p>             <p><strong>Category:</strong> Pilot</p>             <p><strong>Coordinates:</strong> 54.3000°N, 130.9167°W</p>             <p><strong>Description:</strong> Pilot boarding area</p>         </div>         </div>`)[0];
+                popup_737c865ee67389bd0162d1d2939533a8.setContent(html_40a3d9651f779f06c139bdb707c9ac85);
+            
+        
+
+        marker_d18b38f2224fe32af5860d2fe6360f95.bindPopup(popup_737c865ee67389bd0162d1d2939533a8)
+        ;
+
+        
+    
+    
+            marker_d18b38f2224fe32af5860d2fe6360f95.bindTooltip(
+                `<div>
+                     Triple Island Anchorage
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d18b38f2224fe32af5860d2fe6360f95.setIcon(icon_31d4fea97ea1935a8f2a32494a94ddf8);
+            
+    
+            feature_group_15d5b60dd9c4dfd345751725c37a733f.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var feature_group_acf8e9aea76288678c0b5f658bec5e14 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_971ddbab9f46b23ad2ec7bbfb8fc9f20 = L.marker(
+                [50.9833, -127.7167],
+                {
+}
+            ).addTo(feature_group_acf8e9aea76288678c0b5f658bec5e14);
+        
+    
+            var icon_cb8505a3aead2ec17bc8fa72d144052c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "map-marker",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a2df6ef662f1e55d0979c3a3d13b1db5 = L.popup({
+  "maxWidth": 350,
+});
+
+        
+            
+                var html_d07dc9d293fdb6c5b0dc104cbd225723 = $(`<div id="html_d07dc9d293fdb6c5b0dc104cbd225723" style="width: 100.0%; height: 100.0%;">         <div style="width: 300px;">             <h4 style="color: #2E86AB; margin-bottom: 10px;">Pine Island</h4>             <p><strong>Type:</strong> Navigation</p>             <p><strong>Category:</strong> Checkpoint</p>             <p><strong>Coordinates:</strong> 50.9833°N, 127.7167°W</p>             <p><strong>Description:</strong> Northern checkpoint</p>         </div>         </div>`)[0];
+                popup_a2df6ef662f1e55d0979c3a3d13b1db5.setContent(html_d07dc9d293fdb6c5b0dc104cbd225723);
+            
+        
+
+        marker_971ddbab9f46b23ad2ec7bbfb8fc9f20.bindPopup(popup_a2df6ef662f1e55d0979c3a3d13b1db5)
+        ;
+
+        
+    
+    
+            marker_971ddbab9f46b23ad2ec7bbfb8fc9f20.bindTooltip(
+                `<div>
+                     Pine Island
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_971ddbab9f46b23ad2ec7bbfb8fc9f20.setIcon(icon_cb8505a3aead2ec17bc8fa72d144052c);
+            
+    
+            feature_group_acf8e9aea76288678c0b5f658bec5e14.addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var poly_line_8bf70ad77f32f727408324e134e88365 = L.polyline(
+                [[54.2883, -130.3562], [54.0833, -130.75], [53.6167, -129.7167], [53.425, -129.25], [53.2833, -129.0667], [54.0, -128.6667], [54.028571, -128.691677]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+        var popup_581d7258d4cf53b4ba56675838588f64 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2148d95119909b038ca68b83057fbd72 = $(`<div id="html_2148d95119909b038ca68b83057fbd72" style="width: 100.0%; height: 100.0%;">LNG Export Route: Prince Rupert → Kitimat</div>`)[0];
+                popup_581d7258d4cf53b4ba56675838588f64.setContent(html_2148d95119909b038ca68b83057fbd72);
+            
+        
+
+        poly_line_8bf70ad77f32f727408324e134e88365.bindPopup(popup_581d7258d4cf53b4ba56675838588f64)
+        ;
+
+        
+    
+    
+            poly_line_8bf70ad77f32f727408324e134e88365.bindTooltip(
+                `<div>
+                     LNG Export Route
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_2cd802755195832ee8fb37a0a24e01b9 = L.polyline(
+                [[50.7, -127.4167], [50.5833, -126.9167], [50.4667, -126.0833], [50.9833, -127.7167], [51.8667, -128.2333], [52.1617, -128.1433], [52.3167, -128.55], [53.425, -129.25], [54.2883, -130.3562]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+        var popup_bf751c8a2ded48ad23f4f93f6fc63ba7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2779b609a21cdda7c3d4cc449db421cc = $(`<div id="html_2779b609a21cdda7c3d4cc449db421cc" style="width: 100.0%; height: 100.0%;">Inside Passage: Port Hardy → Prince Rupert</div>`)[0];
+                popup_bf751c8a2ded48ad23f4f93f6fc63ba7.setContent(html_2779b609a21cdda7c3d4cc449db421cc);
+            
+        
+
+        poly_line_2cd802755195832ee8fb37a0a24e01b9.bindPopup(popup_bf751c8a2ded48ad23f4f93f6fc63ba7)
+        ;
+
+        
+    
+    
+            poly_line_2cd802755195832ee8fb37a0a24e01b9.bindTooltip(
+                `<div>
+                     Inside Passage Route
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var measure_control_5023ac39f50ea367dd6d24411c0568bb = new L.Control.Measure(
+                {
+  "position": "bottomleft",
+  "primaryLengthUnit": "meters",
+  "secondaryLengthUnit": "miles",
+  "primaryAreaUnit": "sqmeters",
+  "secondaryAreaUnit": "acres",
+});
+            map_040f2aa840c84b0233e83153f38e9a4e.addControl(measure_control_5023ac39f50ea367dd6d24411c0568bb);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+    
+            var mouse_position_57367df2b1a0d36b7cf1efce7edb9635 = new L.Control.MousePosition(
+                {
+  "position": "bottomright",
+  "separator": " : ",
+  "emptyString": "Unavailable",
+  "lngFirst": false,
+  "numDigits": 5,
+  "prefix": "",
+}
+            );
+            mouse_position_57367df2b1a0d36b7cf1efce7edb9635.options["latFormatter"] =
+                undefined;
+            mouse_position_57367df2b1a0d36b7cf1efce7edb9635.options["lngFormatter"] =
+                undefined;
+            map_040f2aa840c84b0233e83153f38e9a4e.addControl(mouse_position_57367df2b1a0d36b7cf1efce7edb9635);
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topleft",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+        
+    
+            var layer_control_12c870abc31d49231d20e6b159483840_layers = {
+                base_layers : {
+                    "OpenStreetMap" : tile_layer_e8c9340d12eb4a9b6f183a2670b56562,
+                    "Satellite" : tile_layer_87181207a73a4e5405c5db51564062b5,
+                    "Ocean" : tile_layer_de580855d6c987682e9c0deae9edd0c3,
+                },
+                overlays :  {
+                    "Pilotage (1)" : feature_group_9457ad8322df892992196828e0308737,
+                    "Infrastructure (4)" : feature_group_134a01ee6d4cdafc00de2d553a5b7b60,
+                    "Waypoint (7)" : feature_group_53da1fd756608e41c216b1cf414632f8,
+                    "Terminal (2)" : feature_group_2a729df10e188b4170e8de2365b4df9c,
+                    "Energy (4)" : feature_group_05aeb8982d198c647b885ab56d5109f5,
+                    "Salmon (17)" : feature_group_b9153ac88d1b1ca0cefa8e9c0f7d15d1,
+                    "Trawl (3)" : feature_group_ced29ce43ecabd1ded2b143eb393c761,
+                    "Conservation (4)" : feature_group_548083161a1a421017f3597fca397603,
+                    "Port (10)" : feature_group_49a1f1f101270e29626369570e2fa525,
+                    "TSS (6)" : feature_group_229def9a6f683b3ca81590992322b17d,
+                    "Protected (4)" : feature_group_0b60bf3164e20cfce299dbc475c37723,
+                    "Heritage (1)" : feature_group_269aca66cf19a5cb3d66c674707cdcc7,
+                    "Passage (5)" : feature_group_d31f871d068206becc0f7e15262e74a2,
+                    "Boundary (1)" : feature_group_8325392db1a6ab9af7ff642142c95e4b,
+                    "Emergency (1)" : feature_group_2cb04fe5a78a0308da9e5a7513c024bc,
+                    "Shelter (1)" : feature_group_271746d306cc90d922d2212dce00964a,
+                    "Services (4)" : feature_group_cdb131aa30405af052ae6395be1ed5b7,
+                    "LNG (3)" : feature_group_017de10632795ea012e1522ae52a4aaf,
+                    "Shipping (4)" : feature_group_c9176911fc1ef51584ed96cdf2bf97e5,
+                    "Tanker (1)" : feature_group_939b1b577d825159728d0a37c56c99a5,
+                    "Pilot (1)" : feature_group_15d5b60dd9c4dfd345751725c37a733f,
+                    "Checkpoint (1)" : feature_group_acf8e9aea76288678c0b5f658bec5e14,
+                },
+            };
+            let layer_control_12c870abc31d49231d20e6b159483840 = L.control.layers(
+                layer_control_12c870abc31d49231d20e6b159483840_layers.base_layers,
+                layer_control_12c870abc31d49231d20e6b159483840_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_040f2aa840c84b0233e83153f38e9a4e);
+
+        
+</script>
+</html>
