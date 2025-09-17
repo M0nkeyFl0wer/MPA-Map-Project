@@ -65,7 +65,7 @@ This profile targets rocky archipelago systems off Banks and Aristazabal Islands
 
 ## 2. Caamano Sound Profile (Zones 310-316)
 
-![Caamano Sound Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_269_img_0.png)
+![Caamano Sound Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_269_img_1.png)
 
 ### **Industrial Operations in Zones 310-316:**
 
@@ -698,7 +698,7 @@ The primary use of the area is by commercial fishers; however, because of the RC
 
 ## Caamano Sound Profile (Zones 310-316)
 
-![Caamano Sound Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_269_img_0.png)
+![Caamano Sound Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_269_img_1.png)
 
 **Additional Zone Detail Map:**
 
@@ -931,164 +931,16 @@ This comprehensive network of marine protected areas in the North Coast represen
 
 ---
 
-# North Vancouver Island Marine Protected Area Zones
+## CONCLUSION
 
-![North Vancouver Island Index Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_303_img_0.png)
+This comprehensive network of marine protected areas represents the largest marine conservation initiative in British Columbia's history, covering critical marine ecosystems from the North Coast (Zones 300-361) to the Central Coast (Zones 100-197). The proposed MPAs balance ecological conservation objectives with cultural preservation and sustainable resource management, reflecting extensive collaboration between federal and provincial governments, First Nations, and marine stakeholders.
 
-## North Vancouver Island Zone Overview
+**Key Conservation Achievements:**
+- **30,000+ km²** of marine habitat protection when fully implemented
+- **183 mapped locations** including zones, operations, and protected areas
+- **Comprehensive First Nations co-governance** frameworks
+- **Integration with existing protected areas** including Glass Sponge Reefs MPA and Scott Islands Marine National Wildlife Area
 
-The North Vancouver Island sub-region encompasses diverse marine habitats and culturally significant areas for First Nations. This section includes several marine protected area profiles spanning zones 1-16, featuring unique ecosystems such as **fjord systems**, **shallow sill ecosystems**, **eelgrass beds**, **kelp forests**, and important **salmon habitats**.
+**Implementation Timeline:** Category 1 zones targeted for completion by 2025, representing the most ambitious marine conservation program in Canada's Pacific waters.
 
----
-
-## Heydon and Loughborough Profile (Zones 1-4)
-
-![Heydon and Loughborough Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_305_img_0.png)
-
-![Heydon and Loughborough Detail Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_305_img_1.png)
-
-**Sub-region:** North Vancouver Island
-**Category:** 1
-**Size:** 28.2 km²
-**Potential designation tools:** Fisheries Act tool to enable "marine refuge" status (potentially a Variation Order and/or Condition of Licence) + Land Act Section 17 withdrawal, with potential for a longer-term provincial tool, such as a Wildlife Management Area, for enhancing protection.
-
-Both **Wei Wai Kum** and **We Wai Kai First Nations** have interests in the Heydon and Loughborough inlet site. The nations are contemplating an agreement to advance discussions about site governance, monitoring, and management collaboratively. We Wai Kai First Nation is not currently a partner in the planning process but has expressed interest in participating in the site designation and management process for this area.
-
-### Context
-
-This site is comprised of a variety of habitats supporting a wide range of biologically diverse species.
-
-**Rock cliffs and ramps**, **sandy and rocky bottom**, **sand and gravel flats and beaches**, **mainland fjord** with steep fjord walls, **high rugosity**, **eelgrass beds**, **kelp forests**, and **estuaries** support species such as **marine birds**, **five species of salmon**, **rockfish** (including **copper** and **quillback**), and a variety of **invertebrates**, such as **clams**, **Dungeness crab**, **urchin**, **sponges** and healthy **sunflower sea stars**.
-
-The **estuaries** and associated species also offer critical habitat for sustaining healthy **grizzly bear** populations.
-
-The site is of high cultural and spiritual importance to the **Wei Wai Kum**, and other local First Nations. The area is home to over thirty documented **archaeological sites**, including **ancient village sites**. It continues to be used for traditional food harvest and cultural practices with the Nation focusing on restoration of species and habitats.
-
-The site is zoned as a **Special Management Zone (SMZ)** – Cultural/Economic emphasis – in the NVI sub-region MaPP plan and is intended to reinforce high value for cultural value protection, food security, and related aboriginal economic development activities. There has been considerable effort in the area by the Wei Wai Kum, with DFO and A'Tlegay on fish inventory work in Heydon Creek and **clam garden restoration**.
-
-Portions of the proposed area overlap with commercial fishing activity including for **prawn**, **sea cucumber**, and **rockfish**. Several log handling sites exist within the site and support forest company interests in the adjacent watersheds.
-
----
-
-## GWAXDLALA/NALAXDLALA (LULL/HOEYA) Profile (Zones 15-16)
-
-![GWAXDLALA/NALAXDLALA Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_311_img_0.png)
-
-![GWAXDLALA/NALAXDLALA Detail Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_312_img_0.png)
-
-**Sub-region:** North Vancouver Island
-**Category:** 1
-**Size:** 21.2 km²
-**Potential designation tools:** Fisheries Act tool to enable "marine refuge" status (potentially a Variation Order and/or Condition of Licence) + Land Act Section 17 withdrawal, with potential for a longer-term provincial tool, such as a Wildlife Management Area, for enhancing protection.
-
-### **Industrial Operations Near Zones 15-16:**
-**Critical Navigation Infrastructure (MODERATE IMPACT):**
-- **Johnstone Strait Navigation Route** - 50.4667° N, 126.0833° W - 110km major Inside Passage route with strong currents
-- **Seymour Narrows Critical Passage** - 50.1500° N, 125.3500° W - 750m width, 15-knot currents, requires slack water timing
-- **Surge Narrows Extreme Currents** - 50.20° N, 125.15° W - 16-knot flood/14-knot ebb currents
-
-### Context
-
-This highly diverse and unique site contains a wide range of habitats, including a **shallow sill ecosystem**, **two estuaries**, **eelgrass beds**, **kelp forests**, **gravel and sand beaches**, **rock cliffs** and **steep fjord walls**.
-
-The area has high biological diversity as seen in the variety of **marine birds**, **salmon species**, and **rockfish**, while the **shallow sill ecosystem** is home to rare **coral and sponges**, including:
-
-- **Gorgonian corals**
-- **Basket stars**
-- **Glass boot sponges**
-- **Soft goblet sponge**
-- **Cloud sponge**
-- **Brain sponge**
-- **Gunpowder star**
-- **Cookie star**
-- **Healthy sunflower sea stars**
-
-The **estuaries** and associated species also offer critical habitat for sustaining healthy **grizzly bear** populations.
-
-The site is of high cultural and spiritual importance to the **Mamalilikulla First Nation** and is known as the Nation's **homeland and place of origin**. The area is also known for its rich marine resources, hunting and timber activities, and hosts several **ancient village sites** and numerous other archaeological features. The area continues to be used for traditional food harvesting and cultural practices.
-
-The **Hoeya Sill (sponge reef)** component of Zone 15 is zoned as a **Protection Management Zone (PMZ)** in the MaPP plan. The entire area lies within DFO Fisheries Management Area 12-27 and is wholly covered by existing **groundfish-trawl** and **tuna** closures. Several log handling sites exist within the area and continue to support upland forestry activities.
-
----
-
-## NVI – Category 3 Area Profile (Existing Sites)
-
-![East Vancouver Island Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_317_img_0.png)
-
-**Sub-region:** North Vancouver Island
-**Category:** 3
-
-### **Adjacent Marine Protected Area Framework:**
-**Scott Islands Marine National Wildlife Area Relationship (MAJOR REGIONAL INFLUENCE):**
-- **Size:** 11,546 km² (BC's 2nd largest protected area, established June 27, 2018)
-- **Location:** Adjacent north of North Vancouver Island MCP zones
-- **Protection Level:** 20-fathom (36.6m) contour around Scott Islands archipelago
-- **Species:** 5-10 million migratory seabirds protection framework
-- **Management Integration:** Existing protection model for North Vancouver Island zone development
-
-This area is important ecologically and culturally, but further work is required to reach agreement among/with First Nations in the area regarding the development of proposed modifications to existing designations or proposed new zones which may contribute to the Network objectives.
-
-The Category 3 area includes multiple existing MPA/RCA sites that are included 'as-is, where-is' - meaning they are existing MPA designations and RCAs that contribute to the Network but have no proposed changes to either boundaries or associated management measures at this time.
-
-### Additional Maps in Category 3 Area:
-
-**North Vancouver Island Regional Context:**
-![North Vancouver Island Overview](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_303_img_1.png)
-
-**Johnstone Strait Area:**
-![Johnstone Strait Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_318_img_0.png)
-
-**Southern Queen Charlotte Strait:**
-![Southern Queen Charlotte Strait Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_319_img_1.png)
-
-**Northern Queen Charlotte Strait:**
-![Northern Queen Charlotte Strait Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_320_img_0.png)
-
-**Comprehensive North Vancouver Island Category 3 Sites:**
-![NVI Category 3 Comprehensive Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_321_img_1.png)
-
----
-
-## Key Features and Species Summary
-
-### North Coast Key Features:
-**Habitat Types:**
-- **Rocky shorelines** and **archipelagos** supporting extensive kelp stands
-- **Tidal mixing zones** and **upwelling** areas driving high productivity
-- **Protected bays**, **tidal channels**, and **sandy beaches**
-- **Glass sponge reefs** and **coral assemblages**
-- **Fjord systems** with steep walls and protected inlets
-
-**Key Species:**
-- **Marine mammals** (**humpback**, **fin**, and **killer whales**, **Dall's porpoises**, **Pacific white-sided dolphins**)
-- **Salmon** (all Pacific species), **herring**, **Pacific sand lance**
-- **Rockfish** (**halibut**, **lingcod**, **sablefish**)
-- **Shellfish** (**red sea urchin**, **geoduck**, **sea cucumber**, **prawn**, **crab**)
-- **Marine birds** (**seabirds**, **peregrine falcons**)
-
-### North Vancouver Island Key Features:
-**Habitat Types:**
-- **Fjord ecosystems** with steep walls and deep depressions
-- **Shallow sill ecosystems** supporting rare corals and sponges
-- **Eelgrass beds** providing critical nursery habitat
-- **Kelp forests** (bull and giant kelp)
-- **Estuarine environments** supporting salmon and wildlife
-- **Rocky intertidal areas** with high biodiversity
-- **High rugosity seafloor** supporting diverse fish communities
-
-**Key Species:**
-- **Salmon** (all five Pacific species: **sockeye**, **chum**, **pink**, **coho**, **chinook**)
-- **Rockfish** species including **copper**, **quillback**, and **yellowtail**
-- **Marine invertebrates** (**Dungeness crab**, **spot prawn**, **sea cucumbers**, **clams**, **urchins**)
-- **Marine birds** (**marbled murrelet**, **loons**, **cormorants**, **sea ducks**)
-- **Marine mammals** (**grizzly bears** using marine resources)
-- **Rare corals and sponges** in shallow sill ecosystems
-
-### Cultural Significance:
-- **First Nations** homeland and origin areas
-- **Archaeological sites** including **ancient village sites**
-- **Traditional food harvesting** areas
-- **Cultural and spiritual** significance for multiple First Nations
-- **Clam garden restoration** and traditional management practices
-
-This comprehensive network represents critical marine habitats while maintaining strong connections to First Nations cultural values and traditional use patterns across both the North Coast and North Vancouver Island regions.
+🤖 *Generated with [Claude Code](https://claude.ai/code)*
