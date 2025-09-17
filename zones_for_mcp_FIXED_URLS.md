@@ -2,7 +2,7 @@
 
 *Source: https://mpanetwork.ca/wp-content/uploads/2022/11/MPA_Network-Action-Plan_web.pdf*
 
-![BC Marine Protected Areas Overview](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/central_coast_images/central_coast_page_164_img_0.png)
+![BC Marine Protected Areas Overview](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/central_coast_images/central_coast_page_167_img_1.png)
 
 This document organizes all BC Marine Conservation Plan zones geographically from north to south, providing a logical spatial flow through the marine protected area network covering the North Coast (Zones 300-361) and Central Coast (Zones 100-197) regions.
 
@@ -942,5 +942,63 @@ This comprehensive network of marine protected areas represents the largest mari
 - **Integration with existing protected areas** including Glass Sponge Reefs MPA and Scott Islands Marine National Wildlife Area
 
 **Implementation Timeline:** Category 1 zones targeted for completion by 2025, representing the most ambitious marine conservation program in Canada's Pacific waters.
+
+---
+
+# PART III: NORTH VANCOUVER ISLAND (Zones 1-16)
+*Northernmost zones - Implementation Category 1 (by 2025)*
+
+![North Vancouver Island Index Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_303_img_1.png)
+
+## Overview
+
+The North Vancouver Island sub-region encompasses diverse marine habitats and culturally significant areas for First Nations. This section includes several marine protected area profiles spanning zones 1-16, featuring unique ecosystems such as **fjord systems**, **shallow sill ecosystems**, **eelgrass beds**, **kelp forests**, and important **salmon habitats**.
+
+## 1. Heydon and Loughborough Profile (Zones 1-4)
+
+![Heydon and Loughborough Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_island_images/north_island_page_305_img_1.png)
+
+**Sub-region:** North Vancouver Island
+**Category:** 1
+**Size:** 28.2 km²
+**Potential designation tools:** Fisheries Act tool to enable "marine refuge" status + Land Act Section 17 withdrawal
+
+### **Industrial Operations in Zones 1-4:**
+
+**Commercial Fishing Operations (MODERATE IMPACT):**
+- **Prawn Fisheries** - Commercial fishing for spot prawns
+- **Sea Cucumber Harvesting** - Commercial diving operations
+- **Rockfish Operations** - Hook and line commercial fishing
+
+**Forestry Operations (HIGH IMPACT):**
+- **Log Handling Sites** - Multiple forest company operations
+- **Adjacent Watershed Activities** - Upland forestry impacting marine systems
+
+Both **Wei Wai Kum** and **We Wai Kai First Nations** have interests in the Heydon and Loughborough inlet site, contemplating agreements for collaborative governance and management.
+
+**Ecological Context:** Features **rock cliffs and ramps**, **sandy and rocky bottom**, **sand and gravel flats and beaches**, **mainland fjord** with steep fjord walls, **high rugosity**, **eelgrass beds**, **kelp forests**, and **estuaries**. Supports marine birds, **five species of salmon**, **rockfish** (copper and quillback), and invertebrates including **clams**, **Dungeness crab**, **urchin**, **sponges** and **sunflower sea stars**. Critical habitat for **grizzly bear** populations.
+
+**Cultural Context:** High cultural and spiritual importance to **Wei Wai Kum** and other local First Nations. Home to **thirty documented archaeological sites** including **ancient village sites**. Continues to be used for traditional food harvest and cultural practices with focus on **species and habitat restoration**. **Clam garden restoration** efforts ongoing with DFO and A'Tlegay partnerships.
+
+## 2. GWAXDLALA/NALAXDLALA (LULL/HOEYA) Profile (Zones 15-16)
+
+*Map reference: GWAXDLALA/NALAXDLALA (Image unavailable - original PDF extraction incomplete)*
+
+**Sub-region:** North Vancouver Island
+**Category:** 1
+**Size:** 21.2 km²
+**Potential designation tools:** Fisheries Act tool to enable "marine refuge" status + Land Act Section 17 withdrawal
+
+### **Industrial Operations in Zones 15-16:**
+
+**Forestry Operations (MODERATE IMPACT):**
+- **Log Handling Sites** - Supporting upland forestry activities
+- **DFO Fisheries Management Area 12-27** - Existing groundfish-trawl and tuna closures
+
+This highly diverse site contains **shallow sill ecosystem**, **two estuaries**, **eelgrass beds**, **kelp forests**, **gravel and sand beaches**, **rock cliffs** and **steep fjord walls**.
+
+**Ecological Context:** High biological diversity with **marine birds**, **salmon species**, and **rockfish**. **Shallow sill ecosystem** supports rare **coral and sponges** including **Gorgonian corals**, **Basket stars**, **Glass boot sponges**, **Cloud sponge**, **Brain sponge**, and **healthy sunflower sea stars**. **Hoeya Sill (sponge reef)** component represents unique deep water communities.
+
+**Cultural Context:** High cultural and spiritual importance to **Mamalilikulla First Nation** as their **homeland and place of origin**. Rich marine resources support traditional **hunting and timber activities**. Contains **ancient village sites** and archaeological features. Continues supporting traditional food harvesting and cultural practices.
 
 🤖 *Generated with [Claude Code](https://claude.ai/code)*
