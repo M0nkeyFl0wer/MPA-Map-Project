@@ -24,20 +24,198 @@ The North Coast sub-region contains multiple marine protected area profiles span
 **Sub-region:** North Coast
 **Category:** 1
 **Size:** 942.4 km²
-**Potential designation tools:** Marine refuge for 300, 305, 306 and 307; Fisheries Act tool for 301; Marine National Wildlife Area for 300 and 301
+**Potential designation tools:**
+- Marine refuge for 300, 305, 306 and 307
+- Fisheries Act tool for 301
+- Marine National Wildlife Area for 300 and 301
 
-This profile includes several non-contiguous existing RCAs and an Ecological Reserve off the west coast of Banks Island and Aristazabal Island. The rocky shorelines support extensive canopy-forming giant kelp and bull kelp stands providing important habitat for a diversity of rockfish and invertebrates. The area is critically important to local First Nations, both culturally and spiritually.
+### **Industrial Operations in Zones 300, 301, 305-307:**
+
+**Commercial Fishing Operations (HIGH IMPACT):**
+- **Existing RCA Restrictions** - Many fishing types already restricted due to Rockfish Conservation Areas
+- **No Current Tenured Activities** - Area currently free of industrial tenures
+
+**First Nations Operations:**
+- **Gander Island IR** - Cultural and spiritual importance site
+- **Traditional Harvesting** - Sealion, marine birds, and seabird resources
+
+This profile targets rocky archipelago systems off Banks and Aristazabal Islands, featuring some of BC's most extensive kelp forests and critical seabird colonies.
+
+**Ecological Context:** Features **rocky shorelines** and **multiple archipelagos** supporting extensive **canopy-forming giant kelp** and **bull kelp stands** providing habitat for diverse **rockfish** and **invertebrates**. Areas off **Aristazabal Island** are important for **rockfish**, **marine birds**, and **peregrine falcons**. Multiple **sealion haulouts** throughout zones. **Zone 305** includes important **coral and sponge assemblages**. Rocky intertidal areas support many **intertidal species**.
+
+**Cultural Context:** Critically important to local First Nations both **culturally** and **spiritually**. Traditional harvest areas for **sealion**, **marine birds**, and **seabird resources**. Many sites of **cultural and spiritual importance** including **Gander Island IR**. Area represents traditional territorial waters with ongoing First Nations stewardship practices.
+
+**Zone 300:**
+- **Ecological Conservation Objective:** Conserve extensive giant kelp and bull kelp forest ecosystems supporting high rockfish diversity. Protect sealion haulout sites and breeding areas. Maintain rocky intertidal habitat complexity supporting diverse invertebrate communities.
+- **Cultural Conservation Objective:** Preserve traditional sealion harvesting areas and maintain access to cultural sites. Support First Nations stewardship of marine bird colonies and traditional ecological knowledge applications.
+
+**Zone 301:**
+- **Ecological Conservation Objective:** Protect important seabird nesting and roosting areas on rocky islands and cliffs. Conserve peregrine falcon habitat and prey base. Maintain marine bird life history areas including feeding and moulting sites.
+- **Cultural Conservation Objective:** Maintain traditional seabird harvesting practices and seasonal access to nesting colonies. Preserve cultural connections to marine bird populations and traditional food security.
+
+**Zone 305:**
+- **Ecological Conservation Objective:** Conserve rare coral and sponge assemblages representing unique deep water communities. Protect cold water coral ecosystems and associated fish communities. Maintain habitat for rare and sensitive marine invertebrates.
+- **Cultural Conservation Objective:** Preserve areas of high cultural value and maintain traditional marine resource access. Support First Nations monitoring and stewardship of sensitive marine ecosystems.
+
+**Zone 306:**
+- **Ecological Conservation Objective:** Protect extensive kelp bed ecosystems and associated rockfish nursery areas. Conserve habitat connectivity between rocky archipelago systems. Maintain biodiversity in complex rocky substrate communities.
+
+**Zone 307:**
+- **Ecological Conservation Objective:** Conserve outer coast rocky reef systems exposed to oceanic conditions. Protect habitat for species requiring high current and wave action environments. Maintain genetic diversity in rockfish populations across habitat gradient.
 
 ## 2. Caamano Sound Profile (Zones 310-316)
 
 ![Caamano Sound Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_269_img_0.png)
 
+### **Industrial Operations in Zones 310-316:**
+
+**Major Shipping Operations (EXTREME IMPACT):**
+
+- **LNG Canada Kitimat Terminal** - 54.028571° N, 128.691677° W - 14 million tonnes/year LNG export facility
+- **Kitimat Shipping Corridor** - Primary shipping lane for LNG tankers through Caamano Sound
+- **Inside Passage** - Cruise ships, cargo ships, and ferries through area
+- **Log Handling Tenures** - Multiple forestry operations within fjords
+
+**Research Operations:**
+- **Cetacea Lab** - Taylor Bight, south end of Gil Island - Whale research station
+
+This group encompasses the largest marine conservation area in the North Coast, critical for whale populations and First Nations governance.
+
+**Ecological Context:** The zones encompass important habitat for **humpback**, **fin**, and **killer whale populations**, with numerous **Dall's porpoises** and **Pacific white-sided dolphins**. The area includes an important mixing area at the mouth of **Moresby Trough**. Coastal tidal mixing and upwelling drives productivity, supporting diverse **fish**, **invertebrate**, and **sea mammal species**. Features numerous **tidal channels**, **protected bays**, **sandy beaches**, **rocky intertidal areas**, and **kelp beds**.
+
+**Cultural Context:** The area is critically important to **Gitga'at**, **Gitxaala**, **Haisla**, and **Kitasoo Xai'xais First Nations**, both culturally and spiritually, for the harvest of marine resources including **seabirds**. Contains many sites of cultural and spiritual importance including **fishing camps** and **archaeological sites**. Supports **recreational fishing** (salmon and groundfish), **wildlife viewing**, **scuba diving**, and **boating**. Commercial fisheries include **groundfish** (halibut, rockfish, lingcod, sablefish), **shellfish** (red sea urchin, geoduck, horse clam, sea cucumber, prawn, crab), **salmon** (troll, seine, gillnet), and **tuna** fisheries.
+
+**Activities of Concern:** Major shipping traffic from **LNG tanker operations** creating vessel noise and strike risks for marine mammals. **Log handling operations** affecting nearshore habitat quality.
+
+**Zone 310:**
+- **Ecological Conservation Objective:** Conserve critical whale habitat including humpback whale feeding areas and killer whale transit corridors. Protect mixing zone productivity at Moresby Trough supporting diverse fish and invertebrate populations.
+- **Cultural Conservation Objective:** Maintain First Nations access to traditional fishing camps and preserve archaeological sites. Support sustainable harvest of marine resources including seabirds and shellfish.
+
+**Zone 311:**
+- **Ecological Conservation Objective:** Protect tidal channel ecosystems and kelp bed habitats supporting rockfish diversity and juvenile salmon rearing. Conserve rocky intertidal areas with high invertebrate diversity.
+- **Cultural Conservation Objective:** Preserve traditional resource access points and seasonal camping areas. Maintain cultural connection to whale populations and marine ecosystem stewardship.
+
+**Zone 312:**
+- **Ecological Conservation Objective:** Conserve protected bay habitats serving as nursery areas for multiple fish species. Protect sandy beach ecosystems important for forage fish spawning and shorebird feeding.
+- **Activities of Concern:** Shipping noise impacts on marine mammal communication and navigation.
+
+**Zone 313:**
+- **Ecological Conservation Objective:** Maintain upwelling areas critical for marine productivity and food web support. Protect habitat connectivity between zones for migratory species.
+- **Cultural Conservation Objective:** Support collaborative governance between Gitga'at, Gitxaala, Haisla, and Kitasoo Xai'xais First Nations as identified priority.
+
+**Zone 314:**
+- **Ecological Conservation Objective:** Conserve fjord wall habitats and deep water areas important for sablefish and other deep water species. Protect areas used by Dall's porpoises and Pacific white-sided dolphins.
+
+**Zone 315:**
+- **Ecological Conservation Objective:** Protect estuary and kelp bed habitats at Kettle Inlet supporting diverse fish and invertebrate communities. Maintain habitat quality for resident and migratory bird populations.
+
+**Zone 316:**
+- **Ecological Conservation Objective:** Conserve Union Pass and lower Douglas Channel habitats connecting to broader North Coast ecosystem. Protect areas important for salmon migration and whale transit.
+
+## 3. Kitkiata (Lax Galts'ap) and Kishkosh Inlets Profile (Zones 320-321)
+
+![Kitkiata and Kishkosh Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_278_img_0.png)
+
 **Sub-region:** North Coast
 **Category:** 1
-**Size:** 1291.2 km²
+**Size:** 16.8 km²
+**Potential designation tools:** Wildlife Management Area + Fisheries Act tool
+
+### **Industrial Operations in Zones 320-321:**
+
+**Douglas Channel Access (MODERATE IMPACT):**
+- **Industrial Proximity** - Located adjacent to Douglas Channel industrial corridor
+- **No Direct Tenures** - Currently free of direct industrial activities
+
+This profile protects two small but ecologically critical inlets serving as refugia from Douglas Channel industrial activities.
+
+**Ecological Context:** These inlets support diverse marine species including **bivalves**, **crab**, **groundfish**, **salmon**, **prawn**, and large numbers of **seabirds**. Inlet environments provide **protected habitat** and **nursery areas** for species sensitive to industrial disturbance. **Estuarine environments** support juvenile fish development and **migratory bird feeding**.
+
+**Cultural Context:** Critically important to local First Nations with **village site** on island in estuary. Areas are **socially and culturally important** to First Nations communities. Traditional use includes **seasonal harvesting** and **cultural practices**. Inlets represent **protected access** to traditional territories during rough weather conditions.
+
+**Zone 320 (Kitkiata/Lax Galts'ap):**
+- **Ecological Conservation Objective:** Conserve inlet estuary ecosystem supporting diverse bivalve communities and crab populations. Protect nursery habitat for groundfish and salmon juveniles. Maintain seabird roosting and feeding areas.
+- **Cultural Conservation Objective:** Preserve traditional village site and maintain First Nations access to cultural areas. Support traditional harvesting of bivalves, crab, and other marine resources. Protect cultural landscape and spiritual connections.
+
+**Zone 321 (Kishkosh Inlet):**
+- **Ecological Conservation Objective:** Protect inlet ecosystem serving as refuge from Douglas Channel industrial impacts. Conserve prawn populations and groundfish habitat. Maintain seabird colony sites and feeding areas.
+- **Cultural Conservation Objective:** Preserve traditional seasonal use areas and maintain cultural access routes. Support sustainable traditional harvesting practices. Protect areas of cultural and spiritual significance.
+
+## 4. Kitkatla Inlet Profile (Zones 330-333)
+
+![Kitkatla Inlet Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_283_img_1.png)
+
+**Sub-region:** North Coast
+**Category:** 1
+**Size:** 440.4 km²
 **Potential designation tools:** Oceans Act MPA
 
-Gitga'at, Gitxaala, Haisla, and Kitasoo Xai'xais First Nations share interests in the Caamano sound site and have identified a need for further discussions about collaborative governance.
+### **Industrial Operations in Zones 330-333:**
+
+**Commercial Fisheries (HIGH IMPACT):**
+- **Salmon Fisheries** - Troll, seine, and gillnet operations
+- **Herring Spawn Fisheries** - Traditional and commercial harvesting
+- **Groundfish Operations** - Halibut, rockfish, and lingcod fisheries
+- **Shellfish Harvesting** - Sea cucumber, geoduck, crab, shrimp, red sea urchin
+
+**Tourism Operations:**
+- **Gitxaala Nii Luutiksm/Kitkatla Conservancy** - Boat anchorages and wildlife viewing
+- **Recreation Activities** - Wildlife viewing, fishing, and boating
+
+This profile encompasses the traditional territory of the Gitxaala Nation, featuring diverse habitats from exposed coastlines to protected inlets.
+
+**Ecological Context:** Zones stretch from **MacAuley Island** to **Porcher Peninsula**, including **Kitkatla Inlet** and marine areas surrounding **Lach Klan (Kitkatla)** village on **Dolphin Island**. Includes **northwest coast of Banks Island** with extensive **giant kelp** and **bull kelp stands**. Variety of habitats with **exposed and sheltered shorelines** important for **Northern abalone**, **herring**, **Pacific sand lance**, and **salmon**. Provides habitat for diverse **marine fish** and **invertebrates**.
+
+**Cultural Context:** **Critical importance to Gitxaala Nation** with broad suite of culturally important species. Focus on **dynamic and sustainable management** of species within zones. Overall **biodiversity conservation** aligned with **cultural conservation objectives**. **Gitxaala Nii Luutiksm/Kitkatla Conservancy** provides safe **boat anchorages** and **recreation opportunities**. Many **sheltered inlets** with **landing beaches** available for traditional and recreational use.
+
+**Zone 330:**
+- **Ecological Conservation Objective:** Conserve MacAuley Island marine ecosystems and surrounding waters. Protect Northern abalone habitat and recovery areas. Maintain kelp forest ecosystems supporting rockfish diversity.
+- **Cultural Conservation Objective:** Preserve Gitxaala traditional territory and maintain access to culturally important species. Support traditional harvesting of abalone and kelp forest resources.
+
+**Zone 331:**
+- **Ecological Conservation Objective:** Protect Kitkatla Inlet estuary and surrounding marine habitats. Conserve herring spawning areas and juvenile salmon rearing habitat. Maintain Pacific sand lance spawning beaches.
+- **Cultural Conservation Objective:** Preserve traditional village access and maintain cultural connections to Lach Klan (Kitkatla). Support traditional herring spawn harvesting and cultural practices.
+
+**Zone 332:**
+- **Ecological Conservation Objective:** Conserve Porcher Peninsula coastline habitats and adjacent marine areas. Protect diverse fish and invertebrate communities in varied depth zones. Maintain habitat connectivity across zone network.
+- **Cultural Conservation Objective:** Support dynamic and sustainable management aligned with Gitxaala Nation interests. Maintain traditional access to diverse marine resource harvesting areas.
+
+**Zone 333:**
+- **Ecological Conservation Objective:** Protect Banks Island kelp forest extensions and associated marine communities. Conserve habitat for salmon, groundfish, and shellfish populations. Maintain high biodiversity areas identified in cultural objectives.
+- **Cultural Conservation Objective:** Preserve traditional territorial waters and support ongoing Gitxaala stewardship. Maintain access to salmon, herring spawn, groundfish, and shellfish harvesting areas.
+
+## 5. Queen Charlotte Sound – North Coast Profile (Zones 360-361)
+
+![Queen Charlotte Sound Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_296_img_0.png)
+
+**Sub-region:** North Coast
+**Category:** 2
+**Size:** 880.1 km²
+**Potential designation tools:** Oceans Act MPA
+
+### **Industrial Operations in Zones 360-361:**
+
+**Commercial Fishing Operations (EXTREME IMPACT):**
+- **Halibut Fisheries** - Bottom longline and trawl operations
+- **Rockfish Fisheries** - Hook and line, and trawl targeting multiple species
+- **Sablefish Operations** - Trap and longline fisheries
+- **Trawl Fisheries** - Bottom and mid-water trawl operations
+
+This profile targets offshore areas between existing Glass Sponge Reef MPAs, featuring high fish and invertebrate diversity.
+
+**Ecological Context:** Located between **northern and central portions** of **Hecate Strait/Queen Charlotte Sound Glass Sponge Reefs MPA**. Zones capture areas with **high diversity of fish and invertebrate species**. **Offshore marine environment** supporting **groundfish populations** and **deep water communities**. **Glass sponge reef connections** providing **habitat corridors** between existing protected areas.
+
+**Cultural Context:** Areas have **cultural and spiritual value** for First Nations and are used for **traditional harvest of marine resources**. Support **multiple culturally significant species** important for **food security** and **traditional practices**. **Deep water fishing areas** traditionally accessed by First Nations communities.
+
+**Activities of Concern:** **Commercial trawl operations** potentially impacting **sea floor habitats** and **non-target species**. **Bottom contact fishing** affecting **sensitive benthic communities**.
+
+**Zone 360:**
+- **Ecological Conservation Objective:** Protect high diversity fish and invertebrate communities in offshore waters. Conserve habitat connectivity with Glass Sponge Reef MPAs. Maintain deep water ecosystem integrity.
+- **Cultural Conservation Objective:** Preserve traditional offshore harvesting areas and maintain access to culturally significant deep water species. Support traditional knowledge of offshore marine ecosystems.
+
+**Zone 361:**
+- **Ecological Conservation Objective:** Conserve offshore areas with high species diversity serving as habitat corridors. Protect areas important for halibut, rockfish, and sablefish populations. Maintain deep water benthic community structure.
+- **Cultural Conservation Objective:** Maintain traditional access to offshore marine resources and preserve cultural connections to deep water environments. Support sustainable traditional harvesting practices.
 
 ---
 
