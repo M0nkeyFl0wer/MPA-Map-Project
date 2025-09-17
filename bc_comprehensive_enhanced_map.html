@@ -153,6 +153,19 @@
             border-radius: 4px;
             display: block;
         }
+
+        .zone-popup-container .leaflet-popup-content {
+            margin: 10px 15px;
+            line-height: 1.4;
+            font-size: 13px;
+        }
+
+        .zone-popup-container .leaflet-popup-content-wrapper {
+            background: white;
+            color: #333;
+            border-radius: 8px;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+        }
     </style>
 </head>
 <body>
@@ -499,12 +512,13 @@
                     popupContent += '</div>';
 
                     marker.bindPopup(popupContent, {
-                        maxWidth: 500,
-                        maxHeight: 400,
+                        maxWidth: 400,
+                        maxHeight: 300,
                         autoPan: true,
-                        autoPanPadding: [50, 50],
+                        autoPanPadding: [20, 20],
                         keepInView: true,
-                        closeOnEscapeKey: true
+                        closeOnEscapeKey: true,
+                        className: 'zone-popup-container'
                     });
                     marker.addTo(group);
                 });
@@ -554,17 +568,21 @@
 
         // Layer control event listeners
         function setupLayerControls() {
-            // MCP Zone toggles
+            // MCP Zone toggles - fix the ID matching
             Object.keys(zoneColors).forEach(groupKey => {
                 const checkbox = document.getElementById(`zones-${groupKey}`);
                 if (checkbox) {
+                    console.log(`Setting up checkbox for zones-${groupKey}`);
                     checkbox.addEventListener('change', function() {
+                        console.log(`Checkbox ${groupKey} changed to:`, this.checked);
                         if (this.checked) {
                             map.addLayer(mcpZoneGroups[groupKey]);
                         } else {
                             map.removeLayer(mcpZoneGroups[groupKey]);
                         }
                     });
+                } else {
+                    console.error(`Checkbox not found for zones-${groupKey}`);
                 }
             });
 
