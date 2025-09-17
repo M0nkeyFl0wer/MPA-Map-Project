@@ -166,6 +166,23 @@
             border-radius: 8px;
             box-shadow: 0 3px 14px rgba(0,0,0,0.4);
         }
+
+        .zone-popup ul {
+            margin: 8px 0;
+            padding-left: 18px;
+        }
+
+        .zone-popup li {
+            margin: 4px 0;
+            line-height: 1.3;
+            font-size: 12px;
+        }
+
+        .zone-popup h5 {
+            margin: 12px 0 6px 0 !important;
+            font-size: 13px !important;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -352,62 +369,158 @@
             }
         };
 
-        // Detailed conservation data for specific zones
+        // Enhanced detailed conservation data with bullet point summaries
         const detailedZoneInfo = {
             100: {
-                ecological: "Conserve areas of high biological diversity, including species assemblages associated with eelgrass meadows, kelp beds, and estuaries. These include seaweed, salmon (multiple species), invertebrates (cockles, mussels, clams, shellfish, geoduck, abalone, crab, prawn), groundfish, marine birds, and seagull eggs.",
-                cultural: null,
-                industrial: ["Mowi Canada West - Kid Bay (52.80108° N, 128.40431° W)", "Mowi Canada West - Goat Cove (52.78726° N, 128.4199° W)"]
+                habitat: ["Eelgrass meadows", "Kelp beds", "Estuaries"],
+                keySpecies: ["Multiple salmon species", "Geoduck, abalone, crab, prawn", "Groundfish", "Marine birds"],
+                ecological: ["Unique clam harvest site", "Herring spawn area", "High rockfish diversity", "Abalone restoration site"],
+                cultural: ["Traditional shellfish harvesting", "Salmon rearing areas"],
+                risks: ["Aquaculture impacts"],
+                industrial: ["Mowi Canada West - Kid Bay", "Mowi Canada West - Goat Cove"]
             },
             102: {
-                ecological: "Conserve areas of high biological diversity, including species assemblages associated with eelgrass meadows, kelp beds, and estuaries, particularly Steelhead, salmon diversity hotspot (all species), groundfish, rockfish, and invertebrates (Dungeness crab, Spot prawn, Sidestripe shrimp).",
-                cultural: "Represent marine areas of high cultural or historic value, including community and seasonal camps, access to resources during poor weather, cultural features and spiritual sites, and areas for teaching traditional practices.",
+                habitat: ["Eelgrass meadows", "Kelp beds", "Estuaries"],
+                keySpecies: ["Steelhead", "All salmon species", "Dungeness crab", "Spot prawn", "Rockfish"],
+                ecological: ["Salmon diversity hotspot", "Representative marine habitats", "Rare species protection"],
+                cultural: ["Seasonal camps", "Weather access routes", "Spiritual sites", "Teaching areas"],
+                risks: ["Fishing interactions with eulachon"],
                 industrial: []
             },
             103: {
-                ecological: "Conserve areas of high biological diversity, including species assemblages associated with eelgrass meadows and estuaries, such as salmon diversity hotspot (Chinook, Coho, Pink (odd/even), Sockeye) and invertebrates (shellfish, Dungeness crab, Spot prawns, Giant Pacific octopus).",
-                cultural: null,
-                industrial: [],
-                concerns: "Commercial and recreational beach seine, cast net, and dip nets due to potential interactions with eulachon."
+                habitat: ["Eelgrass meadows", "Estuaries"],
+                keySpecies: ["Chinook, Coho, Pink, Sockeye salmon", "Dungeness crab", "Spot prawns", "Giant Pacific octopus"],
+                ecological: ["Salmon diversity hotspot", "Shellfish beds"],
+                cultural: ["Traditional harvesting areas"],
+                risks: ["Beach seine conflicts with eulachon"],
+                industrial: []
             },
             110: {
-                ecological: "Conserve areas of high biological diversity associated with estuaries, eelgrass, Bull kelp, and Giant kelp ecosystems, including Steelhead, salmon (Sockeye), benthic fish (Lingcod, Rocksole), rockfish (China, Quillback, Tiger, Yelloweye), invertebrates (barnacle, Spot prawn, Dungeness Crab, Sea cucumber), and Boot and cloud sponges.",
-                cultural: "Represent areas of high cultural/historic value, including seasonal camps, resource access during poor weather, cultural features, spiritual relationship, and teaching areas. Important larval site for abalone.",
+                habitat: ["Estuaries", "Eelgrass", "Bull kelp", "Giant kelp"],
+                keySpecies: ["Steelhead", "Sockeye salmon", "Lingcod", "China, Quillback, Tiger, Yelloweye rockfish", "Boot and cloud sponges"],
+                ecological: ["Abalone larval site", "Diverse rockfish habitat", "Sponge reefs"],
+                cultural: ["Seasonal camps", "Food security species", "Teaching areas"],
+                risks: ["Habitat degradation"],
                 industrial: []
             },
             111: {
-                ecological: "Conserve diversity of species and populations, including seaweed, Steelhead, salmon (Sockeye), Groundfish (Lingcod), rockfish (Bocaccio, Canary, China, Tiger, Widow), invertebrates (Cockles, Clams, Mussels, Geoduck, Red sea urchin, Spot prawn), whales, and Gorgonians.",
-                cultural: "Represents high cultural/historic value (seasonal camps, resource access during poor weather, cultural/spiritual sites, teaching areas). Features early sockeye, herring spawn, seaweed, highest rockfish diversity, gorgonians.",
+                habitat: ["Sandy bottom", "Eelgrass", "Bull kelp", "Cloud sponge reefs"],
+                keySpecies: ["Bocaccio, Canary rockfish", "Steelhead", "Lingcod", "Gorgonians", "Northern abalone"],
+                ecological: ["Highest rockfish diversity", "Early sockeye habitat", "Herring spawn", "Complex habitats"],
+                cultural: ["Seasonal camps", "Cultural sites", "Diverse food species"],
+                risks: ["Overfishing of rockfish"],
                 industrial: []
             },
             112: {
-                ecological: "Protect representative marine habitat types and rare/unique/threatened species, including rockfish (Quillback, Yelloweye) and invertebrates (Olympia oyster, clams, sea stars, shrimp, crabs) and sponges (Boot, Cloud, Glass).",
-                cultural: "Increase awareness of First Nations stewardship, represent high cultural/historic value. Important for halibut breeding, nearshore cloud sponge reefs, very high rockfish diversity.",
+                habitat: ["Representative marine habitats", "Nearshore sponge reefs"],
+                keySpecies: ["Quillback, Yelloweye rockfish", "Olympia oyster", "Boot, Cloud, Glass sponges"],
+                ecological: ["Halibut breeding", "Very high rockfish diversity", "Unique sponge communities"],
+                cultural: ["First Nations stewardship showcase", "Cultural sites"],
+                risks: ["Fishing pressure on threatened rockfish"],
                 industrial: []
             },
             113: {
-                ecological: "Protect representative marine habitat types and rare/unique/threatened species (Quillback rockfish, Northern abalone). Important for life history of resident/migratory species, including eelgrass and abalone, boot and cloud sponge.",
-                cultural: null,
+                habitat: ["Eelgrass beds", "Boot and cloud sponge areas"],
+                keySpecies: ["Quillback rockfish", "Northern abalone"],
+                ecological: ["Rare species protection", "Abalone habitat"],
+                cultural: ["Traditional harvesting"],
+                risks: ["Abalone population recovery"],
                 industrial: []
             },
             114: {
-                ecological: "Conserve areas of high biological diversity associated with estuaries, including Pacific salmon biomass hotspot, and salmon diversity hotspot (Chinook, Chum, Coho, Pink (even/odd), Sockeye). Important for marine bird nesting.",
-                cultural: "Represents high cultural/historic value (seasonal camps, resource access during poor weather, cultural/spiritual sites, teaching areas). Contributes to food security species like salmon, crab, prawn, and groundfish.",
+                habitat: ["Estuaries", "Marine bird nesting areas"],
+                keySpecies: ["All salmon species", "Marine birds"],
+                ecological: ["Pacific salmon biomass hotspot", "Salmon diversity hotspot", "Bird nesting"],
+                cultural: ["Seasonal camps", "Food security species", "Teaching areas"],
+                risks: ["Development pressure"],
                 industrial: []
             },
             130: {
-                ecological: "Conserve areas of high biological diversity associated with eelgrass meadows, kelp beds, and estuaries, including juvenile salmon (Chum, Coho, Pink, Sockeye), benthic fish, rockfish (Yelloweye), and invertebrates (Dungeness crab, Spot prawn, Butter and Littleneck clams, Green urchin, cockles, Giant Pacific octopus).",
-                cultural: null,
-                industrial: []
+                habitat: ["Eelgrass meadows", "Kelp beds", "Estuaries"],
+                keySpecies: ["Juvenile salmon (Chum, Coho, Pink, Sockeye)", "Yelloweye rockfish", "Dungeness crab", "Giant Pacific octopus"],
+                ecological: ["Salmon nursery", "Diverse invertebrate community"],
+                cultural: ["Traditional harvesting areas"],
+                risks: ["Logging operations affecting nearshore"],
+                industrial: ["Tweedsmuir Park Lodge access", "Chris Carlson Guide Service"]
             },
             131: {
-                ecological: "Conserve areas of high biological diversity including species assemblages associated with kelp beds, eelgrass, estuaries, and high current areas, important for whales (potential Northern Resident Killer Whale habitat, Humpback whale density) and sea duck moulting.",
-                cultural: "Represent marine areas of high cultural/historic value, including seasonal camps and cultural features. Contributes to conservation of food security species like salmon, sea urchin, sea cucumber, Yelloweye and other rockfishes, groundfish, prawn, crab, and duck.",
+                habitat: ["Kelp beds", "Eelgrass", "High current areas"],
+                keySpecies: ["Northern Resident Killer Whales", "Humpback whales", "Sea ducks", "Yelloweye rockfish"],
+                ecological: ["Whale habitat", "Sea duck moulting", "High current ecosystems"],
+                cultural: ["Seasonal camps", "Food security species"],
+                risks: ["Vessel traffic", "Marine mammal disturbance"],
                 industrial: []
             },
             132: {
-                ecological: "Conserve areas of high biological diversity associated with large estuaries, including salmon diversity hotspots (chum, coho, pink (odd, even)), Pacific salmon diversity, groundfish, and invertebrates (Dungeness crab, Sport prawn, shrimp). Contributes to protection of rare, unique, threatened species (e.g., eulachon, Marbled murrelet).",
-                cultural: null,
+                habitat: ["Large estuaries", "Salmon streams"],
+                keySpecies: ["Chum, coho, pink salmon", "Eulachon", "Marbled murrelet", "Dungeness crab"],
+                ecological: ["Salmon diversity hotspots", "Eulachon spawning", "Threatened species habitat"],
+                cultural: ["Herring spawn harvest", "Unique eulachon site"],
+                risks: ["Beach seine interactions with eulachon"],
+                industrial: []
+            },
+            133: {
+                habitat: ["Estuaries", "Eelgrass meadows", "Kelp beds"],
+                keySpecies: ["All salmon species", "Quillback, Silvergray rockfish", "Eulachon", "Lingcod"],
+                ecological: ["Salmon diversity", "Estuary habitat", "Unique rockfish populations"],
+                cultural: ["Migratory bird harvesting", "Unique eulachon site"],
+                risks: ["Seine net conflicts with eulachon"],
+                industrial: []
+            },
+            140: {
+                habitat: ["Estuarine fjord", "Benthic fish habitat"],
+                keySpecies: ["Quillback rockfish", "Pacific halibut", "Spot prawn", "Northern Resident Killer Whales"],
+                ecological: ["Fjord ecosystems", "Sea duck staging", "Deep water habitat"],
+                cultural: ["Traditional fishing grounds"],
+                risks: ["Deep water trawling"],
+                industrial: ["Chris Carlson Guide Service - Dean Channel operations"]
+            },
+            141: {
+                habitat: ["Cultural marine areas", "Traditional village sites"],
+                keySpecies: ["Marine mammals", "Groundfish", "Salmon"],
+                ecological: ["Diverse marine life"],
+                cultural: ["Past permanent village", "Seasonal sites", "Spiritual areas"],
+                risks: ["Cultural site disturbance"],
+                industrial: []
+            },
+            142: {
+                habitat: ["Kelp beds", "Rock cliffs", "High current areas"],
+                keySpecies: ["Eulachon", "Pacific herring", "Pacific halibut", "Northern Resident Killer Whales"],
+                ecological: ["Herring spawn", "Halibut rearing", "High current ecosystems"],
+                cultural: ["Traditional camps", "Teaching areas"],
+                risks: ["Current changes", "Climate impacts"],
+                industrial: []
+            },
+            143: {
+                habitat: ["Benthic fish areas", "Marine bird habitat"],
+                keySpecies: ["Yelloweye rockfish", "Spot prawn", "Northern Resident Killer Whales", "Geese/swans"],
+                ecological: ["Rockfish diversity", "Marine bird staging", "Whale habitat"],
+                cultural: ["Indian Reserve area", "High diversity harvesting", "Teaching areas"],
+                risks: ["Fishing pressure", "Whale disturbance"],
+                industrial: []
+            },
+            144: {
+                habitat: ["Estuaries", "Eelgrass meadows"],
+                keySpecies: ["Dungeness crab", "Pacific halibut", "Redstripe rockfish"],
+                ecological: ["Crab nursery", "Halibut rearing", "Unique rockfish"],
+                cultural: ["Traditional camps", "Food security species"],
+                risks: ["Habitat modification"],
+                industrial: []
+            },
+            145: {
+                habitat: ["Estuaries", "Eelgrass meadows"],
+                keySpecies: ["Eulachon", "Marbled murrelet", "Chum salmon"],
+                ecological: ["Eulachon spawning", "Saltwater shore spawning", "Threatened species"],
+                cultural: ["Traditional spawning sites"],
+                risks: ["Seine net conflicts with eulachon"],
+                industrial: []
+            },
+            146: {
+                habitat: ["Estuaries", "Salmon streams"],
+                keySpecies: ["Steelhead", "All salmon species", "Eulachon", "Marbled murrelet"],
+                ecological: ["Pacific salmon biomass hotspot", "Saltwater chum spawning", "Herring spawn"],
+                cultural: ["High harvest diversity", "Unique spawning sites"],
+                risks: ["Multiple fishing conflicts with eulachon"],
                 industrial: []
             }
         };
@@ -428,7 +541,7 @@
                         weight: 3
                     });
 
-                    // Create popup content
+                    // Create popup content with enhanced bullet point format
                     let popupContent = `
                         <div class="zone-popup">
                             <h4 style="color: ${zoneColors[groupKey]};">${zone.name}</h4>
@@ -441,45 +554,69 @@
 
                             <div class="section">
                                 <h5>Group: ${groupData.name}</h5>
-                                <p>${groupData.overview}</p>
+                                <p><em>${groupData.overview}</em></p>
                             </div>
                     `;
 
                     // Add detailed information if available
                     const detailed = detailedZoneInfo[zone.id];
                     if (detailed) {
-                        if (detailed.ecological) {
+                        // Habitat Information
+                        if (detailed.habitat && detailed.habitat.length > 0) {
                             popupContent += `
                                 <div class="conservation-obj">
-                                    <h5>🌿 Ecological Conservation Objective</h5>
-                                    <p>${detailed.ecological}</p>
+                                    <h5>🌊 Primary Habitats</h5>
+                                    <ul>${detailed.habitat.map(h => `<li>${h}</li>`).join('')}</ul>
                                 </div>
                             `;
                         }
 
-                        if (detailed.cultural) {
+                        // Key Species
+                        if (detailed.keySpecies && detailed.keySpecies.length > 0) {
+                            popupContent += `
+                                <div class="conservation-obj">
+                                    <h5>🐟 Key Species</h5>
+                                    <ul>${detailed.keySpecies.map(s => `<li>${s}</li>`).join('')}</ul>
+                                </div>
+                            `;
+                        }
+
+                        // Ecological Highlights
+                        if (detailed.ecological && detailed.ecological.length > 0) {
+                            popupContent += `
+                                <div class="conservation-obj">
+                                    <h5>🌿 Ecological Highlights</h5>
+                                    <ul>${detailed.ecological.map(e => `<li>${e}</li>`).join('')}</ul>
+                                </div>
+                            `;
+                        }
+
+                        // Cultural Significance
+                        if (detailed.cultural && detailed.cultural.length > 0) {
                             popupContent += `
                                 <div class="cultural-obj">
-                                    <h5>🏛️ Cultural Conservation Objective</h5>
-                                    <p>${detailed.cultural}</p>
+                                    <h5>🏛️ Cultural Significance</h5>
+                                    <ul>${detailed.cultural.map(c => `<li>${c}</li>`).join('')}</ul>
                                 </div>
                             `;
                         }
 
-                        if (detailed.concerns) {
+                        // Risk Factors
+                        if (detailed.risks && detailed.risks.length > 0) {
                             popupContent += `
                                 <div class="industrial-ops">
-                                    <h5>⚠️ Activities of Concern</h5>
-                                    <p>${detailed.concerns}</p>
+                                    <h5>⚠️ Risk Factors</h5>
+                                    <ul>${detailed.risks.map(r => `<li>${r}</li>`).join('')}</ul>
                                 </div>
                             `;
                         }
 
+                        // Industrial Operations
                         if (detailed.industrial && detailed.industrial.length > 0) {
                             popupContent += `
                                 <div class="industrial-ops">
                                     <h5>🏭 Industrial Operations</h5>
-                                    ${detailed.industrial.map(op => `<p>• ${op}</p>`).join('')}
+                                    <ul>${detailed.industrial.map(op => `<li>${op}</li>`).join('')}</ul>
                                 </div>
                             `;
                         }
