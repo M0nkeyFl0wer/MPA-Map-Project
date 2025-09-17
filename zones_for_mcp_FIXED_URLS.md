@@ -2,7 +2,9 @@
 
 *Source: https://mpanetwork.ca/wp-content/uploads/2022/11/MPA_Network-Action-Plan_web.pdf*
 
-This document organizes all BC Marine Conservation Plan zones geographically from north to south, providing a logical spatial flow through the marine protected area network.
+![BC Marine Protected Areas Overview](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/central_coast_images/central_coast_page_163_img_0.png)
+
+This document organizes all BC Marine Conservation Plan zones geographically from north to south, providing a logical spatial flow through the marine protected area network covering the North Coast (Zones 300-361) and Central Coast (Zones 100-197) regions.
 
 ---
 
@@ -28,7 +30,7 @@ This profile includes several non-contiguous existing RCAs and an Ecological Res
 
 ## 2. Caamano Sound Profile (Zones 310-316)
 
-![Caamano Sound Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_268_img_0.png)
+![Caamano Sound Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_269_img_0.png)
 
 **Sub-region:** North Coast
 **Category:** 1
@@ -518,7 +520,7 @@ The primary use of the area is by commercial fishers; however, because of the RC
 
 ## Caamano Sound Profile (Zones 310-316)
 
-![Caamano Sound Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_268_img_0.png)
+![Caamano Sound Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_269_img_0.png)
 
 **Additional Zone Detail Map:**
 
