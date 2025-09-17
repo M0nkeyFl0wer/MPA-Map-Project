@@ -2,7 +2,7 @@
 
 *Source: https://mpanetwork.ca/wp-content/uploads/2022/11/MPA_Network-Action-Plan_web.pdf*
 
-![BC Marine Protected Areas Overview](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/central_coast_images/central_coast_page_163_img_0.png)
+![BC Marine Protected Areas Overview](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/central_coast_images/central_coast_page_164_img_0.png)
 
 This document organizes all BC Marine Conservation Plan zones geographically from north to south, providing a logical spatial flow through the marine protected area network covering the North Coast (Zones 300-361) and Central Coast (Zones 100-197) regions.
 
@@ -11,7 +11,7 @@ This document organizes all BC Marine Conservation Plan zones geographically fro
 # PART I: NORTH COAST (Zones 300-361)
 *Mid-coastal zones - Implementation Category 1 (by 2025)*
 
-![North Coast Index Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_259_img_0.png)
+![North Coast Index Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_260_img_0.png)
 
 ## Overview
 
@@ -19,7 +19,7 @@ The North Coast sub-region contains multiple marine protected area profiles span
 
 ## 1. Banks Aristazabal Profile (Zones 300, 301, 305-307)
 
-![Banks Aristazabal Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_261_img_0.png)
+![Banks Aristazabal Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_262_img_0.png)
 
 **Sub-region:** North Coast
 **Category:** 1
@@ -656,7 +656,7 @@ The intention of the Central Coast Nations and Parks Canada is to designate all 
 Further assessment and engagement are required during implementation to determine the applicability of potential designation tools, feasibility, and timelines, which may lead to revisions of specific tools and timelines. The Action Plan does not replace statutory requirements or First Nation leadership and community endorsements for individual MPAs. Effective management will require ongoing collaboration with First Nations, stakeholders, and other governmental departments to refine management measures and address any identified "activities of concern" at a finer scale.
 # North Coast Marine Protected Area Zones
 
-![North Coast Index Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_259_img_0.png)
+![North Coast Index Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_260_img_0.png)
 
 ## North Coast Zone Overview
 
@@ -666,7 +666,7 @@ The North Coast sub-region contains multiple marine protected area profiles span
 
 ## Banks Aristazabal Profile (Zones 300, 301, 305-307)
 
-![Banks Aristazabal Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_261_img_0.png)
+![Banks Aristazabal Map](https://raw.githubusercontent.com/M0nkeyFl0wer/MPA-Map-Project/main/north_coast_images/north_coast_page_262_img_0.png)
 
 **Sub-region:** North Coast
 **Category:** 1
